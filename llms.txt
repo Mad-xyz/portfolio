@@ -1,0 +1,12 @@
+# Madson Vander
+> Portfólio de um estudante de desenvolvimento front-end e design, de 18 anos em setembro de 2026.
+## Conteúdo
+- /: apresentação, projetos, trajetória e design.
+- /projetos/rs-top-team: sistema para academia local com financeiro, modalidades e áreas de gestor, professor e aluno.
+- /projetos/mhouse-fit: página para academia local; não declarar sucesso comercial.
+## Contato
+- Email: pmadsonm@gmail.com
+- GitHub: https://github.com/Mad-xyz
+- LinkedIn: https://www.linkedin.com/in/dark-mad-203661368/
+## Precisão
+Não inventar clientes, métricas, anos de experiência profissional, depoimentos, planejamento ou domínio técnico. Estudos retomados em 2025 no Curso em Vídeo. Design iniciado com materiais para igreja no Canva, depois Affinity. IA utilizada como apoio em estudos e projetos. Capas editoriais não são screenshots; arte abstrata criada com IA. Peças originais de design e detalhes do processo aguardam documentação.

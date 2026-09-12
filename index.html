@@ -1,0 +1,549 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#101012" />
+    <title>Madson Vander — Design & Desenvolvimento</title>
+    <meta
+      name="description"
+      content="Portfólio de Madson Vander. Projetos de desenvolvimento web, design gráfico e uma trajetória movida pela curiosidade."
+    />
+    <link rel="icon" href="imagens/favicon-novo.svg" />
+    <link rel="stylesheet" href="css/estilos.css" />
+    <script defer src="js/interacoes.js"></script>
+    <script defer src="js/bibliotecas/liquid-react.js"></script>
+  </head>
+  <body class="antialiased">
+    <!-- Altere os textos diretamente neste HTML. As classes existentes foram preservadas. -->
+    <a class="skip-link" href="#main">Pular para o conteúdo</a>
+    <div class="square-cursor" aria-hidden="true"><span></span></div>
+    <header class="site-header">
+      <a class="wordmark" href="index.html" aria-label="Madson Vander, início"
+        >mad<span>son</span><sup>✳</sup></a
+      >
+      <nav aria-label="Principal">
+        <a href="#projetos">Projetos</a><a href="#sobre">Sobre mim</a
+        ><a href="#design">Design</a>
+      </nav>
+      <a class="contact-link" href="mailto:pmadsonm@gmail.com"
+        >Vamos conversar
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-arrow-up-right"
+          aria-hidden="true"
+        >
+          <path d="M7 7h10v10"></path>
+          <path d="M7 17 17 7"></path></svg
+      ></a>
+    </header>
+
+    <main id="main">
+      <section class="hero" aria-labelledby="titulo-apresentacao">
+        <div class="hero-top">
+          <span class="eyebrow">MADSON VANDER / PORTFÓLIO</span
+          ><span class="hero-index">DESIGN + CÓDIGO</span>
+        </div>
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <h1 id="titulo-apresentacao">
+              Curiosidade<br />vira <em>criação.</em>
+            </h1>
+
+            <p>
+              Sou Madson. Estudo desenvolvimento front-end e design, colocando
+              minhas ideias na tela — uma descoberta de cada vez.
+            </p>
+            <a class="primary-link" href="#projetos"
+              >Explore meus projetos<svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-arrow-down"
+                aria-hidden="true"
+              >
+                <path d="M12 5v14"></path>
+                <path d="m19 12-7 7-7-7"></path></svg
+            ></a>
+            <div class="hero-footnote">
+              <span>18 anos. Muito para aprender.</span
+              ><span>E vontade de fazer.</span>
+            </div>
+          </div>
+          <figure class="hero-art">
+            <div id="area-liquid" class="liquid-art">
+              <img
+                id="imagem-liquid"
+                src="imagens/hero-art.webp"
+                alt="Escultura abstrata de metal com reflexos violetas"
+                width="1100"
+                height="1100"
+                fetchpriority="high"
+              />
+            </div>
+            <figcaption class="art-caption">
+              EXPERIMENTAR. ENTENDER. CRIAR.
+            </figcaption>
+            <span class="art-number" aria-label="Imagem número 001"
+              >M / 001</span
+            >
+          </figure>
+        </div>
+        <div class="discipline-line">
+          <span>DESENVOLVIMENTO WEB</span><span class="asterisk">✳</span
+          ><span>DESIGN GRÁFICO</span><span class="asterisk">✳</span
+          ><span>APRENDIZADO EM PRÁTICA</span><span class="asterisk">✳</span>
+        </div>
+      </section>
+      <!-- PROJETOS: cada cartão leva à página completa do trabalho. -->
+      <section
+        id="projetos"
+        class="work section"
+        aria-labelledby="titulo-projetos"
+      >
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">01 / TRABALHOS SELECIONADOS</span>
+            <h2 id="titulo-projetos">Da ideia<br />para a <em>tela.</em></h2>
+          </div>
+          <p>
+            Projetos de desenvolvimento e minhas primeiras experiências com
+            problemas reais.
+          </p>
+        </div>
+        <div class="project-grid">
+          <a
+            class="project-card"
+            href="projetos/rs-top-team/index.html"
+            aria-label="Ver estudo de caso do projeto R.S. Top Team"
+          >
+            <div class="project-cover rs">
+              <div class="cover-meta">
+                <span>GESTÃO / ACADEMIA</span
+                ><svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="23"
+                  height="23"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-arrow-up-right"
+                  aria-hidden="true"
+                >
+                  <path d="M7 7h10v10"></path>
+                  <path d="M7 17 17 7"></path>
+                </svg>
+              </div>
+              <div class="cover-name">R.S.<span>TOP TEAM</span></div>
+              <div class="cover-bottom">
+                <span>Gestão dentro e fora do treino.</span
+                ><span>Projeto 01</span>
+              </div>
+            </div>
+            <div class="project-caption">
+              <div>
+                <h3>R.S. Top Team</h3>
+
+                <p>Sistema de gestão · Desenvolvimento web</p>
+              </div>
+              <span class="round-arrow"
+                ><svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="22"
+                  height="22"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-arrow-up-right"
+                  aria-hidden="true"
+                >
+                  <path d="M7 7h10v10"></path>
+                  <path d="M7 17 17 7"></path></svg
+              ></span>
+            </div>
+            <p class="project-summary">
+              Financeiro, modalidades e áreas para gestor, professor e aluno em
+              um sistema para uma academia local.
+            </p></a
+          ><a
+            class="project-card"
+            href="projetos/mhouse-fit/index.html"
+            aria-label="Ver estudo de caso do projeto MHouse Fit"
+          >
+            <div class="project-cover mh">
+              <div class="cover-meta">
+                <span>WEB / FITNESS</span
+                ><svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="23"
+                  height="23"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-arrow-up-right"
+                  aria-hidden="true"
+                >
+                  <path d="M7 7h10v10"></path>
+                  <path d="M7 17 17 7"></path>
+                </svg>
+              </div>
+              <div class="cover-name">MHOUSE<span>FIT</span></div>
+              <div class="cover-bottom">
+                <span>Presença digital. Energia real.</span
+                ><span>Projeto 02</span>
+              </div>
+            </div>
+            <div class="project-caption">
+              <div>
+                <h3>MHouse Fit</h3>
+
+                <p>Site institucional · Interface</p>
+              </div>
+              <span class="round-arrow"
+                ><svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="22"
+                  height="22"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-arrow-up-right"
+                  aria-hidden="true"
+                >
+                  <path d="M7 7h10v10"></path>
+                  <path d="M7 17 17 7"></path></svg
+              ></span>
+            </div>
+            <p class="project-summary">
+              Uma página criada para apresentar uma academia local na web, com
+              foco na sua presença digital.
+            </p></a
+          >
+        </div>
+      </section>
+      <!-- SOBRE MIM: trajetória e apresentação pessoal. -->
+      <section class="about section" id="sobre" aria-labelledby="titulo-sobre">
+        <div class="about-heading">
+          <span class="eyebrow">02 / QUEM ESTÁ POR TRÁS</span>
+          <h2 id="titulo-sobre">
+            Antes do código,<br />veio a <em>curiosidade.</em>
+          </h2>
+
+          <p class="about-lead">
+            Não preciso aparecer na foto<br />para colocar um pouco de mim<br />no
+            que eu crio.
+          </p>
+          <span class="signature">Madson Vander</span>
+        </div>
+        <div class="about-story">
+          <p>
+            Sempre gostei de ficar no computador. O design começou na igreja:
+            banners, artes para camisetas e materiais que eu criava no Canva.
+            Depois, o Affinity entrou nessa história.
+          </p>
+          <div class="timeline">
+            <div>
+              <span>2021</span>
+              <div>
+                <h3>Um bot. Muitas perguntas.</h3>
+
+                <p>
+                  Queria entender como criar um bot para o Discord. Pesquisando,
+                  descobri a programação e comecei a estudar JavaScript.
+                </p>
+              </div>
+            </div>
+            <div>
+              <span>2025</span>
+              <div>
+                <h3>Voltar também é avançar.</h3>
+
+                <p>
+                  Depois de uma pausa, retomei os estudos com HTML, CSS e
+                  JavaScript no Curso em Vídeo, do Gustavo Guanabara.
+                </p>
+              </div>
+            </div>
+            <div>
+              <span>HOJE</span>
+              <div>
+                <h3>Aprender fazendo.</h3>
+
+                <p>
+                  Sigo estudando e criando projetos. Também exploro IA como
+                  apoio, procurando entender cada solução e reconhecer o que
+                  ainda preciso aprender.
+                </p>
+              </div>
+            </div>
+          </div>
+          <p class="honest-note">
+            Estou no começo da minha trajetória profissional. Os projetos daqui
+            mostram essa construção, não um ponto de chegada.
+          </p>
+        </div>
+      </section>
+
+      <section class="toolbox section" aria-labelledby="titulo-ferramentas">
+        <span class="eyebrow" id="titulo-ferramentas"
+          >NA MINHA MESA DE TRABALHO</span
+        >
+        <div class="tools-row">
+          <div>
+            <h3>HTML</h3>
+            <span>Estrutura e semântica</span>
+          </div>
+          <div>
+            <h3>CSS</h3>
+            <span>Layouts em estudo</span>
+          </div>
+          <div>
+            <h3>JavaScript</h3>
+            <span>Fundamentos</span>
+          </div>
+          <div>
+            <h3>Firebase</h3>
+            <span>Prática em projetos</span>
+          </div>
+          <div>
+            <h3>Canva + Affinity</h3>
+            <span>Criação visual</span>
+          </div>
+        </div>
+      </section>
+      <!-- DESIGN: todas as abas estão no HTML; interacoes.js alterna a visibilidade. -->
+      <section
+        class="design section"
+        id="design"
+        aria-labelledby="titulo-design"
+      >
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">03 / MEU LADO VISUAL</span>
+            <h2 id="titulo-design">O design foi<br />o <em>começo.</em></h2>
+          </div>
+          <p>
+            Foi criando para a igreja que comecei a olhar para composição, cor e
+            tipografia com mais atenção.
+          </p>
+        </div>
+        <div class="design-tabs" data-slot="tabs" data-orientation="horizontal">
+          <div
+            aria-label="Experiências em design"
+            role="tablist"
+            data-slot="tabs-list"
+            data-variant="line"
+          >
+            <button
+              type="button"
+              role="tab"
+              id="aba-banners"
+              aria-controls="painel-banners"
+              aria-selected="true"
+              tabindex="0"
+              data-slot="tabs-trigger"
+              data-state="active"
+            >
+              Banners e divulgação
+            </button>
+            <button
+              type="button"
+              role="tab"
+              id="aba-camisetas"
+              aria-controls="painel-camisetas"
+              aria-selected="false"
+              tabindex="-1"
+              data-slot="tabs-trigger"
+              data-state="inactive"
+            >
+              Artes para camisetas
+            </button>
+            <button
+              type="button"
+              role="tab"
+              id="aba-processo"
+              aria-controls="painel-processo"
+              aria-selected="false"
+              tabindex="-1"
+              data-slot="tabs-trigger"
+              data-state="inactive"
+            >
+              Meu começo
+            </button>
+          </div>
+          <div
+            role="tabpanel"
+            id="painel-banners"
+            aria-labelledby="aba-banners"
+            tabindex="0"
+            data-slot="tabs-content"
+            data-state="active"
+          >
+            <div class="design-panel">
+              <span class="big-type">Dar forma<br />à <em>mensagem.</em></span>
+              <div>
+                <span class="eyebrow">CANVA / AFFINITY</span>
+                <h3>Design para comunicar.</h3>
+
+                <p>
+                  Meus primeiros materiais foram banners e artes de divulgação
+                  para a igreja. Foi nesse espaço que comecei a praticar design.
+                </p>
+                <p class="muted">
+                  A seleção das peças originais está sendo organizada para este
+                  portfólio.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div
+            role="tabpanel"
+            id="painel-camisetas"
+            aria-labelledby="aba-camisetas"
+            tabindex="0"
+            hidden=""
+            data-slot="tabs-content"
+            data-state="inactive"
+          >
+            <div class="design-panel">
+              <span class="big-type">Da tela<br />para <em>vestir.</em></span>
+              <div>
+                <span class="eyebrow">DESIGN GRÁFICO</span>
+                <h3>Artes para camisetas.</h3>
+
+                <p>
+                  As camisetas também fizeram parte das criações para a igreja.
+                  Uma forma de experimentar o design além das telas.
+                </p>
+                <p class="muted">
+                  As peças originais serão adicionadas à seleção.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div
+            role="tabpanel"
+            id="painel-processo"
+            aria-labelledby="aba-processo"
+            tabindex="0"
+            hidden=""
+            data-slot="tabs-content"
+            data-state="inactive"
+          >
+            <div class="design-panel">
+              <span class="big-type"
+                >Criar.<br /><em>Aprender.</em><br />Repetir.</span
+              >
+              <div>
+                <span class="eyebrow">UMA EXPERIÊNCIA PESSOAL</span>
+                <h3>Comecei com o que tinha.</h3>
+
+                <p>
+                  Aprendi a criar no Canva para ajudar com os materiais da
+                  igreja. Com o tempo, explorei o Affinity e continuei
+                  estudando. Essa prática veio antes da programação e continua
+                  fazendo parte do meu caminho.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer id="contato">
+      <div class="eyebrow">UM PROJETO, UMA IDEIA OU UM OLÁ.</div>
+      <a class="footer-title" href="mailto:pmadsonm@gmail.com"
+        >Vamos conversar?<svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-arrow-up-right"
+          aria-hidden="true"
+        >
+          <path d="M7 7h10v10"></path>
+          <path d="M7 17 17 7"></path></svg
+      ></a>
+      <div class="footer-bottom">
+        <a href="mailto:pmadsonm@gmail.com">pmadsonm@gmail.com</a>
+        <div class="socials">
+          <a href="https://github.com/Mad-xyz" target="_blank" rel="noreferrer"
+            ><svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="17"
+              height="17"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-code-xml"
+              aria-hidden="true"
+            >
+              <path d="m18 16 4-4-4-4"></path>
+              <path d="m6 8-4 4 4 4"></path>
+              <path d="m14.5 4-5 16"></path></svg
+            >GitHub</a
+          ><a
+            href="https://www.linkedin.com/in/dark-mad-203661368/"
+            target="_blank"
+            rel="noreferrer"
+            ><svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="17"
+              height="17"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-contact"
+              aria-hidden="true"
+            >
+              <path d="M16 2v2"></path>
+              <path d="M7 21v-2a2 2 0 012-2h6a2 2 0 012 2v2"></path>
+              <path d="M8 2v2"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+              <rect x="3" y="3" width="18" height="18" rx="2"></rect></svg
+            >LinkedIn</a
+          >
+        </div>
+        <span>Madson Vander · 2026</span>
+      </div>
+    </footer>
+  </body>
+</html>

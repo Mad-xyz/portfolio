@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="titulo descricao">
+  <title id="titulo">Monograma Madson</title>
+  <desc id="descricao">Símbolo geométrico com a letra m em preto, branco e roxo.</desc>
+  <rect width="64" height="64" rx="14" fill="#101012"/>
+  <path d="M12 47V17h9v10l11-10h8v30h-9V31L32 42 22 31v16z" fill="#F4F3F6"/>
+  <path d="M40 17h12v30h-9V31l-3 3z" fill="#A37DF7"/>
+</svg>
