@@ -693,6 +693,22 @@ footer .eyebrow {
   align-items:center;
   gap:7px
 }
+.icon-github,.icon-instagram,.icon-linkedin {
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 18px;
+  height: 18px;
+  filter: brightness(0);
+}
+.icon-github {
+  background-image: url('https://cdn.jsdelivr.net/gh/glincker/thesvg@main/public/icons/github/default.svg');
+}
+.icon-instagram {
+  background-image: url('https://cdn.jsdelivr.net/gh/glincker/thesvg@main/public/icons/instagram/mono.svg');
+}
+.icon-linkedin {
+  background-image: url('https://cdn.jsdelivr.net/gh/glincker/thesvg@main/public/icons/linkedin/default.svg');
+}
 
 /* CURSOR QUADRADO */
 .square-cursor {
