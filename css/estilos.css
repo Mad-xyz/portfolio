@@ -408,14 +408,27 @@ h2 {
 h2 em {
   color:var(--purple)
 }
+.work {
+  overflow:hidden;
+}
 .project-grid {
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:34px
+  --grid-gap:34px;
+  display:flex;
+  gap:var(--grid-gap);
+  width:max-content;
+  animation:marquee 30s linear infinite;
+}
+.project-grid:hover {
+  animation-play-state:paused;
+}
+@keyframes marquee {
+  0% { transform:translateX(0); }
+  100% { transform:translateX(calc(-50% - (var(--grid-gap) / 2))); }
 }
 .project-card {
   display:block;
-  min-width:0
+  min-width:0;
+  flex:0 0 32vw;
 }
 .project-cover {
   aspect-ratio:1.36;
@@ -437,6 +450,14 @@ h2 em {
 .mh {
   background:#e6e6e3;
   color:#161617
+}
+.ig {
+  background:#f4a6d1;
+  color:#2e1320
+}
+.ag {
+  background:#a5d1f0;
+  color:#13202e
 }
 .cover-meta,.cover-bottom {
   display:flex;
@@ -461,6 +482,16 @@ h2 em {
 .mh .cover-name>span {
   font-style:italic;
   color:#685189
+}
+.ig .cover-name>span {
+  font-size:.6em;
+  letter-spacing:-2px;
+  color:#ad4b80
+}
+.ag .cover-name>span {
+  font-size:.6em;
+  letter-spacing:-2px;
+  color:#4b80ad
 }
 .cover-bottom {
   font-size:12px;
@@ -1000,8 +1031,10 @@ h2 {
   letter-spacing:-2px
 }
 .project-grid {
-  grid-template-columns:1fr;
-  gap:40px
+  --grid-gap:20px;
+}
+.project-card {
+  flex:0 0 85vw;
 }
 .cover-name {
   font-size:clamp(50px,15vw,70px)

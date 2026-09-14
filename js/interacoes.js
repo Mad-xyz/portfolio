@@ -64,4 +64,15 @@
       proximoBotao.focus();
     });
   });
+
+  // Marquee de Projetos (Auto-scroll)
+  const projectGrid = document.querySelector('.project-grid');
+  if (projectGrid) {
+    const cards = Array.from(projectGrid.children);
+    cards.forEach(card => {
+      const clone = card.cloneNode(true);
+      clone.setAttribute('aria-hidden', 'true');
+      projectGrid.appendChild(clone);
+    });
+  }
 })();
