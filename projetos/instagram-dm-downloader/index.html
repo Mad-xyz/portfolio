@@ -3,54 +3,128 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Instagram DM Downloader — Madson Vander</title>
-<meta name="description" content="Projeto criado para facilitar o download de mídias recebidas no Instagram Direct. A extensão permite salvar imagens e vídeos de conversas pela versão web do Instagram.">
+<meta name="theme-color" content="#101012">
+<title>Instagram DM Downloader | Extensão — Madson Vander</title>
+<meta name="description" content="Extensão para Instagram Web criada para baixar imagens e vídeos recebidos no Direct, com ações rápidas e sem coleta de dados pelo projeto.">
+<meta name="author" content="Madson Vander">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<link rel="canonical" href="https://madsdevelop.vercel.app/projetos/instagram-dm-downloader/index.html">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Madson Vander">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Instagram DM Downloader | Extensão — Madson Vander">
+<meta property="og:description" content="Estudo de caso de uma extensão JavaScript para baixar imagens e vídeos recebidos no Instagram Direct pela versão web.">
+<meta property="og:url" content="https://madsdevelop.vercel.app/projetos/instagram-dm-downloader/index.html">
+<meta property="og:image" content="https://madsdevelop.vercel.app/projetos/instagram-dm-downloader/img/DM%20downloader.webp">
+<meta property="og:image:alt" content="Interface da extensão Instagram DM Downloader">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Instagram DM Downloader | Extensão — Madson Vander">
+<meta name="twitter:description" content="Extensão JavaScript para baixar mídias recebidas no Instagram Direct pela versão web.">
+<meta name="twitter:image" content="https://madsdevelop.vercel.app/projetos/instagram-dm-downloader/img/DM%20downloader.webp">
+<meta name="twitter:image:alt" content="Interface da extensão Instagram DM Downloader">
 <link rel="icon" href="../../imagens/favicon-novo.svg">
 <link rel="stylesheet" href="../../css/estilos.css">
+<script type="application/ld+json" data-seo-static>
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://madsdevelop.vercel.app/#madson-vander",
+      "name": "Madson Vander",
+      "url": "https://madsdevelop.vercel.app/",
+      "sameAs": [
+        "https://github.com/Mad-xyz",
+        "https://www.linkedin.com/in/dark-mad-203661368/",
+        "https://www.instagram.com/mad.exe/"
+      ]
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://madsdevelop.vercel.app/projetos/instagram-dm-downloader/index.html#project",
+      "url": "https://madsdevelop.vercel.app/projetos/instagram-dm-downloader/index.html",
+      "name": "Instagram DM Downloader",
+      "description": "Extensão em JavaScript para baixar imagens e vídeos recebidos no Instagram Direct pela versão web.",
+      "image": "https://madsdevelop.vercel.app/projetos/instagram-dm-downloader/img/DM%20downloader.webp",
+      "inLanguage": "pt-BR",
+      "dateModified": "2026-09-16",
+      "programmingLanguage": "JavaScript",
+      "codeRepository": "https://github.com/Mad-xyz/-Instagram-DM-Image-Video-Downloader",
+      "creator": {"@id": "https://madsdevelop.vercel.app/#madson-vander"},
+      "keywords": ["extensão de navegador", "JavaScript", "Instagram Web", "download de mídia"]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Portfólio", "item": "https://madsdevelop.vercel.app/"},
+        {"@type": "ListItem", "position": 2, "name": "Instagram DM Downloader", "item": "https://madsdevelop.vercel.app/projetos/instagram-dm-downloader/index.html"}
+      ]
+    }
+  ]
+}
+</script>
 <script defer src="../../js/interacoes.js"></script>
 <script defer src="../../js/card-media.js"></script>
 </head>
 <body class="antialiased">
-<!-- Altere os textos diretamente neste HTML. As classes existentes foram preservadas. -->
 <a class="skip-link" href="#main">Pular para o conteúdo</a>
-<div class="square-cursor" aria-hidden="true"><span></span>
-</div>
-<header class="site-header"><a class="wordmark" href="../../index.html" aria-label="Madson Vander, início">mad<span>son</span><sup>✳</sup></a>
-<nav aria-label="Principal"><a href="../../index.html#projetos">Projetos</a><a href="../../index.html#sobre">Sobre mim</a><a href="../../index.html#design">Design</a>
-</nav>
+<div class="square-cursor" aria-hidden="true"><span></span></div>
+<header class="site-header">
+<a class="wordmark" href="../../index.html" aria-label="Madson Vander, início">mad<span>son</span><sup>✳</sup></a>
+<nav aria-label="Principal"><a href="../../index.html#projetos">Projetos</a><a href="../../index.html#sobre">Sobre mim</a><a href="../../index.html#design">Design</a></nav>
 <a class="contact-link" href="mailto:pmadsonm@gmail.com">Vamos conversar <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right" aria-hidden="true"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></a>
 </header>
 
-<main id="main" class="case-main"><a class="back-link" href="../../index.html#projetos"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left" aria-hidden="true"><path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path></svg>Todos os projetos</a>
+<main id="main" class="case-main">
+<a class="back-link" href="../../index.html#projetos"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left" aria-hidden="true"><path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path></svg>Todos os projetos</a>
 <div class="case-heading">
 <div><span class="eyebrow">03 / JavaScript · Extensão</span>
 <h1>Instagram DM Downloader</h1>
-
-<p>Projeto criado para facilitar o download de mídias recebidas no Instagram Direct. A extensão permite salvar imagens e vídeos de conversas pela versão web do Instagram.</p>
+<p>Uma extensão criada para facilitar o download de imagens e vídeos recebidos em conversas do Instagram Direct pela versão web, mantendo a ação de download próxima da própria mídia.</p>
 </div><span class="eyebrow">Projeto de portfólio</span>
 </div>
+
 <div class="project-cover ig" data-media-type="scroll" data-project="instagram-dm">
 <div class="cover-media" aria-hidden="true"></div>
-<div class="cover-meta"><span>EXTENSÃO / INSTAGRAM</span><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right" aria-hidden="true"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>
-</div>
-<div class="cover-name">INSTAGRAM<span>DM</span>
-</div>
-<div class="cover-bottom"><span>Baixe mídias facilmente.</span><span>Projeto 03</span>
-</div>
-</div>
-<div class="case-links"><a href="https://github.com/Mad-xyz/-Instagram-DM-Image-Video-Downloader" target="_blank" rel="noreferrer">Ver no GitHub<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right" aria-hidden="true"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></a>
+<div class="cover-meta"><span>EXTENSÃO / INSTAGRAM</span><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right" aria-hidden="true"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></div>
+<div class="cover-name">INSTAGRAM<span>DM</span></div>
+<div class="cover-bottom"><span>Baixe mídias facilmente.</span><span>Projeto 03</span></div>
 </div>
 
-<p class="case-note">As capas são composições editoriais do portfólio, não capturas de tela dos sistemas. O relato detalhado de planejamento e as imagens originais serão acrescentados conforme a documentação de cada projeto.</p>
+<div class="case-links"><a href="https://github.com/Mad-xyz/-Instagram-DM-Image-Video-Downloader" target="_blank" rel="noreferrer">Ver no GitHub<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right" aria-hidden="true"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></a></div>
+
+<section class="case-sections">
+<h2>01 / O que a extensão resolve?</h2>
+<p>O Instagram Web permite visualizar as mídias recebidas no Direct, mas o fluxo para salvar determinados conteúdos pode não ser direto. Este projeto nasceu como uma experiência prática para colocar uma ação de download junto das imagens e vídeos exibidos nas conversas.</p>
+<p>O foco é reduzir passos: abrir a conversa, localizar a mídia e acionar o download pela própria interface adicionada pela extensão.</p>
+</section>
+
+<section class="case-sections">
+<h2>02 / Quais mídias o projeto suporta?</h2>
+<p>O repositório documenta suporte para download de fotos e vídeos recebidos nas mensagens diretas do Instagram. A extensão procura utilizar a mídia na qualidade original quando ela está disponível e foi pensada para funcionar na versão web do Instagram.</p>
+<p>O suporte a grupos ou álbuns de fotos aparece no projeto como funcionalidade futura, por isso não é apresentado aqui como recurso concluído.</p>
+</section>
+
+<section class="case-sections">
+<h2>03 / Privacidade e instalação</h2>
+<p>De acordo com a documentação do próprio projeto, a extensão não coleta dados e não envia informações para terceiros. Ela é instalada localmente pelo modo de desenvolvedor do navegador, usando a opção de carregar uma extensão sem compactação.</p>
+<p>Este projeto é independente e não possui afiliação com Instagram ou Meta. Essas limitações ficam explícitas para não transformar um experimento técnico em uma promessa maior do que ele realmente é.</p>
+</section>
+
+<section class="case-sections">
+<h2>04 / O que aprendi com o projeto?</h2>
+<p>A extensão me deu um contexto diferente de uma página comum: em vez de controlar todo o HTML, precisei pensar em como uma funcionalidade própria convive com a interface de outro site. Isso envolve observar elementos da página, criar ações de interface e manter o comportamento simples para quem usa.</p>
+<p>O código está disponível publicamente no GitHub para que a implementação possa ser inspecionada junto deste estudo de caso.</p>
+</section>
+
+<p class="case-note">A extensão é um projeto independente de portfólio e não é afiliada ao Instagram ou à Meta. Recursos descritos nesta página foram limitados ao que está documentado no repositório público.</p>
 </main>
 
 <footer id="contato">
 <div class="eyebrow">UM PROJETO, UMA IDEIA OU UM OLÁ.</div><a class="footer-title" href="mailto:pmadsonm@gmail.com">Vamos conversar?<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right" aria-hidden="true"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></a>
 <div class="footer-bottom"><a href="mailto:pmadsonm@gmail.com">pmadsonm@gmail.com</a>
-<div class="socials"><a href="https://github.com/Mad-xyz" target="_blank" rel="noreferrer"><span class="icon-github" aria-hidden="true"></span>GitHub</a><a href="https://www.linkedin.com/in/dark-mad-203661368/" target="_blank" rel="noreferrer"><span class="icon-linkedin" aria-hidden="true"></span>LinkedIn</a><a href="https://www.instagram.com/mad.exe/" target="_blank" rel="noreferrer"><span class="icon-instagram" aria-hidden="true"></span>Instagram</a>
-</div><span>Madson Vander · 2026</span>
+<div class="socials"><a href="https://github.com/Mad-xyz" target="_blank" rel="noreferrer"><span class="icon-github" aria-hidden="true"></span>GitHub</a><a href="https://www.linkedin.com/in/dark-mad-203661368/" target="_blank" rel="noreferrer"><span class="icon-linkedin" aria-hidden="true"></span>LinkedIn</a><a href="https://www.instagram.com/mad.exe/" target="_blank" rel="noreferrer"><span class="icon-instagram" aria-hidden="true"></span>Instagram</a></div><span>Madson Vander · 2026</span>
 </div>
 </footer>
-
 </body>
 </html>
