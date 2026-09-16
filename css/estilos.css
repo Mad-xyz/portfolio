@@ -1120,6 +1120,92 @@ h2 {
 
 }
 
+/* ── ANIMAÇÕES DE MÍDIA NOS CARDS ──────────────────────────────────────────
+   Camada de mídia absoluta dentro do .project-cover.
+   O design original (cores, tipografia, layout flex) é completamente
+   preservado. Os textos ficam acima via z-index no .cover-overlay.
+   ─────────────────────────────────────────────────────────────────────── */
+
+/* Contentor da mídia: preenchimento absoluto, clipa o overflow */
+.cover-media {
+  position:absolute;
+  inset:0;
+  overflow:hidden;
+  z-index:0;
+  pointer-events:none
+}
+
+/* Overlay de cor: mantém a identidade de cada card sobre a imagem */
+.cover-media::after {
+  content:'';
+  position:absolute;
+  inset:0;
+  z-index:2;
+  pointer-events:none
+}
+.rs .cover-media::after { background:rgba(192,165,240,.60) }
+.mh .cover-media::after { background:rgba(230,230,227,.58) }
+.ig .cover-media::after { background:rgba(244,166,209,.60) }
+.ag .cover-media::after { background:rgba(165,209,240,.60) }
+
+/* Quando há mídia: esconde textos e remove overlay de cor,
+   deixando apenas a imagem preencher o card. */
+[data-media-type] .cover-media::after {
+  display:none
+}
+[data-media-type] .cover-meta,
+[data-media-type] .cover-name,
+[data-media-type] .cover-bottom {
+  display:none
+}
+
+/* Textos aparecem acima da camada de mídia */
+.project-cover .cover-meta,
+.project-cover .cover-name,
+.project-cover .cover-bottom {
+  position:relative;
+  z-index:1
+}
+
+/* ── Scroll: captura longa que desce de cima para baixo ── */
+.cover-scroll-img {
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  max-width:none;
+  object-fit:cover;
+  object-position:50% 0%;
+  display:block;
+  z-index:1;
+  animation:coverScrollPos 16s ease-in-out infinite
+}
+
+@keyframes coverScrollPos {
+  0%,8%    { object-position:50% 0% }
+  45%,55%  { object-position:50% 100% }
+  92%,100% { object-position:50% 0% }
+}
+
+/* ── Slideshow: múltiplas imagens com crossfade ── */
+.cover-slide-img {
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  max-width:none;
+  object-fit:cover;
+  object-position:center top;
+  display:block;
+  z-index:1;
+  opacity:0;
+  transition:opacity 350ms ease
+}
+
+.cover-slide-img--ativo {
+  opacity:1
+}
+
 @media(prefers-reduced-motion:reduce) {
   html {
   scroll-behavior:auto
