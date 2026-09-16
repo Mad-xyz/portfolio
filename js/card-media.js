@@ -1,12 +1,13 @@
 /**
- * card-media.js — Animações de mídia nos cards de projetos.
+ * card-media.js — mídia dos cards de projeto com carregamento progressivo.
  *
- * Objetivos de performance:
- *   · não baixar capturas pesadas antes de o card se aproximar da viewport;
- *   · carregar somente o primeiro frame do slideshow e buscar os próximos sob demanda;
- *   · manter a cor do card como fallback enquanto a imagem não estiver pronta;
- *   · remover visualmente a cor assim que a mídia carregar;
- *   · pausar animações fora da viewport e respeitar prefers-reduced-motion.
+ * Regras:
+ *   · a cor original do card é o fallback enquanto não existe imagem pronta;
+ *   · quando a imagem carrega, a cor some e a imagem assume o card;
+ *   · se a imagem falhar, a cor e os textos do card continuam visíveis;
+ *   · na home, imagens pesadas só entram na rede perto da viewport;
+ *   · o slideshow do R.S. Top Team baixa um frame por vez, sem trocar para um frame ainda incompleto;
+ *   · animações respeitam prefers-reduced-motion.
  */
 (function iniciarCardMedia() {
   'use strict';
@@ -14,7 +15,8 @@
   var CONFIG = Object.freeze({
     SLIDE_DURATION_MS: 2400,
     SCROLL_DURATION_S: 16,
-    ROOT_MARGIN: '320px 0px',
+    ROOT_MARGIN: '160px 0px',
+    FADE_MS: 350,
   });
 
   var PROJECT_MEDIA = {
@@ -35,52 +37,165 @@
   var mediaBase = inSubPage ? '../../' : '';
   var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var slideshowState = Object.create(null);
+  var preloadCache = Object.create(null);
+
+  function injetarEstilosDeEstado() {
+    if (document.getElementById('card-media-state-styles')) return;
+
+    var style = document.createElement('style');
+    style.id = 'card-media-state-styles';
+    style.textContent = [
+      '/* Estado visual: cor/texto são fallback; imagem pronta assume o card. */',
+      '.project-grid .project-cover[data-media-type] .cover-media{opacity:0;transition:opacity .24s ease}',
+      '.project-grid .project-cover.project-cover--media-ready[data-media-type] .cover-media{opacity:1}',
+      '.project-grid .project-cover.project-cover--media-ready.rs,',
+      '.project-grid .project-cover.project-cover--media-ready.mh,',
+      '.project-grid .project-cover.project-cover--media-ready.ig,',
+      '.project-grid .project-cover.project-cover--media-ready.ag{background-color:transparent!important}',
+      '.project-grid .project-cover[data-media-type]:not(.project-cover--media-ready) .cover-meta,',
+      '.project-grid .project-cover[data-media-type]:not(.project-cover--media-ready) .cover-bottom{display:flex!important}',
+      '.project-grid .project-cover[data-media-type]:not(.project-cover--media-ready) .cover-name{display:block!important}',
+      '.project-grid .project-cover.project-cover--media-ready[data-media-type] .cover-meta,',
+      '.project-grid .project-cover.project-cover--media-ready[data-media-type] .cover-bottom,',
+      '.project-grid .project-cover.project-cover--media-ready[data-media-type] .cover-name{display:none!important}',
+      '/* Contraste do fallback: mantém a família de cores, mas passa com folga em texto grande. */',
+      '.project-grid .ig:not(.project-cover--media-ready) .cover-name>span{color:#73204d!important}',
+      '.project-grid .ag:not(.project-cover--media-ready) .cover-name>span{color:#245276!important}',
+      '@media (prefers-reduced-motion:reduce){.project-grid .project-cover[data-media-type] .cover-media{transition:none}}'
+    ].join('');
+    document.head.appendChild(style);
+  }
 
   function projectIdFrom(mediaEl) {
     var project = mediaEl.closest('[data-project]');
     return project ? project.dataset.project : '';
   }
 
+  function getCover(mediaEl) {
+    return mediaEl.closest('.project-cover');
+  }
+
   function marcarCarregando(mediaEl) {
-    var cover = mediaEl.closest('.project-cover');
-    if (!cover) return;
+    var cover = getCover(mediaEl);
+    if (!cover || cover.classList.contains('project-cover--media-ready')) return;
     cover.classList.add('project-cover--loading');
-    cover.classList.remove('project-cover--media-ready');
+    cover.classList.remove('project-cover--media-error');
   }
 
   function marcarPronto(mediaEl) {
-    var cover = mediaEl.closest('.project-cover');
+    var cover = getCover(mediaEl);
     if (!cover) return;
-    cover.classList.remove('project-cover--loading');
+    cover.classList.remove('project-cover--loading', 'project-cover--media-error');
     cover.classList.add('project-cover--media-ready');
   }
 
-  function marcarFalha(mediaEl) {
-    var cover = mediaEl.closest('.project-cover');
-    if (!cover) return;
-    cover.classList.remove('project-cover--loading', 'project-cover--media-ready');
+  function marcarFalhaInicial(mediaEl) {
+    var cover = getCover(mediaEl);
+    if (!cover || cover.classList.contains('project-cover--media-ready')) return;
+    cover.classList.remove('project-cover--loading');
     cover.classList.add('project-cover--media-error');
   }
 
-  function criarImg(src, eager, mediaEl) {
+  function urlDaMidia(src) {
+    return mediaBase + src;
+  }
+
+  function preCarregar(src) {
+    var url = urlDaMidia(src);
+    if (preloadCache[url]) return preloadCache[url];
+
+    preloadCache[url] = new Promise(function (resolve, reject) {
+      var probe = new Image();
+      probe.decoding = 'async';
+      probe.onload = function () { resolve(url); };
+      probe.onerror = function () {
+        delete preloadCache[url];
+        reject(new Error('Falha ao carregar ' + url));
+      };
+      probe.src = url;
+    });
+
+    return preloadCache[url];
+  }
+
+  function criarImg(src, mediaEl, options) {
+    options = options || {};
+
     var img = document.createElement('img');
     img.alt = '';
     img.setAttribute('aria-hidden', 'true');
-    img.loading = eager ? 'eager' : 'lazy';
     img.decoding = 'async';
-    try { img.fetchPriority = eager ? 'high' : 'low'; } catch (_) {}
+    img.loading = options.eager ? 'eager' : 'lazy';
+
+    try {
+      img.fetchPriority = options.priority || 'low';
+    } catch (_) {}
 
     img.addEventListener('load', function () {
       marcarPronto(mediaEl);
+      if (typeof options.onLoad === 'function') options.onLoad(img);
     }, { once: true });
 
     img.addEventListener('error', function () {
-      marcarFalha(mediaEl);
+      if (options.initial) marcarFalhaInicial(mediaEl);
+      if (typeof options.onError === 'function') options.onError(img);
     }, { once: true });
 
-    marcarCarregando(mediaEl);
-    img.src = mediaBase + src;
+    if (options.initial) marcarCarregando(mediaEl);
+    img.src = urlDaMidia(src);
     return img;
+  }
+
+  function observarQuandoPerto(targets, callback) {
+    var lista = Array.isArray(targets) ? targets : [targets];
+
+    if (!('IntersectionObserver' in window) || inSubPage) {
+      callback();
+      return;
+    }
+
+    var executado = false;
+    var observer = new IntersectionObserver(function (entries) {
+      if (executado) return;
+
+      for (var i = 0; i < entries.length; i += 1) {
+        if (!entries[i].isIntersecting) continue;
+        executado = true;
+        observer.disconnect();
+        callback();
+        break;
+      }
+    }, {
+      root: null,
+      rootMargin: CONFIG.ROOT_MARGIN,
+      threshold: 0.01,
+    });
+
+    lista.forEach(function (target) {
+      if (target) observer.observe(target);
+    });
+  }
+
+  function observarAnimacaoScroll(mediaEl, img) {
+    if (reducedMotion) {
+      img.style.animation = 'none';
+      return;
+    }
+
+    img.style.animationDuration = CONFIG.SCROLL_DURATION_S + 's';
+
+    var cover = getCover(mediaEl) || mediaEl;
+    if (!('IntersectionObserver' in window)) return;
+
+    img.style.animationPlayState = 'paused';
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        img.style.animationPlayState = entry.isIntersecting ? 'running' : 'paused';
+      });
+    }, { threshold: 0.05 });
+
+    observer.observe(cover);
   }
 
   function initScrollCover(mediaEl) {
@@ -91,40 +206,109 @@
     var srcs = PROJECT_MEDIA[projectId];
     if (!srcs || !srcs.length) return;
 
-    var img = criarImg(srcs[0], inSubPage, mediaEl);
+    var img = criarImg(srcs[0], mediaEl, {
+      initial: true,
+      eager: true,
+      priority: inSubPage ? 'high' : 'low',
+    });
+
     img.classList.add('cover-scroll-img');
-    if (!reducedMotion) img.style.animationDuration = CONFIG.SCROLL_DURATION_S + 's';
     mediaEl.appendChild(img);
+    observarAnimacaoScroll(mediaEl, img);
   }
 
-  function ensureSlideFrame(state, frameIndex) {
-    state.covers.forEach(function (mediaEl) {
-      if (mediaEl.querySelector('[data-slide-index="' + frameIndex + '"]')) return;
+  function initScrollCovers(covers) {
+    covers.forEach(function (mediaEl) {
+      var cover = getCover(mediaEl) || mediaEl;
+      observarQuandoPerto(cover, function () {
+        initScrollCover(mediaEl);
+      });
+    });
+  }
 
-      var img = criarImg(state.srcs[frameIndex], inSubPage && frameIndex === 0, mediaEl);
-      img.classList.add('cover-slide-img');
-      img.dataset.slideIndex = String(frameIndex);
-      if (frameIndex === state.index) img.classList.add('cover-slide-img--ativo');
-      mediaEl.appendChild(img);
+  function obterFrame(mediaEl, frameIndex) {
+    return mediaEl.querySelector('[data-slide-index="' + frameIndex + '"]');
+  }
+
+  function anexarFrame(mediaEl, state, frameIndex, initial) {
+    var existente = obterFrame(mediaEl, frameIndex);
+    if (existente) return existente;
+
+    var img = criarImg(state.srcs[frameIndex], mediaEl, {
+      initial: initial,
+      eager: true,
+      priority: inSubPage && initial ? 'high' : 'low',
+    });
+
+    img.classList.add('cover-slide-img');
+    img.dataset.slideIndex = String(frameIndex);
+    mediaEl.appendChild(img);
+    return img;
+  }
+
+  function ativarFrameQuandoPronto(mediaEl, prevIdx, nextIdx, img) {
+    function trocar() {
+      var anterior = obterFrame(mediaEl, prevIdx);
+      var proximo = obterFrame(mediaEl, nextIdx);
+      if (!proximo || !proximo.complete || !proximo.naturalWidth) return;
+
+      if (anterior) anterior.classList.remove('cover-slide-img--ativo');
+      proximo.classList.add('cover-slide-img--ativo');
+
+      // Depois do crossfade, conserva apenas o frame atual no DOM.
+      if (anterior && anterior !== proximo) {
+        window.setTimeout(function () {
+          if (!anterior.classList.contains('cover-slide-img--ativo')) anterior.remove();
+        }, reducedMotion ? 0 : CONFIG.FADE_MS + 80);
+      }
+    }
+
+    if (img.complete && img.naturalWidth) {
+      trocar();
+    } else {
+      img.addEventListener('load', trocar, { once: true });
+    }
+  }
+
+  function carregarPrimeiroFrame(state) {
+    var src = state.srcs[0];
+
+    preCarregar(src).then(function () {
+      state.covers.forEach(function (mediaEl) {
+        var img = anexarFrame(mediaEl, state, 0, true);
+
+        function ativar() {
+          if (!img.naturalWidth) return;
+          img.classList.add('cover-slide-img--ativo');
+          marcarPronto(mediaEl);
+        }
+
+        if (img.complete && img.naturalWidth) ativar();
+        else img.addEventListener('load', ativar, { once: true });
+      });
+    }).catch(function () {
+      state.covers.forEach(marcarFalhaInicial);
     });
   }
 
   function avancarSlide(projectId) {
     var state = slideshowState[projectId];
-    if (!state || document.hidden) return;
+    if (!state || state.loading || document.hidden || reducedMotion) return;
 
     var prevIdx = state.index;
     var nextIdx = (prevIdx + 1) % state.srcs.length;
+    state.loading = true;
 
-    // O próximo frame só entra na rede quando realmente for necessário.
-    ensureSlideFrame(state, nextIdx);
-    state.index = nextIdx;
-
-    state.covers.forEach(function (mediaEl) {
-      var prev = mediaEl.querySelector('[data-slide-index="' + prevIdx + '"]');
-      var next = mediaEl.querySelector('[data-slide-index="' + nextIdx + '"]');
-      if (prev) prev.classList.remove('cover-slide-img--ativo');
-      if (next) next.classList.add('cover-slide-img--ativo');
+    preCarregar(state.srcs[nextIdx]).then(function () {
+      state.covers.forEach(function (mediaEl) {
+        var img = anexarFrame(mediaEl, state, nextIdx, false);
+        ativarFrameQuandoPronto(mediaEl, prevIdx, nextIdx, img);
+      });
+      state.index = nextIdx;
+    }).catch(function () {
+      // Se um frame secundário falhar, mantém o último frame válido e tenta o próximo ciclo.
+    }).finally(function () {
+      state.loading = false;
     });
   }
 
@@ -138,10 +322,11 @@
       index: 0,
       srcs: srcs,
       covers: mediaEls,
+      loading: false,
       timerId: null,
     };
 
-    ensureSlideFrame(state, 0);
+    carregarPrimeiroFrame(state);
 
     if (!reducedMotion && srcs.length > 1) {
       state.timerId = window.setInterval(function () {
@@ -162,67 +347,28 @@
 
     Object.keys(porProjeto).forEach(function (projectId) {
       var mediaEls = porProjeto[projectId];
-      var alvo = mediaEls[0].closest('.project-cover') || mediaEls[0];
+      var targets = mediaEls.map(function (mediaEl) {
+        return getCover(mediaEl) || mediaEl;
+      });
 
-      lazyObserve(alvo, function () {
+      observarQuandoPerto(targets, function () {
         iniciarSlideshowDoProjeto(projectId, mediaEls);
       });
     });
   }
 
-  function lazyObserve(target, callback) {
-    if (!('IntersectionObserver' in window) || inSubPage) {
-      callback();
-      return;
-    }
-
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        observer.disconnect();
-        callback();
-      });
-    }, {
-      root: null,
-      rootMargin: CONFIG.ROOT_MARGIN,
-      threshold: 0.01,
-    });
-
-    observer.observe(target);
-  }
-
-  function initScrollCovers(covers) {
-    covers.forEach(function (mediaEl) {
-      var alvo = mediaEl.closest('.project-cover') || mediaEl;
-      lazyObserve(alvo, function () {
-        initScrollCover(mediaEl);
-      });
-    });
-  }
-
-  function initScrollAnimationObserver(covers) {
-    if (!('IntersectionObserver' in window) || reducedMotion) return;
-
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        var img = entry.target.querySelector('.cover-scroll-img');
-        if (!img) return;
-        img.style.animationPlayState = entry.isIntersecting ? 'running' : 'paused';
-      });
-    }, { threshold: 0.05 });
-
-    covers.forEach(function (mediaEl) {
-      observer.observe(mediaEl.closest('.project-cover') || mediaEl);
-    });
-  }
-
   function init() {
-    var scrollCovers = Array.from(document.querySelectorAll('[data-media-type="scroll"] .cover-media'));
-    var slideshowCovers = Array.from(document.querySelectorAll('[data-media-type="slideshow"] .cover-media'));
+    injetarEstilosDeEstado();
+
+    var scrollCovers = Array.from(
+      document.querySelectorAll('[data-media-type="scroll"] .cover-media')
+    );
+    var slideshowCovers = Array.from(
+      document.querySelectorAll('[data-media-type="slideshow"] .cover-media')
+    );
 
     if (scrollCovers.length) initScrollCovers(scrollCovers);
     if (slideshowCovers.length) initSlideshowCovers(slideshowCovers);
-    initScrollAnimationObserver(scrollCovers);
   }
 
   init();
