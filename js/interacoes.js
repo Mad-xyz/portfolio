@@ -80,20 +80,28 @@
     projectGrid.style.userSelect = 'none';
     projectGrid.style.webkitUserSelect = 'none';
 
+    // O navegador considera <a> arrastável por padrão no desktop.
+    // Desativamos isso para o mouse controlar o carrossel em vez de criar
+    // aquela prévia/caixa com a URL do projeto durante o arraste.
     cardsOriginais.forEach((card) => {
+      card.setAttribute('draggable', 'false');
+
       const clone = card.cloneNode(true);
       clone.setAttribute('aria-hidden', 'true');
       clone.setAttribute('tabindex', '-1');
+      clone.setAttribute('draggable', 'false');
       clone.querySelectorAll('a, button, input, select, textarea').forEach((elemento) => {
         elemento.setAttribute('tabindex', '-1');
       });
       projectGrid.appendChild(clone);
     });
 
-    projectGrid.querySelectorAll('img, video').forEach((midia) => {
-      midia.setAttribute('draggable', 'false');
-      midia.addEventListener('dragstart', (evento) => evento.preventDefault());
+    projectGrid.querySelectorAll('img, video, a').forEach((elemento) => {
+      elemento.setAttribute('draggable', 'false');
     });
+
+    // Impede qualquer drag nativo (principalmente o ghost do link no Chrome).
+    projectGrid.addEventListener('dragstart', (evento) => evento.preventDefault());
 
     const prefereMovimentoReduzido = window.matchMedia('(prefers-reduced-motion: reduce)');
     const DURACAO_VOLTA_MS = 30000; //quanto tempo leva para o marquee voltar ao inicio
