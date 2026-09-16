@@ -113,7 +113,6 @@
     });
 
     projectGrid.querySelectorAll('.project-cover').forEach((capa) => {
-      capa.style.cursor = 'grab';
       capa.style.touchAction = 'pan-y';
       capa.style.userSelect = 'none';
       capa.style.webkitUserSelect = 'none';
@@ -224,7 +223,6 @@
       ultimoPonteiroX = evento.clientX;
       ultimoTempoPonteiro = performance.now();
       velocidadeInercia = 0;
-      capa.style.cursor = 'grabbing';
     }
 
     function moverDrag(evento) {
@@ -241,9 +239,6 @@
           arrastando = false;
           ponteiroAtivo = null;
           cardPressionado = null;
-          projectGrid.querySelectorAll('.project-cover').forEach((capa) => {
-            capa.style.cursor = 'grab';
-          });
           return;
         }
 
@@ -282,10 +277,6 @@
       ponteiroAtivo = null;
       cardPressionado = null;
 
-      projectGrid.querySelectorAll('.project-cover').forEach((capa) => {
-        capa.style.cursor = 'grab';
-      });
-
       if (!foiDrag) {
         velocidadeInercia = 0;
       } else {
@@ -310,9 +301,6 @@
       ponteiroAtivo = null;
       cardPressionado = null;
       velocidadeInercia = 0;
-      projectGrid.querySelectorAll('.project-cover').forEach((capa) => {
-        capa.style.cursor = 'grab';
-      });
     }
 
     projectGrid.addEventListener('pointerdown', iniciarDrag, { passive: false });
