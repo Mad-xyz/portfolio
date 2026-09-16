@@ -16,7 +16,7 @@
       cursor.style.transform = `translate3d(${evento.clientX}px, ${evento.clientY}px, 0)`;
       cursor.style.opacity = '1';
 
-      const elementoInterativo = evento.target.closest('a, button');
+      const elementoInterativo = evento.target.closest('a, button, [role="link"]');
       cursor.classList.toggle('over', Boolean(elementoInterativo));
       document.documentElement.classList.add('custom-cursor');
     };
@@ -79,21 +79,37 @@
     projectGrid.style.userSelect = 'none';
     projectGrid.style.webkitUserSelect = 'none';
 
-    // Duplica os cards para manter o loop infinito.
+    /*
+     * IMPORTANTE:
+     * O Chrome pode iniciar o drag nativo de <a href="..."> antes do nosso
+     * carrossel assumir o gesto. Para eliminar isso pela raiz, salvamos a URL
+     * em data-href e removemos o href dos cards. A navegação passa a ser feita
+     * manualmente por clique/teclado. Sem href, não existe link nativo para o
+     * Chrome transformar naquele "ghost" cinza com título + URL.
+     */
     cardsOriginais.forEach((card) => {
+      const href = card.getAttribute('href');
+      if (href) card.dataset.href = href;
+
+      card.removeAttribute('href');
+      card.setAttribute('role', 'link');
+      card.setAttribute('tabindex', '0');
+      card.setAttribute('draggable', 'false');
+      card.style.webkitUserDrag = 'none';
+
       const clone = card.cloneNode(true);
       clone.setAttribute('aria-hidden', 'true');
       clone.setAttribute('tabindex', '-1');
+      clone.setAttribute('draggable', 'false');
+      clone.style.webkitUserDrag = 'none';
       projectGrid.appendChild(clone);
     });
 
-    // Links e imagens são arrastáveis nativamente no navegador.
-    // Aqui desativamos isso em TODOS os descendentes, inclusive nos clones.
+    // Nenhum descendente do carrossel pode iniciar drag nativo.
     projectGrid.querySelectorAll('*').forEach((elemento) => {
-      if (elemento instanceof HTMLElement) {
-        elemento.draggable = false;
-        elemento.style.webkitUserDrag = 'none';
-      }
+      if (!(elemento instanceof HTMLElement)) return;
+      elemento.draggable = false;
+      elemento.style.webkitUserDrag = 'none';
     });
 
     projectGrid.querySelectorAll('.project-cover').forEach((capa) => {
@@ -104,13 +120,12 @@
       capa.style.webkitUserDrag = 'none';
     });
 
-    // Defesa extra contra o ghost/tooltip de URL do Chrome.
-    // Capture=true garante que bloqueamos antes do próprio <a> receber o evento.
+    // Última barreira: se algum elemento tentar emitir dragstart, aborta.
     projectGrid.addEventListener(
       'dragstart',
       (evento) => {
         evento.preventDefault();
-        evento.stopPropagation();
+        evento.stopImmediatePropagation();
       },
       true
     );
@@ -137,7 +152,7 @@
     let ultimoTempoPonteiro = 0;
     let ultimoFrame = performance.now();
     let cardPressionado = null;
-    let cliqueMouseBloqueado = false;
+    let ignorarCliqueAte = 0;
 
     function aplicarTransformacao() {
       projectGrid.style.transform = `translate3d(${posicaoX}px, 0, 0)`;
@@ -158,6 +173,12 @@
       velocidadeAutomatica = larguraDoCiclo / DURACAO_VOLTA_MS;
       normalizarPosicao();
       aplicarTransformacao();
+    }
+
+    function abrirCard(card) {
+      if (!card) return;
+      const href = card.dataset.href;
+      if (href) window.location.assign(href);
     }
 
     function animar(agora) {
@@ -183,21 +204,15 @@
     function iniciarDrag(evento) {
       if (evento.pointerType === 'mouse' && evento.button !== 0) return;
 
-      // O drag só começa pela CAPA do projeto. A legenda continua sendo link normal.
+      // O gesto de arraste começa pela capa/área visual do projeto.
       const capa = evento.target.closest('.project-cover');
       if (!capa || !projectGrid.contains(capa)) return;
 
       const card = capa.closest('.project-card');
       if (!card) return;
 
-      // No PC bloqueia o comportamento nativo do link antes que o Chrome tente
-      // criar o ghost com título/URL. O clique simples é restaurado manualmente.
-      if (evento.pointerType === 'mouse') {
-        evento.preventDefault();
-        cliqueMouseBloqueado = true;
-      } else {
-        cliqueMouseBloqueado = false;
-      }
+      // Sem href já não existe drag de link, mas isto ainda evita seleção de texto.
+      if (evento.pointerType === 'mouse' && evento.cancelable) evento.preventDefault();
 
       cardPressionado = card;
       arrastando = true;
@@ -212,19 +227,6 @@
       capa.style.cursor = 'grabbing';
     }
 
-    // MouseDown separado porque é ele que dispara o drag nativo HTML no Chrome.
-    // Bloqueamos somente quando o clique começa dentro da capa do projeto.
-    projectGrid.addEventListener(
-      'mousedown',
-      (evento) => {
-        if (evento.button !== 0) return;
-        const capa = evento.target.closest('.project-cover');
-        if (!capa || !projectGrid.contains(capa)) return;
-        evento.preventDefault();
-      },
-      true
-    );
-
     function moverDrag(evento) {
       if (!arrastando || evento.pointerId !== ponteiroAtivo) return;
 
@@ -234,11 +236,11 @@
       if (!dragConfirmado) {
         if (Math.abs(deslocamentoBrutoX) < LIMITE_DRAG_PX) return;
 
-        if (Math.abs(deslocamentoY) > Math.abs(deslocamentoBrutoX)) {
+        // Em touch, um gesto predominantemente vertical continua rolando a página.
+        if (evento.pointerType !== 'mouse' && Math.abs(deslocamentoY) > Math.abs(deslocamentoBrutoX)) {
           arrastando = false;
           ponteiroAtivo = null;
           cardPressionado = null;
-          cliqueMouseBloqueado = false;
           projectGrid.querySelectorAll('.project-cover').forEach((capa) => {
             capa.style.cursor = 'grab';
           });
@@ -248,7 +250,6 @@
         dragConfirmado = true;
       }
 
-      // Como o movimento é nosso, não deixa o navegador iniciar seleção/drag.
       if (evento.cancelable) evento.preventDefault();
 
       const deslocamentoX = deslocamentoBrutoX * SENSIBILIDADE_DRAG;
@@ -274,28 +275,31 @@
       if (!arrastando || evento.pointerId !== ponteiroAtivo) return;
 
       const foiDrag = dragConfirmado;
-      const cardParaAbrir = cardPressionado;
-      const abrirManual = cliqueMouseBloqueado;
+      const card = cardPressionado;
 
       arrastando = false;
       dragConfirmado = false;
       ponteiroAtivo = null;
       cardPressionado = null;
-      cliqueMouseBloqueado = false;
 
       projectGrid.querySelectorAll('.project-cover').forEach((capa) => {
         capa.style.cursor = 'grab';
       });
 
-      if (!foiDrag) velocidadeInercia = 0;
+      if (!foiDrag) {
+        velocidadeInercia = 0;
+      } else {
+        // Evita que um click sintetizado imediatamente após o drag abra o projeto.
+        ignorarCliqueAte = performance.now() + 250;
+      }
 
       normalizarPosicao();
       aplicarTransformacao();
 
-      // Clique simples na capa continua abrindo o projeto, inclusive se for clone.
-      if (!foiDrag && abrirManual && cardParaAbrir) {
-        const href = cardParaAbrir.getAttribute('href');
-        if (href) window.location.assign(href);
+      // Como o pointerdown do mouse é preventDefault(), clique simples na capa
+      // é resolvido aqui manualmente.
+      if (!foiDrag && evento.pointerType === 'mouse') {
+        abrirCard(card);
       }
     }
 
@@ -305,7 +309,6 @@
       dragConfirmado = false;
       ponteiroAtivo = null;
       cardPressionado = null;
-      cliqueMouseBloqueado = false;
       velocidadeInercia = 0;
       projectGrid.querySelectorAll('.project-cover').forEach((capa) => {
         capa.style.cursor = 'grab';
@@ -317,21 +320,32 @@
     window.addEventListener('pointerup', finalizarDrag);
     window.addEventListener('pointercancel', cancelarDrag);
 
-    // Se o browser sintetizar um click depois do nosso gesto de mouse na capa,
-    // evita navegação dupla. Teclado e cliques na legenda continuam nativos.
-    projectGrid.addEventListener(
-      'click',
-      (evento) => {
-        const capa = evento.target.closest('.project-cover');
-        if (!capa) return;
+    // Clique normal fora da capa (legenda/texto) ou clique touch abre manualmente.
+    projectGrid.addEventListener('click', (evento) => {
+      const card = evento.target.closest('.project-card');
+      if (!card || !projectGrid.contains(card)) return;
 
-        // Para cliques reais de mouse na capa a navegação já foi resolvida no pointerup.
-        if (evento.detail > 0 && evento.pointerType !== 'touch') {
-          evento.preventDefault();
-        }
-      },
-      true
-    );
+      evento.preventDefault();
+      if (performance.now() < ignorarCliqueAte) return;
+
+      const clicouNaCapa = Boolean(evento.target.closest('.project-cover'));
+      if (clicouNaCapa && evento.detail > 0) {
+        // No mouse, a capa já é tratada no pointerup para separar click de drag.
+        // Em touch, o click sintetizado pode abrir normalmente.
+        if (window.matchMedia('(pointer: fine)').matches) return;
+      }
+
+      abrirCard(card);
+    });
+
+    // Mantém acesso por teclado mesmo sem href nativo.
+    projectGrid.addEventListener('keydown', (evento) => {
+      if (evento.key !== 'Enter' && evento.key !== ' ') return;
+      const card = evento.target.closest('.project-card');
+      if (!card || card.getAttribute('aria-hidden') === 'true') return;
+      evento.preventDefault();
+      abrirCard(card);
+    });
 
     if ('ResizeObserver' in window) {
       const observadorTamanho = new ResizeObserver(atualizarMedidas);
