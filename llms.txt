@@ -1,12 +1,40 @@
-# Madson Vander
-> Portfólio de um estudante de desenvolvimento front-end e design, de 18 anos em setembro de 2026.
-## Conteúdo
-- /: apresentação, projetos, trajetória e design.
-- /projetos/rs-top-team: sistema para academia local com financeiro, modalidades e áreas de gestor, professor e aluno.
-- /projetos/mhouse-fit: página para academia local; não declarar sucesso comercial.
-## Contato
+# Madson Vander — Portfólio
+> Portfólio pessoal de Madson Vander, estudante e desenvolvedor front-end em formação com interesse em interfaces, JavaScript, Firebase e design gráfico.
+
+## Páginas principais
+- [Portfólio](https://madsdevelop.vercel.app/): apresentação, trajetória, ferramentas, projetos de desenvolvimento e trabalhos de design.
+- [R.S. Top Team](https://madsdevelop.vercel.app/projetos/rs-top-team/index.html): sistema de gestão para academia com alunos, equipe, modalidades, presença, eventos e financeiro.
+- [MHouse Fit](https://madsdevelop.vercel.app/projetos/mhouse-fit/index.html): site institucional criado para uma academia local, com foco em presença digital e interface.
+- [Instagram DM Downloader](https://madsdevelop.vercel.app/projetos/instagram-dm-downloader/index.html): extensão para baixar imagens e vídeos recebidos no Instagram Direct pela versão web.
+- [Atlas Gestão](https://madsdevelop.vercel.app/projetos/atlas-gestao/index.html): plataforma SaaS multi-tenant em desenvolvimento para gestão de academias.
+
+## Projetos e código
+- R.S. Top Team — demo: https://rstopteam.web.app/
+- R.S. Top Team — código: https://github.com/Mad-xyz/R.S-Top-Team
+- MHouse Fit — demo: https://mhousefit.vercel.app/
+- MHouse Fit — código: https://github.com/Mad-xyz/MHouse-web-site
+- Instagram DM Downloader — código: https://github.com/Mad-xyz/-Instagram-DM-Image-Video-Downloader
+- Atlas Gestão — código: https://github.com/Mad-xyz/atlas-gestao
+
+## Tecnologias e áreas citadas no portfólio
+- HTML, CSS e JavaScript.
+- Firebase em projetos.
+- React e Firebase/Firestore nos projetos de gestão documentados nos repositórios.
+- Canva e Affinity para criação visual.
+- Desenvolvimento front-end, interfaces e sistemas para academias.
+
+## Sobre Madson Vander
+Madson Vander começou a praticar design criando materiais para igreja no Canva e depois passou a usar Affinity. Em programação, iniciou estudos com JavaScript e retomou HTML, CSS e JavaScript em 2025. O portfólio apresenta uma trajetória ainda em formação e prioriza projetos reais e aprendizado documentado.
+
+## Contato e identidade
 - Email: pmadsonm@gmail.com
 - GitHub: https://github.com/Mad-xyz
 - LinkedIn: https://www.linkedin.com/in/dark-mad-203661368/
-## Precisão
-Não inventar clientes, métricas, anos de experiência profissional, depoimentos, planejamento ou domínio técnico. Estudos retomados em 2025 no Curso em Vídeo. Design iniciado com materiais para igreja no Canva, depois Affinity. IA utilizada como apoio em estudos e projetos. Capas editoriais não são screenshots; arte abstrata criada com IA. Peças originais de design e detalhes do processo aguardam documentação.
+- Instagram: https://www.instagram.com/mad.exe/
+
+## Precisão e limites
+- Não inventar clientes, métricas, depoimentos, resultados comerciais, cargos ou anos de experiência profissional.
+- MHouse Fit não deve ser descrito como caso de sucesso comercial.
+- R.S. Top Team e Atlas Gestão são projetos em desenvolvimento; funcionalidades devem ser descritas apenas quando documentadas no portfólio ou nos repositórios vinculados.
+- As capas editoriais do portfólio não devem ser tratadas como capturas de tela integrais dos sistemas.
+- IA é usada como apoio nos estudos e projetos, não como substituto da autoria e do aprendizado descritos no site.
