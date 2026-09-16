@@ -5,6 +5,264 @@
  * O HTML continua sendo a fonte principal dos textos e da estrutura.
  */
 (function iniciarInteracoes() {
+  // SEO compartilhado: mantém títulos, canonical, social cards e JSON-LD
+  // consistentes entre a home e os estudos de caso sem duplicar lógica.
+  function configurarSeo() {
+    const ORIGEM = 'https://madsdevelop.vercel.app';
+    const caminhoOriginal = window.location.pathname || '/';
+    const caminho = caminhoOriginal !== '/' ? caminhoOriginal.replace(/\/+$/, '') : '/';
+
+    const paginas = {
+      '/': {
+        title: 'Madson Vander | Desenvolvedor Front-end e Designer',
+        description: 'Portfólio de Madson Vander, desenvolvedor front-end em formação e designer. Projetos com HTML, CSS, JavaScript, Firebase e interfaces para web.',
+        canonical: `${ORIGEM}/`,
+        image: `${ORIGEM}/imagens/hero-art.webp`,
+        imageAlt: 'Arte abstrata do portfólio de Madson Vander',
+        type: 'website'
+      },
+      '/index.html': {
+        title: 'Madson Vander | Desenvolvedor Front-end e Designer',
+        description: 'Portfólio de Madson Vander, desenvolvedor front-end em formação e designer. Projetos com HTML, CSS, JavaScript, Firebase e interfaces para web.',
+        canonical: `${ORIGEM}/`,
+        image: `${ORIGEM}/imagens/hero-art.webp`,
+        imageAlt: 'Arte abstrata do portfólio de Madson Vander',
+        type: 'website'
+      },
+      '/projetos/rs-top-team': {
+        title: 'R.S. Top Team | Sistema para Academias — Madson Vander',
+        description: 'Estudo de caso do R.S. Top Team: sistema de gestão para academias com alunos, equipe, modalidades, presença, eventos, finanças e permissões.',
+        canonical: `${ORIGEM}/projetos/rs-top-team/index.html`,
+        image: `${ORIGEM}/projetos/rs-top-team/img/1%20Dashboras.webp`,
+        imageAlt: 'Interface do sistema R.S. Top Team',
+        type: 'article',
+        projectName: 'R.S. Top Team',
+        keywords: ['gestão de academias', 'React', 'Firebase', 'controle de presença', 'gestão de alunos'],
+        sameAs: ['https://rstopteam.web.app/', 'https://github.com/Mad-xyz/R.S-Top-Team']
+      },
+      '/projetos/rs-top-team/index.html': {
+        title: 'R.S. Top Team | Sistema para Academias — Madson Vander',
+        description: 'Estudo de caso do R.S. Top Team: sistema de gestão para academias com alunos, equipe, modalidades, presença, eventos, finanças e permissões.',
+        canonical: `${ORIGEM}/projetos/rs-top-team/index.html`,
+        image: `${ORIGEM}/projetos/rs-top-team/img/1%20Dashboras.webp`,
+        imageAlt: 'Interface do sistema R.S. Top Team',
+        type: 'article',
+        projectName: 'R.S. Top Team',
+        keywords: ['gestão de academias', 'React', 'Firebase', 'controle de presença', 'gestão de alunos'],
+        sameAs: ['https://rstopteam.web.app/', 'https://github.com/Mad-xyz/R.S-Top-Team']
+      },
+      '/projetos/mhouse-fit': {
+        title: 'MHouse Fit | Site para Academia — Madson Vander',
+        description: 'Estudo de caso do MHouse Fit, site institucional criado para uma academia local com foco em presença digital, interface e experiência na web.',
+        canonical: `${ORIGEM}/projetos/mhouse-fit/index.html`,
+        image: `${ORIGEM}/projetos/mhouse-fit/img/Mhouse.webp`,
+        imageAlt: 'Interface do projeto MHouse Fit',
+        type: 'article',
+        projectName: 'MHouse Fit',
+        keywords: ['site para academia', 'HTML', 'CSS', 'JavaScript', 'interface web'],
+        sameAs: ['https://mhousefit.vercel.app/', 'https://github.com/Mad-xyz/MHouse-web-site']
+      },
+      '/projetos/mhouse-fit/index.html': {
+        title: 'MHouse Fit | Site para Academia — Madson Vander',
+        description: 'Estudo de caso do MHouse Fit, site institucional criado para uma academia local com foco em presença digital, interface e experiência na web.',
+        canonical: `${ORIGEM}/projetos/mhouse-fit/index.html`,
+        image: `${ORIGEM}/projetos/mhouse-fit/img/Mhouse.webp`,
+        imageAlt: 'Interface do projeto MHouse Fit',
+        type: 'article',
+        projectName: 'MHouse Fit',
+        keywords: ['site para academia', 'HTML', 'CSS', 'JavaScript', 'interface web'],
+        sameAs: ['https://mhousefit.vercel.app/', 'https://github.com/Mad-xyz/MHouse-web-site']
+      },
+      '/projetos/instagram-dm-downloader': {
+        title: 'Instagram DM Downloader | Extensão — Madson Vander',
+        description: 'Extensão para Instagram Web criada para baixar imagens e vídeos recebidos no Direct, com ações rápidas e sem coleta de dados pelo projeto.',
+        canonical: `${ORIGEM}/projetos/instagram-dm-downloader/index.html`,
+        image: `${ORIGEM}/projetos/instagram-dm-downloader/img/DM%20downloader.webp`,
+        imageAlt: 'Interface da extensão Instagram DM Downloader',
+        type: 'article',
+        projectName: 'Instagram DM Downloader',
+        keywords: ['extensão de navegador', 'JavaScript', 'Instagram Web', 'download de mídia'],
+        sameAs: ['https://github.com/Mad-xyz/-Instagram-DM-Image-Video-Downloader']
+      },
+      '/projetos/instagram-dm-downloader/index.html': {
+        title: 'Instagram DM Downloader | Extensão — Madson Vander',
+        description: 'Extensão para Instagram Web criada para baixar imagens e vídeos recebidos no Direct, com ações rápidas e sem coleta de dados pelo projeto.',
+        canonical: `${ORIGEM}/projetos/instagram-dm-downloader/index.html`,
+        image: `${ORIGEM}/projetos/instagram-dm-downloader/img/DM%20downloader.webp`,
+        imageAlt: 'Interface da extensão Instagram DM Downloader',
+        type: 'article',
+        projectName: 'Instagram DM Downloader',
+        keywords: ['extensão de navegador', 'JavaScript', 'Instagram Web', 'download de mídia'],
+        sameAs: ['https://github.com/Mad-xyz/-Instagram-DM-Image-Video-Downloader']
+      },
+      '/projetos/atlas-gestao': {
+        title: 'Atlas Gestão | SaaS para Academias — Madson Vander',
+        description: 'Atlas Gestão é uma plataforma SaaS multi-tenant em desenvolvimento para organizar alunos, equipe, modalidades, presenças, finanças e rotinas de academias.',
+        canonical: `${ORIGEM}/projetos/atlas-gestao/index.html`,
+        image: `${ORIGEM}/projetos/atlas-gestao/img/index-atlas.webp`,
+        imageAlt: 'Interface do projeto Atlas Gestão',
+        type: 'article',
+        projectName: 'Atlas Gestão',
+        keywords: ['SaaS para academias', 'React', 'Firebase', 'Firestore', 'multi-tenant'],
+        sameAs: ['https://github.com/Mad-xyz/atlas-gestao']
+      },
+      '/projetos/atlas-gestao/index.html': {
+        title: 'Atlas Gestão | SaaS para Academias — Madson Vander',
+        description: 'Atlas Gestão é uma plataforma SaaS multi-tenant em desenvolvimento para organizar alunos, equipe, modalidades, presenças, finanças e rotinas de academias.',
+        canonical: `${ORIGEM}/projetos/atlas-gestao/index.html`,
+        image: `${ORIGEM}/projetos/atlas-gestao/img/index-atlas.webp`,
+        imageAlt: 'Interface do projeto Atlas Gestão',
+        type: 'article',
+        projectName: 'Atlas Gestão',
+        keywords: ['SaaS para academias', 'React', 'Firebase', 'Firestore', 'multi-tenant'],
+        sameAs: ['https://github.com/Mad-xyz/atlas-gestao']
+      }
+    };
+
+    const pagina = paginas[caminho];
+    if (!pagina) return;
+
+    function definirMeta(seletor, atributo, valorAtributo, content) {
+      let elemento = document.head.querySelector(seletor);
+      if (!elemento) {
+        elemento = document.createElement('meta');
+        elemento.setAttribute(atributo, valorAtributo);
+        document.head.appendChild(elemento);
+      }
+      elemento.setAttribute('content', content);
+    }
+
+    function definirLinkCanonical(url) {
+      let link = document.head.querySelector('link[rel="canonical"]');
+      if (!link) {
+        link = document.createElement('link');
+        link.setAttribute('rel', 'canonical');
+        document.head.appendChild(link);
+      }
+      link.setAttribute('href', url);
+    }
+
+    document.title = pagina.title;
+    definirMeta('meta[name="description"]', 'name', 'description', pagina.description);
+    definirMeta('meta[name="author"]', 'name', 'author', 'Madson Vander');
+    definirMeta(
+      'meta[name="robots"]',
+      'name',
+      'robots',
+      'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1'
+    );
+    definirLinkCanonical(pagina.canonical);
+
+    definirMeta('meta[property="og:locale"]', 'property', 'og:locale', 'pt_BR');
+    definirMeta('meta[property="og:site_name"]', 'property', 'og:site_name', 'Madson Vander');
+    definirMeta('meta[property="og:type"]', 'property', 'og:type', pagina.type);
+    definirMeta('meta[property="og:title"]', 'property', 'og:title', pagina.title);
+    definirMeta('meta[property="og:description"]', 'property', 'og:description', pagina.description);
+    definirMeta('meta[property="og:url"]', 'property', 'og:url', pagina.canonical);
+    definirMeta('meta[property="og:image"]', 'property', 'og:image', pagina.image);
+    definirMeta('meta[property="og:image:alt"]', 'property', 'og:image:alt', pagina.imageAlt);
+
+    definirMeta('meta[name="twitter:card"]', 'name', 'twitter:card', 'summary_large_image');
+    definirMeta('meta[name="twitter:title"]', 'name', 'twitter:title', pagina.title);
+    definirMeta('meta[name="twitter:description"]', 'name', 'twitter:description', pagina.description);
+    definirMeta('meta[name="twitter:image"]', 'name', 'twitter:image', pagina.image);
+    definirMeta('meta[name="twitter:image:alt"]', 'name', 'twitter:image:alt', pagina.imageAlt);
+
+    const pessoa = {
+      '@type': 'Person',
+      '@id': `${ORIGEM}/#madson-vander`,
+      name: 'Madson Vander',
+      url: `${ORIGEM}/`,
+      jobTitle: 'Desenvolvedor front-end e designer',
+      description: 'Desenvolvedor front-end em formação e designer, com projetos em HTML, CSS, JavaScript, Firebase e interfaces para web.',
+      sameAs: [
+        'https://github.com/Mad-xyz',
+        'https://www.linkedin.com/in/dark-mad-203661368/',
+        'https://www.instagram.com/mad.exe/'
+      ],
+      knowsAbout: ['HTML', 'CSS', 'JavaScript', 'Firebase', 'React', 'Design gráfico', 'Canva', 'Affinity']
+    };
+
+    const website = {
+      '@type': 'WebSite',
+      '@id': `${ORIGEM}/#website`,
+      url: `${ORIGEM}/`,
+      name: 'Madson Vander — Portfólio',
+      alternateName: 'Portfólio de Madson Vander',
+      inLanguage: 'pt-BR',
+      creator: { '@id': pessoa['@id'] }
+    };
+
+    let graph;
+    if (!pagina.projectName) {
+      graph = [
+        website,
+        pessoa,
+        {
+          '@type': 'WebPage',
+          '@id': `${ORIGEM}/#webpage`,
+          url: `${ORIGEM}/`,
+          name: pagina.title,
+          description: pagina.description,
+          inLanguage: 'pt-BR',
+          isPartOf: { '@id': website['@id'] },
+          about: { '@id': pessoa['@id'] },
+          primaryImageOfPage: { '@type': 'ImageObject', url: pagina.image }
+        }
+      ];
+    } else {
+      graph = [
+        website,
+        pessoa,
+        {
+          '@type': 'CreativeWork',
+          '@id': `${pagina.canonical}#project`,
+          url: pagina.canonical,
+          name: pagina.projectName,
+          headline: pagina.title,
+          description: pagina.description,
+          image: pagina.image,
+          inLanguage: 'pt-BR',
+          dateModified: '2026-09-16',
+          creator: { '@id': pessoa['@id'] },
+          isPartOf: { '@id': website['@id'] },
+          mainEntityOfPage: pagina.canonical,
+          keywords: pagina.keywords,
+          sameAs: pagina.sameAs
+        },
+        {
+          '@type': 'BreadcrumbList',
+          '@id': `${pagina.canonical}#breadcrumb`,
+          itemListElement: [
+            {
+              '@type': 'ListItem',
+              position: 1,
+              name: 'Portfólio',
+              item: `${ORIGEM}/`
+            },
+            {
+              '@type': 'ListItem',
+              position: 2,
+              name: pagina.projectName,
+              item: pagina.canonical
+            }
+          ]
+        }
+      ];
+    }
+
+    let schema = document.getElementById('seo-structured-data');
+    if (!schema) {
+      schema = document.createElement('script');
+      schema.id = 'seo-structured-data';
+      schema.type = 'application/ld+json';
+      document.head.appendChild(schema);
+    }
+    schema.textContent = JSON.stringify({ '@context': 'https://schema.org', '@graph': graph });
+  }
+
+  configurarSeo();
+
   const consultaMovimento = window.matchMedia(
     '(pointer: fine) and (prefers-reduced-motion: no-preference)'
   );
