@@ -96,12 +96,12 @@
     });
 
     const prefereMovimentoReduzido = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const DURACAO_VOLTA_MS = 30000;
-    const LIMITE_DRAG_PX = 5;
-    const SENSIBILIDADE_DRAG = 2.5;
-    const FRICCAO = 0.94;
-    const VELOCIDADE_MINIMA_INERCIA = 0.02;
-    const VELOCIDADE_MAXIMA_INERCIA = 2.8;
+    const DURACAO_VOLTA_MS = 30000; //quanto tempo leva para o marquee voltar ao inicio
+    const LIMITE_DRAG_PX = 5; //quanto antes do movimento ser considerado um arrasto
+    const SENSIBILIDADE_DRAG = 1; //quão mais rápido o grid se move em relação ao mouse
+    const FRICCAO = 0.94; //quão rápido o grid desacelera quando você solta o mouse
+    const VELOCIDADE_MINIMA_INERCIA = 0.02; //quão rápido o grid para de se mover
+    const VELOCIDADE_MAXIMA_INERCIA = 2.8; //quão rápido o grid se move quando você solta o mouse
 
     let posicaoX = 0;
     let larguraDoCiclo = 0;
