@@ -65,14 +65,209 @@
     });
   });
 
-  // Marquee de Projetos (Auto-scroll)
+  // Projetos: marquee infinito + arraste horizontal com mouse/touch.
   const projectGrid = document.querySelector('.project-grid');
+
   if (projectGrid) {
-    const cards = Array.from(projectGrid.children);
-    cards.forEach(card => {
+    const cardsOriginais = Array.from(projectGrid.children);
+    const quantidadeOriginal = cardsOriginais.length;
+
+    // Desliga o marquee CSS antigo. A posição passa a ser controlada pelo JS,
+    // assim o movimento pode continuar exatamente de onde o usuário soltou.
+    projectGrid.style.animation = 'none';
+    projectGrid.style.transform = 'translate3d(0, 0, 0)';
+    projectGrid.style.willChange = 'transform';
+    projectGrid.style.cursor = 'grab';
+    projectGrid.style.touchAction = 'pan-y';
+    projectGrid.style.userSelect = 'none';
+    projectGrid.style.webkitUserSelect = 'none';
+
+    cardsOriginais.forEach((card) => {
       const clone = card.cloneNode(true);
       clone.setAttribute('aria-hidden', 'true');
+      clone.setAttribute('tabindex', '-1');
+      clone.querySelectorAll('a, button, input, select, textarea').forEach((elemento) => {
+        elemento.setAttribute('tabindex', '-1');
+      });
       projectGrid.appendChild(clone);
     });
+
+    projectGrid.querySelectorAll('img, video').forEach((midia) => {
+      midia.setAttribute('draggable', 'false');
+      midia.addEventListener('dragstart', (evento) => evento.preventDefault());
+    });
+
+    const prefereMovimentoReduzido = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const DURACAO_VOLTA_MS = 30000;
+    const LIMITE_DRAG_PX = 7;
+    const FRICCAO = 0.92;
+    const VELOCIDADE_MINIMA_INERCIA = 0.02;
+    const VELOCIDADE_MAXIMA_INERCIA = 1.25;
+
+    let posicaoX = 0;
+    let larguraDoCiclo = 0;
+    let velocidadeAutomatica = 0;
+    let velocidadeInercia = 0;
+    let arrastando = false;
+    let dragConfirmado = false;
+    let bloquearProximoClique = false;
+    let ponteiroAtivo = null;
+    let inicioPonteiroX = 0;
+    let inicioPonteiroY = 0;
+    let inicioPosicaoX = 0;
+    let ultimoPonteiroX = 0;
+    let ultimoTempoPonteiro = 0;
+    let ultimoFrame = performance.now();
+
+    function aplicarTransformacao() {
+      projectGrid.style.transform = `translate3d(${posicaoX}px, 0, 0)`;
+    }
+
+    function normalizarPosicao() {
+      if (!larguraDoCiclo) return;
+
+      while (posicaoX <= -larguraDoCiclo) posicaoX += larguraDoCiclo;
+      while (posicaoX > 0) posicaoX -= larguraDoCiclo;
+    }
+
+    function atualizarMedidas() {
+      const primeiroOriginal = projectGrid.children[0];
+      const primeiroClone = projectGrid.children[quantidadeOriginal];
+      if (!primeiroOriginal || !primeiroClone) return;
+
+      larguraDoCiclo = primeiroClone.offsetLeft - primeiroOriginal.offsetLeft;
+      velocidadeAutomatica = larguraDoCiclo / DURACAO_VOLTA_MS;
+      normalizarPosicao();
+      aplicarTransformacao();
+    }
+
+    function animar(agora) {
+      const delta = Math.min(agora - ultimoFrame, 50);
+      ultimoFrame = agora;
+
+      if (!arrastando && !prefereMovimentoReduzido.matches && larguraDoCiclo > 0) {
+        if (Math.abs(velocidadeInercia) > VELOCIDADE_MINIMA_INERCIA) {
+          posicaoX += velocidadeInercia * delta;
+          velocidadeInercia *= Math.pow(FRICCAO, delta / 16.67);
+        } else {
+          velocidadeInercia = 0;
+          posicaoX -= velocidadeAutomatica * delta;
+        }
+
+        normalizarPosicao();
+        aplicarTransformacao();
+      }
+
+      requestAnimationFrame(animar);
+    }
+
+    function iniciarDrag(evento) {
+      if (evento.pointerType === 'mouse' && evento.button !== 0) return;
+
+      arrastando = true;
+      dragConfirmado = false;
+      bloquearProximoClique = false;
+      ponteiroAtivo = evento.pointerId;
+      inicioPonteiroX = evento.clientX;
+      inicioPonteiroY = evento.clientY;
+      inicioPosicaoX = posicaoX;
+      ultimoPonteiroX = evento.clientX;
+      ultimoTempoPonteiro = performance.now();
+      velocidadeInercia = 0;
+
+      projectGrid.style.cursor = 'grabbing';
+    }
+
+    function moverDrag(evento) {
+      if (!arrastando || evento.pointerId !== ponteiroAtivo) return;
+
+      const deslocamentoX = evento.clientX - inicioPonteiroX;
+      const deslocamentoY = evento.clientY - inicioPonteiroY;
+
+      // Só vira drag após um pequeno movimento horizontal. Antes disso,
+      // continua sendo um clique normal no link do projeto.
+      if (!dragConfirmado) {
+        if (Math.abs(deslocamentoX) < LIMITE_DRAG_PX) return;
+
+        // Se o gesto for predominantemente vertical, deixa a página rolar.
+        if (Math.abs(deslocamentoY) > Math.abs(deslocamentoX)) {
+          arrastando = false;
+          ponteiroAtivo = null;
+          projectGrid.style.cursor = 'grab';
+          return;
+        }
+
+        dragConfirmado = true;
+        bloquearProximoClique = true;
+      }
+
+      posicaoX = inicioPosicaoX + deslocamentoX;
+      normalizarPosicao();
+      aplicarTransformacao();
+
+      const agora = performance.now();
+      const deltaTempo = agora - ultimoTempoPonteiro;
+
+      if (deltaTempo > 0) {
+        velocidadeInercia = (evento.clientX - ultimoPonteiroX) / deltaTempo;
+        velocidadeInercia = Math.max(
+          -VELOCIDADE_MAXIMA_INERCIA,
+          Math.min(VELOCIDADE_MAXIMA_INERCIA, velocidadeInercia)
+        );
+      }
+
+      ultimoPonteiroX = evento.clientX;
+      ultimoTempoPonteiro = agora;
+    }
+
+    function finalizarDrag(evento) {
+      if (!arrastando || evento.pointerId !== ponteiroAtivo) return;
+
+      arrastando = false;
+      ponteiroAtivo = null;
+      projectGrid.style.cursor = 'grab';
+
+      if (!dragConfirmado) {
+        velocidadeInercia = 0;
+      }
+    }
+
+    projectGrid.addEventListener('pointerdown', iniciarDrag);
+
+    // O tracking fica no window de propósito. Não usamos setPointerCapture(),
+    // pois capturar o ponteiro no grid impede o <a> do card de receber o clique.
+    window.addEventListener('pointermove', moverDrag, { passive: true });
+    window.addEventListener('pointerup', finalizarDrag);
+    window.addEventListener('pointercancel', finalizarDrag);
+
+    // Cancela a navegação somente quando houve um arraste real.
+    projectGrid.addEventListener(
+      'click',
+      (evento) => {
+        if (!bloquearProximoClique) return;
+        evento.preventDefault();
+        evento.stopPropagation();
+        bloquearProximoClique = false;
+        dragConfirmado = false;
+      },
+      true
+    );
+
+    // Segurança: se não houver click sintetizado após um drag, libera a flag
+    // antes de uma interação posterior do usuário.
+    projectGrid.addEventListener('pointerdown', () => {
+      bloquearProximoClique = false;
+    }, { capture: true });
+
+    if ('ResizeObserver' in window) {
+      const observadorTamanho = new ResizeObserver(atualizarMedidas);
+      observadorTamanho.observe(projectGrid);
+    } else {
+      window.addEventListener('resize', atualizarMedidas);
+    }
+
+    window.addEventListener('load', atualizarMedidas, { once: true });
+    atualizarMedidas();
+    requestAnimationFrame(animar);
   }
 })();
