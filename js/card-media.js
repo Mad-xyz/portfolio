@@ -7,24 +7,16 @@
  *   · Sincronização entre cards do mesmo projeto (marquee incluso)
  *   · Suporte a prefers-reduced-motion
  *   · IntersectionObserver para pausar animações fora da viewport
- *
- * Para alterar durações globais, edite apenas o objeto CONFIG abaixo.
+ *   · Lazy loading das mídias da home para reduzir carga inicial
  */
 (function iniciarCardMedia() {
 
-  // ── Configuração centralizada ────────────────────────────────────────────
   var CONFIG = Object.freeze({
-    /** Tempo (ms) que cada slide fica visível antes da troca. */
-    SLIDE_DURATION_MS  : 2400,
-    /** Duração (ms) do crossfade entre slides. Deve corresponder à
-     *  transição CSS em .cover-slide-img. */
-    SLIDE_FADE_MS      : 350,
-    /** Duração (s) do ciclo completo de scroll top→bottom→top. */
-    SCROLL_DURATION_S  : 16,
+    SLIDE_DURATION_MS : 2400,
+    SLIDE_FADE_MS     : 350,
+    SCROLL_DURATION_S : 16,
   });
 
-  // ── Mapa de mídias reais por projeto ────────────────────────────────────
-  // Listados na ordem que devem aparecer no slideshow.
   var PROJECT_MEDIA = {
     'rs-top-team': [
       'projetos/rs-top-team/img/1 Dashboras.webp',
@@ -45,15 +37,12 @@
     ],
   };
 
-  // ── Base path: se estamos dentro de projetos/*/index.html,
-  //    os caminhos precisam de ../../ para voltar à raiz ────────────────────
+  // Dentro da página individual a mídia principal pode ser priorizada.
+  // Na home, os projetos ficam abaixo da dobra e são carregados sob demanda.
   var inSubPage = location.pathname.replace(/\\/g, '/').indexOf('/projetos/') !== -1;
   var mediaBase = inSubPage ? '../../' : '';
-
-  // ── Preferência de redução de movimento ─────────────────────────────────
   var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // ── Utilitário: criar elemento <img> acessível ───────────────────────────
   function criarImg(src, eager) {
     var img = document.createElement('img');
     img.src = mediaBase + src;
@@ -61,19 +50,18 @@
     img.setAttribute('aria-hidden', 'true');
     img.loading = eager ? 'eager' : 'lazy';
     img.decoding = 'async';
+    try { img.fetchPriority = eager ? 'high' : 'low'; } catch (_) {}
     return img;
   }
 
-  // ────────────────────────────────────────────────────────────────────────
-  // SCROLL: imagem única que desliza do topo até o fim da página
-  // ────────────────────────────────────────────────────────────────────────
   function initScrollCovers(covers) {
     covers.forEach(function (mediaEl) {
       var projectId = mediaEl.closest('[data-project]').dataset.project;
       var srcs = PROJECT_MEDIA[projectId];
       if (!srcs || srcs.length === 0) return;
 
-      var img = criarImg(srcs[0], true);
+      // Na home estas capturas podem ter vários MB; não competem com o hero.
+      var img = criarImg(srcs[0], inSubPage);
       img.classList.add('cover-scroll-img');
 
       if (!reducedMotion) {
@@ -84,17 +72,12 @@
     });
   }
 
-  // ────────────────────────────────────────────────────────────────────────
-  // SLIDESHOW: múltiplas imagens alternando com crossfade
-  // Um único setInterval por projeto sincroniza todos os covers relacionados.
-  // ────────────────────────────────────────────────────────────────────────
-
-  // Mapa: projectId → { index, srcs, covers, timerId }
   var slideshowState = Object.create(null);
 
   function criarFramesSlideshow(mediaEl, srcs) {
     srcs.forEach(function (src, i) {
-      var img = criarImg(src, i === 0);
+      // Apenas o primeiro frame de uma página individual é prioritário.
+      var img = criarImg(src, inSubPage && i === 0);
       img.classList.add('cover-slide-img');
       if (i === 0) img.classList.add('cover-slide-img--ativo');
       mediaEl.appendChild(img);
@@ -109,7 +92,6 @@
     var nextIdx = (prevIdx + 1) % state.srcs.length;
     state.index = nextIdx;
 
-    // Atualiza TODOS os covers do projeto simultaneamente (inclui clones do marquee)
     state.covers.forEach(function (mediaEl) {
       var imgs = mediaEl.querySelectorAll('.cover-slide-img');
       if (imgs[prevIdx]) imgs[prevIdx].classList.remove('cover-slide-img--ativo');
@@ -118,7 +100,6 @@
   }
 
   function initSlideshowCovers(covers) {
-    // Agrupa covers por projeto (original + clones do marquee juntos)
     var porProjeto = Object.create(null);
     covers.forEach(function (mediaEl) {
       var id = mediaEl.closest('[data-project]').dataset.project;
@@ -131,18 +112,16 @@
       var srcs = PROJECT_MEDIA[projectId];
       if (!srcs || srcs.length === 0) return;
 
-      // Cria os frames em cada cover
       mediaEls.forEach(function (mediaEl) {
         criarFramesSlideshow(mediaEl, srcs);
       });
 
       if (reducedMotion || srcs.length <= 1) return;
 
-      // Um único intervalo controla todos os covers deste projeto
       slideshowState[projectId] = {
-        index  : 0,
-        srcs   : srcs,
-        covers : mediaEls,
+        index: 0,
+        srcs: srcs,
+        covers: mediaEls,
         timerId: null,
       };
 
@@ -152,9 +131,6 @@
     });
   }
 
-  // ────────────────────────────────────────────────────────────────────────
-  // INTERSECTION OBSERVER: pausa scroll CSS quando fora da viewport
-  // ────────────────────────────────────────────────────────────────────────
   function initScrollObserver(covers) {
     if (!('IntersectionObserver' in window) || reducedMotion) return;
 
@@ -174,10 +150,6 @@
     });
   }
 
-  // ────────────────────────────────────────────────────────────────────────
-  // PONTO DE ENTRADA
-  // Executado após defer (DOM + clones do marquee já existem)
-  // ────────────────────────────────────────────────────────────────────────
   function init() {
     var scrollCovers = Array.from(
       document.querySelectorAll('[data-media-type="scroll"] .cover-media')
@@ -186,12 +158,10 @@
       document.querySelectorAll('[data-media-type="slideshow"] .cover-media')
     );
 
-    if (scrollCovers.length)    initScrollCovers(scrollCovers);
+    if (scrollCovers.length) initScrollCovers(scrollCovers);
     if (slideshowCovers.length) initSlideshowCovers(slideshowCovers);
-
     initScrollObserver(scrollCovers);
   }
 
   init();
-
 })();
