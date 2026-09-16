@@ -5,8 +5,9 @@
  *   · a cor original do card é o fallback enquanto não existe imagem pronta;
  *   · quando a imagem carrega, a cor some e a imagem assume o card;
  *   · se a imagem falhar, a cor e os textos do card continuam visíveis;
- *   · na home, imagens pesadas só entram na rede perto da viewport;
- *   · o slideshow do R.S. Top Team baixa um frame por vez, sem trocar para um frame ainda incompleto;
+ *   · na home, imagens só entram na rede perto da viewport;
+ *   · os cards usam versões WebP leves, próprias para preview;
+ *   · o slideshow do R.S. Top Team baixa um frame por vez e só troca quando o próximo terminou de carregar;
  *   · animações respeitam prefers-reduced-motion.
  */
 (function iniciarCardMedia() {
@@ -19,18 +20,20 @@
     FADE_MS: 350,
   });
 
+  // Versões de 900 px geradas exclusivamente para os cards.
+  // As imagens originais de alta resolução continuam preservadas nas páginas dos projetos.
   var PROJECT_MEDIA = {
     'rs-top-team': [
-      'projetos/rs-top-team/img/1 Dashboras.webp',
-      'projetos/rs-top-team/img/2 aluno.webp',
-      'projetos/rs-top-team/img/3 Equipe .webp',
-      'projetos/rs-top-team/img/4 chamda .webp',
-      'projetos/rs-top-team/img/5 evento.webp',
-      'projetos/rs-top-team/img/6 modalidade.webp',
+      'projetos/rs-top-team/img/card-1.webp',
+      'projetos/rs-top-team/img/card-2.webp',
+      'projetos/rs-top-team/img/card-3.webp',
+      'projetos/rs-top-team/img/card-4.webp',
+      'projetos/rs-top-team/img/card-5.webp',
+      'projetos/rs-top-team/img/card-6.webp',
     ],
-    'atlas-gestao': ['projetos/atlas-gestao/img/index-atlas.webp'],
-    'mhouse-fit': ['projetos/mhouse-fit/img/Mhouse.webp'],
-    'instagram-dm': ['projetos/instagram-dm-downloader/img/DM downloader.webp'],
+    'atlas-gestao': ['projetos/atlas-gestao/img/index-atlas-card.webp'],
+    'mhouse-fit': ['projetos/mhouse-fit/img/Mhouse-card.webp'],
+    'instagram-dm': ['projetos/instagram-dm-downloader/img/DM-downloader-card.webp'],
   };
 
   var inSubPage = location.pathname.replace(/\\/g, '/').indexOf('/projetos/') !== -1;
@@ -45,7 +48,7 @@
     var style = document.createElement('style');
     style.id = 'card-media-state-styles';
     style.textContent = [
-      '/* Estado visual: cor/texto são fallback; imagem pronta assume o card. */',
+      '/* Cor/texto = fallback. Imagem pronta = conteúdo visual do card. */',
       '.project-grid .project-cover[data-media-type] .cover-media{opacity:0;transition:opacity .24s ease}',
       '.project-grid .project-cover.project-cover--media-ready[data-media-type] .cover-media{opacity:1}',
       '.project-grid .project-cover.project-cover--media-ready.rs,',
@@ -58,7 +61,7 @@
       '.project-grid .project-cover.project-cover--media-ready[data-media-type] .cover-meta,',
       '.project-grid .project-cover.project-cover--media-ready[data-media-type] .cover-bottom,',
       '.project-grid .project-cover.project-cover--media-ready[data-media-type] .cover-name{display:none!important}',
-      '/* Contraste do fallback: mantém a família de cores, mas passa com folga em texto grande. */',
+      '/* Contraste do fallback sem mudar a família visual dos cards. */',
       '.project-grid .ig:not(.project-cover--media-ready) .cover-name>span{color:#73204d!important}',
       '.project-grid .ag:not(.project-cover--media-ready) .cover-name>span{color:#245276!important}',
       '@media (prefers-reduced-motion:reduce){.project-grid .project-cover[data-media-type] .cover-media{transition:none}}'
@@ -255,7 +258,6 @@
       if (anterior) anterior.classList.remove('cover-slide-img--ativo');
       proximo.classList.add('cover-slide-img--ativo');
 
-      // Depois do crossfade, conserva apenas o frame atual no DOM.
       if (anterior && anterior !== proximo) {
         window.setTimeout(function () {
           if (!anterior.classList.contains('cover-slide-img--ativo')) anterior.remove();
@@ -263,11 +265,8 @@
       }
     }
 
-    if (img.complete && img.naturalWidth) {
-      trocar();
-    } else {
-      img.addEventListener('load', trocar, { once: true });
-    }
+    if (img.complete && img.naturalWidth) trocar();
+    else img.addEventListener('load', trocar, { once: true });
   }
 
   function carregarPrimeiroFrame(state) {
@@ -306,7 +305,7 @@
       });
       state.index = nextIdx;
     }).catch(function () {
-      // Se um frame secundário falhar, mantém o último frame válido e tenta o próximo ciclo.
+      // Um frame secundário com falha não substitui o último frame válido.
     }).finally(function () {
       state.loading = false;
     });
