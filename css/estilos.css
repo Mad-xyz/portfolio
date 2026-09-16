@@ -1148,15 +1148,28 @@ h2 {
 .ig .cover-media::after { background:rgba(244,166,209,.60) }
 .ag .cover-media::after { background:rgba(165,209,240,.60) }
 
-/* Quando há mídia: esconde textos e remove overlay de cor,
-   deixando apenas a imagem preencher o card. */
+/* Quando há mídia: remove overlay de cor em todos os covers */
 [data-media-type] .cover-media::after {
   display:none
 }
-[data-media-type] .cover-meta,
-[data-media-type] .cover-name,
-[data-media-type] .cover-bottom {
+
+/* No index (dentro do grid): esconde textos — só imagem */
+.project-grid [data-media-type] .cover-meta,
+.project-grid [data-media-type] .cover-bottom {
   display:none
+}
+
+/* Em qualquer cover com mídia: esconde cover-name */
+[data-media-type] .cover-name {
+  display:none
+}
+
+/* Imagem dentro do contentor de mídia */
+.cover-media img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block
 }
 
 /* Textos aparecem acima da camada de mídia */

@@ -45,13 +45,18 @@
     ],
   };
 
+  // ── Base path: se estamos dentro de projetos/*/index.html,
+  //    os caminhos precisam de ../../ para voltar à raiz ────────────────────
+  var inSubPage = location.pathname.replace(/\\/g, '/').indexOf('/projetos/') !== -1;
+  var mediaBase = inSubPage ? '../../' : '';
+
   // ── Preferência de redução de movimento ─────────────────────────────────
   var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // ── Utilitário: criar elemento <img> acessível ───────────────────────────
   function criarImg(src, eager) {
     var img = document.createElement('img');
-    img.src = src;
+    img.src = mediaBase + src;
     img.alt = '';
     img.setAttribute('aria-hidden', 'true');
     img.loading = eager ? 'eager' : 'lazy';
