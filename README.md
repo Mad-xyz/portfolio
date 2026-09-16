@@ -1,36 +1,46 @@
-# Portfólio do Madson
+# Madson Vander — Portfólio de Desenvolvimento Front-end e Design
 
-Esta versão mantém o mesmo conteúdo e o mesmo visual do portfólio, mas usa arquivos simples para facilitar a edição:
+Portfólio pessoal de **Madson Vander**, com projetos de desenvolvimento web, interfaces e design. O site reúne estudos de caso de sistemas para academias, uma extensão para Instagram Web e trabalhos que acompanham minha evolução com HTML, CSS, JavaScript, React e Firebase.
+
+**Site:** https://madsdevelop.vercel.app/
+
+## Projetos em destaque
+
+- **R.S. Top Team** — sistema de gestão para academias com alunos, equipe, modalidades, presença, eventos e financeiro.
+- **MHouse Fit** — site institucional criado para uma academia local.
+- **Instagram DM Downloader** — extensão em JavaScript para baixar imagens e vídeos recebidos no Instagram Direct pela versão web.
+- **Atlas Gestão** — plataforma SaaS multi-tenant em desenvolvimento para gestão de academias.
+
+## Estrutura
 
 ```text
-index.html                    Página inicial
-projetos/                     Uma página HTML para cada projeto
-css/estilos.css               Cores, espaçamentos, tipografia e responsividade
-js/interacoes.js              Cursor quadrado e abas da seção Design
-js/bibliotecas/liquid-react.js Efeito Liquid original isolado em JavaScript
-js/efeito-liquid.js             Alternativa leve e editável para o efeito
-imagens/                      Imagem principal e favicon
+index.html                       Página inicial
+projetos/                        Estudos de caso dos projetos
+css/estilos.css                  Cores, espaçamentos, tipografia e responsividade
+js/interacoes.js                 Interações, carrossel e metadados SEO compartilhados
+js/card-media.js                 Mídias animadas dos cards
+js/bibliotecas/liquid-react.js   Efeito visual da imagem principal
+imagens/                         Imagem principal e favicons
+robots.txt                       Regras de rastreamento e localização do sitemap
+sitemap.xml                      URLs públicas do portfólio
+llms.txt                         Resumo factual do site para agentes que adotam o formato
 ```
+
+## SEO e descoberta
+
+O projeto inclui sitemap XML, robots.txt, URLs canônicas, metadados sociais, dados estruturados e conteúdo descritivo nos estudos de caso. O arquivo `llms.txt` funciona como um resumo complementar para ferramentas que escolham consumir esse formato; ele não substitui HTML semântico, sitemap, conteúdo rastreável nem os fundamentos tradicionais de SEO.
 
 ## Como editar
 
 1. Abra `index.html` para alterar os textos da página inicial.
 2. Abra `css/estilos.css` para mudar cores, tamanhos ou margens.
-3. Abra `js/interacoes.js` para alterar o cursor ou as abas.
-4. O efeito da imagem fica isolado em `js/bibliotecas/liquid-react.js`. O arquivo `js/efeito-liquid.js` contém uma alternativa curta caso você queira experimentar um efeito mais simples.
-5. As páginas completas dos projetos ficam em `projetos/rs-top-team/index.html` e `projetos/mhouse-fit/index.html`.
+3. Abra `js/interacoes.js` para alterar as interações do portfólio.
+4. As páginas completas dos projetos ficam dentro de `projetos/`.
+5. Ao criar uma nova página pública, revise também `sitemap.xml` e `llms.txt`.
 
-Os links principais estão no próprio HTML e usam âncoras simples:
+## Como abrir localmente
 
-```html
-<a href="#projetos">Projetos</a>
-<a href="#sobre">Sobre mim</a>
-<a href="#design">Design</a>
-```
-
-## Como abrir no computador
-
-É possível abrir `index.html` diretamente no navegador. Para testar com um servidor local, abra o terminal nesta pasta e use:
+É possível abrir `index.html` diretamente no navegador. Para testar com um servidor local:
 
 ```bash
 python -m http.server 5500
@@ -38,4 +48,4 @@ python -m http.server 5500
 
 Depois visite `http://localhost:5500`.
 
-Não é necessário instalar Node.js, npm, pnpm, React ou outra dependência para editar e visualizar esta versão.
+Não é necessário instalar Node.js, npm, pnpm ou React para editar e visualizar este portfólio estático.
