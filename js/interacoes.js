@@ -80,9 +80,8 @@
     projectGrid.style.userSelect = 'none';
     projectGrid.style.webkitUserSelect = 'none';
 
-    // O navegador considera <a> arrastável por padrão no desktop.
-    // Desativamos isso para o mouse controlar o carrossel em vez de criar
-    // aquela prévia/caixa com a URL do projeto durante o arraste.
+    // <a> e imagens são arrastáveis por padrão no desktop.
+    // Desativamos isso para o navegador não criar o "ghost" com a URL.
     cardsOriginais.forEach((card) => {
       card.setAttribute('draggable', 'false');
 
@@ -100,16 +99,15 @@
       elemento.setAttribute('draggable', 'false');
     });
 
-    // Impede qualquer drag nativo (principalmente o ghost do link no Chrome).
     projectGrid.addEventListener('dragstart', (evento) => evento.preventDefault());
 
     const prefereMovimentoReduzido = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const DURACAO_VOLTA_MS = 30000; //quanto tempo leva para o marquee voltar ao inicio
-    const LIMITE_DRAG_PX = 5; //quanto antes do movimento ser considerado um arrasto
-    const SENSIBILIDADE_DRAG = 1; //quão mais rápido o grid se move em relação ao mouse
-    const FRICCAO = 0.94; //quão rápido o grid desacelera quando você solta o mouse
-    const VELOCIDADE_MINIMA_INERCIA = 0.02; //quão rápido o grid para de se mover
-    const VELOCIDADE_MAXIMA_INERCIA = 2.8; //quão rápido o grid se move quando você solta o mouse
+    const DURACAO_VOLTA_MS = 30000; // tempo de uma volta completa do marquee
+    const LIMITE_DRAG_PX = 5; // distância mínima para considerar como arraste
+    const SENSIBILIDADE_DRAG = 1; // 1 = acompanha o mouse 1:1
+    const FRICCAO = 0.94; // desaceleração da inércia
+    const VELOCIDADE_MINIMA_INERCIA = 0.02;
+    const VELOCIDADE_MAXIMA_INERCIA = 2.8;
 
     let posicaoX = 0;
     let larguraDoCiclo = 0;
@@ -117,7 +115,6 @@
     let velocidadeInercia = 0;
     let arrastando = false;
     let dragConfirmado = false;
-    let bloquearProximoClique = false;
     let ponteiroAtivo = null;
     let inicioPonteiroX = 0;
     let inicioPonteiroY = 0;
@@ -125,6 +122,8 @@
     let ultimoPonteiroX = 0;
     let ultimoTempoPonteiro = 0;
     let ultimoFrame = performance.now();
+    let linkPressionado = null;
+    let bloquearCliqueNativo = false;
 
     function aplicarTransformacao() {
       projectGrid.style.transform = `translate3d(${posicaoX}px, 0, 0)`;
@@ -170,9 +169,22 @@
     function iniciarDrag(evento) {
       if (evento.pointerType === 'mouse' && evento.button !== 0) return;
 
+      const cardClicado = evento.target.closest('.project-card');
+      const ehClone = cardClicado && cardClicado.getAttribute('aria-hidden') === 'true';
+
+      // No desktop bloqueamos o comportamento padrão já no pointerdown.
+      // Isso impede o Chrome de iniciar o arraste nativo do link.
+      if (evento.pointerType === 'mouse' && cardClicado) {
+        evento.preventDefault();
+        bloquearCliqueNativo = true;
+        linkPressionado = ehClone ? null : cardClicado;
+      } else {
+        bloquearCliqueNativo = false;
+        linkPressionado = ehClone ? null : cardClicado;
+      }
+
       arrastando = true;
       dragConfirmado = false;
-      bloquearProximoClique = false;
       ponteiroAtivo = evento.pointerId;
       inicioPonteiroX = evento.clientX;
       inicioPonteiroY = evento.clientY;
@@ -192,6 +204,7 @@
       if (!dragConfirmado) {
         if (Math.abs(deslocamentoBrutoX) < LIMITE_DRAG_PX) return;
 
+        // Se o gesto for claramente vertical, não transforma em drag horizontal.
         if (Math.abs(deslocamentoY) > Math.abs(deslocamentoBrutoX)) {
           arrastando = false;
           ponteiroAtivo = null;
@@ -200,7 +213,6 @@
         }
 
         dragConfirmado = true;
-        bloquearProximoClique = true;
       }
 
       const deslocamentoX = deslocamentoBrutoX * SENSIBILIDADE_DRAG;
@@ -225,38 +237,57 @@
     function finalizarDrag(evento) {
       if (!arrastando || evento.pointerId !== ponteiroAtivo) return;
 
+      const foiDrag = dragConfirmado;
+      const linkParaAbrir = linkPressionado;
+
       arrastando = false;
+      dragConfirmado = false;
       ponteiroAtivo = null;
+      linkPressionado = null;
       projectGrid.style.cursor = 'grab';
 
-      if (!dragConfirmado) {
+      if (!foiDrag) {
         velocidadeInercia = 0;
       }
 
       normalizarPosicao();
       aplicarTransformacao();
+
+      // Como bloqueamos o comportamento padrão no desktop, um clique simples
+      // é aberto manualmente aqui. Se houve arraste, não navega.
+      if (!foiDrag && bloquearCliqueNativo && linkParaAbrir) {
+        const href = linkParaAbrir.getAttribute('href');
+        if (href) window.location.href = href;
+      }
+
+      bloquearCliqueNativo = false;
     }
 
     projectGrid.addEventListener('pointerdown', iniciarDrag);
     window.addEventListener('pointermove', moverDrag, { passive: true });
     window.addEventListener('pointerup', finalizarDrag);
-    window.addEventListener('pointercancel', finalizarDrag);
+    window.addEventListener('pointercancel', (evento) => {
+      if (!arrastando || evento.pointerId !== ponteiroAtivo) return;
+      arrastando = false;
+      dragConfirmado = false;
+      ponteiroAtivo = null;
+      linkPressionado = null;
+      bloquearCliqueNativo = false;
+      velocidadeInercia = 0;
+      projectGrid.style.cursor = 'grab';
+    });
 
+    // Segurança extra: depois de um arraste real, nenhum click sintetizado
+    // pelo navegador deve abrir o projeto.
     projectGrid.addEventListener(
       'click',
       (evento) => {
-        if (!bloquearProximoClique) return;
+        if (!bloquearCliqueNativo && !dragConfirmado) return;
         evento.preventDefault();
         evento.stopPropagation();
-        bloquearProximoClique = false;
-        dragConfirmado = false;
       },
       true
     );
-
-    projectGrid.addEventListener('pointerdown', () => {
-      bloquearProximoClique = false;
-    }, { capture: true });
 
     if ('ResizeObserver' in window) {
       const observadorTamanho = new ResizeObserver(atualizarMedidas);
