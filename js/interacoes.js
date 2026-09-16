@@ -72,8 +72,6 @@
     const cardsOriginais = Array.from(projectGrid.children);
     const quantidadeOriginal = cardsOriginais.length;
 
-    // Desliga o marquee CSS antigo. A posição passa a ser controlada pelo JS,
-    // assim o movimento pode continuar exatamente de onde o usuário soltou.
     projectGrid.style.animation = 'none';
     projectGrid.style.transform = 'translate3d(0, 0, 0)';
     projectGrid.style.willChange = 'transform';
@@ -99,10 +97,11 @@
 
     const prefereMovimentoReduzido = window.matchMedia('(prefers-reduced-motion: reduce)');
     const DURACAO_VOLTA_MS = 30000;
-    const LIMITE_DRAG_PX = 7;
-    const FRICCAO = 0.92;
+    const LIMITE_DRAG_PX = 5;
+    const SENSIBILIDADE_DRAG = 2.5;
+    const FRICCAO = 0.94;
     const VELOCIDADE_MINIMA_INERCIA = 0.02;
-    const VELOCIDADE_MAXIMA_INERCIA = 1.25;
+    const VELOCIDADE_MAXIMA_INERCIA = 2.8;
 
     let posicaoX = 0;
     let larguraDoCiclo = 0;
@@ -125,7 +124,6 @@
 
     function normalizarPosicao() {
       if (!larguraDoCiclo) return;
-
       while (posicaoX <= -larguraDoCiclo) posicaoX += larguraDoCiclo;
       while (posicaoX > 0) posicaoX -= larguraDoCiclo;
     }
@@ -174,23 +172,19 @@
       ultimoPonteiroX = evento.clientX;
       ultimoTempoPonteiro = performance.now();
       velocidadeInercia = 0;
-
       projectGrid.style.cursor = 'grabbing';
     }
 
     function moverDrag(evento) {
       if (!arrastando || evento.pointerId !== ponteiroAtivo) return;
 
-      const deslocamentoX = evento.clientX - inicioPonteiroX;
+      const deslocamentoBrutoX = evento.clientX - inicioPonteiroX;
       const deslocamentoY = evento.clientY - inicioPonteiroY;
 
-      // Só vira drag após um pequeno movimento horizontal. Antes disso,
-      // continua sendo um clique normal no link do projeto.
       if (!dragConfirmado) {
-        if (Math.abs(deslocamentoX) < LIMITE_DRAG_PX) return;
+        if (Math.abs(deslocamentoBrutoX) < LIMITE_DRAG_PX) return;
 
-        // Se o gesto for predominantemente vertical, deixa a página rolar.
-        if (Math.abs(deslocamentoY) > Math.abs(deslocamentoX)) {
+        if (Math.abs(deslocamentoY) > Math.abs(deslocamentoBrutoX)) {
           arrastando = false;
           ponteiroAtivo = null;
           projectGrid.style.cursor = 'grab';
@@ -201,15 +195,15 @@
         bloquearProximoClique = true;
       }
 
+      const deslocamentoX = deslocamentoBrutoX * SENSIBILIDADE_DRAG;
       posicaoX = inicioPosicaoX + deslocamentoX;
-      normalizarPosicao();
       aplicarTransformacao();
 
       const agora = performance.now();
       const deltaTempo = agora - ultimoTempoPonteiro;
 
       if (deltaTempo > 0) {
-        velocidadeInercia = (evento.clientX - ultimoPonteiroX) / deltaTempo;
+        velocidadeInercia = ((evento.clientX - ultimoPonteiroX) / deltaTempo) * SENSIBILIDADE_DRAG;
         velocidadeInercia = Math.max(
           -VELOCIDADE_MAXIMA_INERCIA,
           Math.min(VELOCIDADE_MAXIMA_INERCIA, velocidadeInercia)
@@ -230,17 +224,16 @@
       if (!dragConfirmado) {
         velocidadeInercia = 0;
       }
+
+      normalizarPosicao();
+      aplicarTransformacao();
     }
 
     projectGrid.addEventListener('pointerdown', iniciarDrag);
-
-    // O tracking fica no window de propósito. Não usamos setPointerCapture(),
-    // pois capturar o ponteiro no grid impede o <a> do card de receber o clique.
     window.addEventListener('pointermove', moverDrag, { passive: true });
     window.addEventListener('pointerup', finalizarDrag);
     window.addEventListener('pointercancel', finalizarDrag);
 
-    // Cancela a navegação somente quando houve um arraste real.
     projectGrid.addEventListener(
       'click',
       (evento) => {
@@ -253,8 +246,6 @@
       true
     );
 
-    // Segurança: se não houver click sintetizado após um drag, libera a flag
-    // antes de uma interação posterior do usuário.
     projectGrid.addEventListener('pointerdown', () => {
       bloquearProximoClique = false;
     }, { capture: true });
