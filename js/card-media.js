@@ -1,20 +1,20 @@
 /**
  * card-media.js — Animações de mídia nos cards de projetos.
  *
- * Responsabilidades:
- *   · Scroll automático (top→bottom) para capturas longas .webp
- *   · Slideshow com crossfade para múltiplas imagens .webp
- *   · Sincronização entre cards do mesmo projeto (marquee incluso)
- *   · Suporte a prefers-reduced-motion
- *   · IntersectionObserver para pausar animações fora da viewport
- *   · Lazy loading das mídias da home para reduzir carga inicial
+ * Objetivos de performance:
+ *   · não baixar capturas pesadas antes de o card se aproximar da viewport;
+ *   · carregar somente o primeiro frame do slideshow e buscar os próximos sob demanda;
+ *   · manter a cor do card como fallback enquanto a imagem não estiver pronta;
+ *   · remover visualmente a cor assim que a mídia carregar;
+ *   · pausar animações fora da viewport e respeitar prefers-reduced-motion.
  */
 (function iniciarCardMedia() {
+  'use strict';
 
   var CONFIG = Object.freeze({
-    SLIDE_DURATION_MS : 2400,
-    SLIDE_FADE_MS     : 350,
-    SCROLL_DURATION_S : 16,
+    SLIDE_DURATION_MS: 2400,
+    SCROLL_DURATION_S: 16,
+    ROOT_MARGIN: '320px 0px',
   });
 
   var PROJECT_MEDIA = {
@@ -26,124 +26,190 @@
       'projetos/rs-top-team/img/5 evento.webp',
       'projetos/rs-top-team/img/6 modalidade.webp',
     ],
-    'atlas-gestao': [
-      'projetos/atlas-gestao/img/index-atlas.webp',
-    ],
-    'mhouse-fit': [
-      'projetos/mhouse-fit/img/Mhouse.webp',
-    ],
-    'instagram-dm': [
-      'projetos/instagram-dm-downloader/img/DM downloader.webp',
-    ],
+    'atlas-gestao': ['projetos/atlas-gestao/img/index-atlas.webp'],
+    'mhouse-fit': ['projetos/mhouse-fit/img/Mhouse.webp'],
+    'instagram-dm': ['projetos/instagram-dm-downloader/img/DM downloader.webp'],
   };
 
-  // Dentro da página individual a mídia principal pode ser priorizada.
-  // Na home, os projetos ficam abaixo da dobra e são carregados sob demanda.
   var inSubPage = location.pathname.replace(/\\/g, '/').indexOf('/projetos/') !== -1;
   var mediaBase = inSubPage ? '../../' : '';
   var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var slideshowState = Object.create(null);
 
-  function criarImg(src, eager) {
+  function projectIdFrom(mediaEl) {
+    var project = mediaEl.closest('[data-project]');
+    return project ? project.dataset.project : '';
+  }
+
+  function marcarCarregando(mediaEl) {
+    var cover = mediaEl.closest('.project-cover');
+    if (!cover) return;
+    cover.classList.add('project-cover--loading');
+    cover.classList.remove('project-cover--media-ready');
+  }
+
+  function marcarPronto(mediaEl) {
+    var cover = mediaEl.closest('.project-cover');
+    if (!cover) return;
+    cover.classList.remove('project-cover--loading');
+    cover.classList.add('project-cover--media-ready');
+  }
+
+  function marcarFalha(mediaEl) {
+    var cover = mediaEl.closest('.project-cover');
+    if (!cover) return;
+    cover.classList.remove('project-cover--loading', 'project-cover--media-ready');
+    cover.classList.add('project-cover--media-error');
+  }
+
+  function criarImg(src, eager, mediaEl) {
     var img = document.createElement('img');
-    img.src = mediaBase + src;
     img.alt = '';
     img.setAttribute('aria-hidden', 'true');
     img.loading = eager ? 'eager' : 'lazy';
     img.decoding = 'async';
     try { img.fetchPriority = eager ? 'high' : 'low'; } catch (_) {}
+
+    img.addEventListener('load', function () {
+      marcarPronto(mediaEl);
+    }, { once: true });
+
+    img.addEventListener('error', function () {
+      marcarFalha(mediaEl);
+    }, { once: true });
+
+    marcarCarregando(mediaEl);
+    img.src = mediaBase + src;
     return img;
   }
 
-  function initScrollCovers(covers) {
-    covers.forEach(function (mediaEl) {
-      var projectId = mediaEl.closest('[data-project]').dataset.project;
-      var srcs = PROJECT_MEDIA[projectId];
-      if (!srcs || srcs.length === 0) return;
+  function initScrollCover(mediaEl) {
+    if (mediaEl.dataset.mediaInitialized === 'true') return;
+    mediaEl.dataset.mediaInitialized = 'true';
 
-      // Na home estas capturas podem ter vários MB; não competem com o hero.
-      var img = criarImg(srcs[0], inSubPage);
-      img.classList.add('cover-scroll-img');
+    var projectId = projectIdFrom(mediaEl);
+    var srcs = PROJECT_MEDIA[projectId];
+    if (!srcs || !srcs.length) return;
 
-      if (!reducedMotion) {
-        img.style.animationDuration = CONFIG.SCROLL_DURATION_S + 's';
-      }
-
-      mediaEl.appendChild(img);
-    });
+    var img = criarImg(srcs[0], inSubPage, mediaEl);
+    img.classList.add('cover-scroll-img');
+    if (!reducedMotion) img.style.animationDuration = CONFIG.SCROLL_DURATION_S + 's';
+    mediaEl.appendChild(img);
   }
 
-  var slideshowState = Object.create(null);
+  function ensureSlideFrame(state, frameIndex) {
+    state.covers.forEach(function (mediaEl) {
+      if (mediaEl.querySelector('[data-slide-index="' + frameIndex + '"]')) return;
 
-  function criarFramesSlideshow(mediaEl, srcs) {
-    srcs.forEach(function (src, i) {
-      // Apenas o primeiro frame de uma página individual é prioritário.
-      var img = criarImg(src, inSubPage && i === 0);
+      var img = criarImg(state.srcs[frameIndex], inSubPage && frameIndex === 0, mediaEl);
       img.classList.add('cover-slide-img');
-      if (i === 0) img.classList.add('cover-slide-img--ativo');
+      img.dataset.slideIndex = String(frameIndex);
+      if (frameIndex === state.index) img.classList.add('cover-slide-img--ativo');
       mediaEl.appendChild(img);
     });
   }
 
   function avancarSlide(projectId) {
     var state = slideshowState[projectId];
-    if (!state) return;
+    if (!state || document.hidden) return;
 
     var prevIdx = state.index;
     var nextIdx = (prevIdx + 1) % state.srcs.length;
+
+    // O próximo frame só entra na rede quando realmente for necessário.
+    ensureSlideFrame(state, nextIdx);
     state.index = nextIdx;
 
     state.covers.forEach(function (mediaEl) {
-      var imgs = mediaEl.querySelectorAll('.cover-slide-img');
-      if (imgs[prevIdx]) imgs[prevIdx].classList.remove('cover-slide-img--ativo');
-      if (imgs[nextIdx]) imgs[nextIdx].classList.add('cover-slide-img--ativo');
+      var prev = mediaEl.querySelector('[data-slide-index="' + prevIdx + '"]');
+      var next = mediaEl.querySelector('[data-slide-index="' + nextIdx + '"]');
+      if (prev) prev.classList.remove('cover-slide-img--ativo');
+      if (next) next.classList.add('cover-slide-img--ativo');
     });
+  }
+
+  function iniciarSlideshowDoProjeto(projectId, mediaEls) {
+    if (slideshowState[projectId]) return;
+
+    var srcs = PROJECT_MEDIA[projectId];
+    if (!srcs || !srcs.length) return;
+
+    var state = slideshowState[projectId] = {
+      index: 0,
+      srcs: srcs,
+      covers: mediaEls,
+      timerId: null,
+    };
+
+    ensureSlideFrame(state, 0);
+
+    if (!reducedMotion && srcs.length > 1) {
+      state.timerId = window.setInterval(function () {
+        avancarSlide(projectId);
+      }, CONFIG.SLIDE_DURATION_MS);
+    }
   }
 
   function initSlideshowCovers(covers) {
     var porProjeto = Object.create(null);
+
     covers.forEach(function (mediaEl) {
-      var id = mediaEl.closest('[data-project]').dataset.project;
+      var id = projectIdFrom(mediaEl);
+      if (!id) return;
       if (!porProjeto[id]) porProjeto[id] = [];
       porProjeto[id].push(mediaEl);
     });
 
     Object.keys(porProjeto).forEach(function (projectId) {
       var mediaEls = porProjeto[projectId];
-      var srcs = PROJECT_MEDIA[projectId];
-      if (!srcs || srcs.length === 0) return;
+      var alvo = mediaEls[0].closest('.project-cover') || mediaEls[0];
 
-      mediaEls.forEach(function (mediaEl) {
-        criarFramesSlideshow(mediaEl, srcs);
+      lazyObserve(alvo, function () {
+        iniciarSlideshowDoProjeto(projectId, mediaEls);
       });
-
-      if (reducedMotion || srcs.length <= 1) return;
-
-      slideshowState[projectId] = {
-        index: 0,
-        srcs: srcs,
-        covers: mediaEls,
-        timerId: null,
-      };
-
-      slideshowState[projectId].timerId = setInterval(function () {
-        avancarSlide(projectId);
-      }, CONFIG.SLIDE_DURATION_MS);
     });
   }
 
-  function initScrollObserver(covers) {
+  function lazyObserve(target, callback) {
+    if (!('IntersectionObserver' in window) || inSubPage) {
+      callback();
+      return;
+    }
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        observer.disconnect();
+        callback();
+      });
+    }, {
+      root: null,
+      rootMargin: CONFIG.ROOT_MARGIN,
+      threshold: 0.01,
+    });
+
+    observer.observe(target);
+  }
+
+  function initScrollCovers(covers) {
+    covers.forEach(function (mediaEl) {
+      var alvo = mediaEl.closest('.project-cover') || mediaEl;
+      lazyObserve(alvo, function () {
+        initScrollCover(mediaEl);
+      });
+    });
+  }
+
+  function initScrollAnimationObserver(covers) {
     if (!('IntersectionObserver' in window) || reducedMotion) return;
 
-    var observer = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (entry) {
-          var img = entry.target.querySelector('.cover-scroll-img');
-          if (!img) return;
-          img.style.animationPlayState = entry.isIntersecting ? 'running' : 'paused';
-        });
-      },
-      { threshold: 0.05 }
-    );
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        var img = entry.target.querySelector('.cover-scroll-img');
+        if (!img) return;
+        img.style.animationPlayState = entry.isIntersecting ? 'running' : 'paused';
+      });
+    }, { threshold: 0.05 });
 
     covers.forEach(function (mediaEl) {
       observer.observe(mediaEl.closest('.project-cover') || mediaEl);
@@ -151,16 +217,12 @@
   }
 
   function init() {
-    var scrollCovers = Array.from(
-      document.querySelectorAll('[data-media-type="scroll"] .cover-media')
-    );
-    var slideshowCovers = Array.from(
-      document.querySelectorAll('[data-media-type="slideshow"] .cover-media')
-    );
+    var scrollCovers = Array.from(document.querySelectorAll('[data-media-type="scroll"] .cover-media'));
+    var slideshowCovers = Array.from(document.querySelectorAll('[data-media-type="slideshow"] .cover-media'));
 
     if (scrollCovers.length) initScrollCovers(scrollCovers);
     if (slideshowCovers.length) initSlideshowCovers(slideshowCovers);
-    initScrollObserver(scrollCovers);
+    initScrollAnimationObserver(scrollCovers);
   }
 
   init();
