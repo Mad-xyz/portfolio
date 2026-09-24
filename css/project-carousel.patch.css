@@ -1,0 +1,30 @@
+/* Substitui a animação CSS do marquee pelo controle JS, permitindo drag contínuo. */
+.project-grid {
+  --grid-gap:34px;
+  display:flex;
+  gap:var(--grid-gap);
+  width:max-content;
+  animation:none;
+  transform:translate3d(0,0,0);
+  will-change:transform;
+  cursor:grab;
+  touch-action:pan-y;
+  user-select:none;
+  -webkit-user-select:none;
+}
+
+.project-grid.is-dragging {
+  cursor:grabbing;
+}
+
+.project-grid img,
+.project-grid video {
+  -webkit-user-drag:none;
+  user-select:none;
+  pointer-events:none;
+}
+
+/* Remover do CSS atual:
+.project-grid:hover { animation-play-state:paused; }
+@keyframes marquee { ... }
+*/
