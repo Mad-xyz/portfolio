@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Interações do portfólio.
  *
  * Este arquivo substitui os pequenos componentes interativos do React.
@@ -8,7 +8,7 @@
   // SEO compartilhado: mantém títulos, canonical, social cards e JSON-LD
   // consistentes entre a home e os estudos de caso sem duplicar lógica.
   function configurarSeo() {
-    const ORIGEM = 'https://madsdevelop.vercel.app';
+    const ORIGEM = 'https://avryum.vercel.app';
     const caminhoOriginal = window.location.pathname || '/';
     const caminho = caminhoOriginal !== '/' ? caminhoOriginal.replace(/\/+$/, '') : '/';
 
