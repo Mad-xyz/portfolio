@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Interações do portfólio.
  *
  * Este arquivo substitui os pequenos componentes interativos do React.

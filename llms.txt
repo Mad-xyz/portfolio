@@ -1,41 +1,41 @@
-﻿# AVRYUM Digital Studio | SoluÃ§Ãµes Digitais
-> PÃ¡gina profissional de AVRYUM Digital Studio (AVRYUM Digital Studio), oferecendo serviÃ§os de desenvolvimento web, sistemas, interfaces responsivas e design grÃ¡fico para negÃ³cios, profissionais e projetos.
+# AVRYUM Digital Studio | Soluções Digitais
+> Página profissional de AVRYUM Digital Studio (AVRYUM Digital Studio), oferecendo serviços de desenvolvimento web, sistemas, interfaces responsivas e design gráfico para negócios, profissionais e projetos.
 
-## PÃ¡ginas principais
-- [AVRYUM Digital Studio (Home)](https://avryum.vercel.app/): apresentaÃ§Ã£o profissional, serviÃ§os digitais, projetos selecionados, tecnologias e contato para orÃ§amentos.
-- [R.S. Top Team](https://avryum.vercel.app/projetos/rs-top-team/index.html): estudo de caso de sistema de gestÃ£o para academia com alunos, equipe, modalidades, presenÃ§a, eventos e financeiro.
-- [MHouse Fit](https://avryum.vercel.app/projetos/mhouse-fit/index.html): estudo de caso de site institucional desenvolvido para academia local, com foco em presenÃ§a digital e interface responsiva.
-- [Instagram DM Downloader](https://avryum.vercel.app/projetos/instagram-dm-downloader/index.html): estudo de caso de extensÃ£o para automatizar o download de mÃ­dias no Instagram Direct pela versÃ£o web.
-- [Atlas GestÃ£o](https://avryum.vercel.app/projetos/atlas-gestao/index.html): estudo de caso de plataforma SaaS multi-tenant desenvolvida para centralizar gestÃ£o e processos de academias.
+## Páginas principais
+- [AVRYUM Digital Studio (Home)](https://avryum.vercel.app/): apresentação profissional, serviços digitais, projetos selecionados, tecnologias e contato para orçamentos.
+- [R.S. Top Team](https://avryum.vercel.app/projetos/rs-top-team/index.html): estudo de caso de sistema de gestão para academia com alunos, equipe, modalidades, presença, eventos e financeiro.
+- [MHouse Fit](https://avryum.vercel.app/projetos/mhouse-fit/index.html): estudo de caso de site institucional desenvolvido para academia local, com foco em presença digital e interface responsiva.
+- [Instagram DM Downloader](https://avryum.vercel.app/projetos/instagram-dm-downloader/index.html): estudo de caso de extensão para automatizar o download de mídias no Instagram Direct pela versão web.
+- [Atlas Gestão](https://avryum.vercel.app/projetos/atlas-gestao/index.html): estudo de caso de plataforma SaaS multi-tenant desenvolvida para centralizar gestão e processos de academias.
 
-## Projetos e cÃ³digo
-- R.S. Top Team â€” demo: https://rstopteam.web.app/
-- R.S. Top Team â€” cÃ³digo: https://github.com/Mad-xyz/R.S-Top-Team
-- MHouse Fit â€” demo: https://mhousefit.vercel.app/
-- MHouse Fit â€” cÃ³digo: https://github.com/Mad-xyz/MHouse-web-site
-- Instagram DM Downloader â€” cÃ³digo: https://github.com/Mad-xyz/-Instagram-DM-Image-Video-Downloader
-- Atlas GestÃ£o â€” cÃ³digo: https://github.com/Mad-xyz/atlas-gestao
+## Projetos e código
+- R.S. Top Team — demo: https://rstopteam.web.app/
+- R.S. Top Team — código: https://github.com/Mad-xyz/R.S-Top-Team
+- MHouse Fit — demo: https://mhousefit.vercel.app/
+- MHouse Fit — código: https://github.com/Mad-xyz/MHouse-web-site
+- Instagram DM Downloader — código: https://github.com/Mad-xyz/-Instagram-DM-Image-Video-Downloader
+- Atlas Gestão — código: https://github.com/Mad-xyz/atlas-gestao
 
-## ServiÃ§os e especialidades
+## Serviços e especialidades
 - Desenvolvimento de sites institucionais e landing pages
-- Sistemas e painÃ©is web (dashboards, autenticaÃ§Ã£o, controle de dados)
-- Interfaces responsivas e acessÃ­veis (mobile-first)
+- Sistemas e painéis web (dashboards, autenticação, controle de dados)
+- Interfaces responsivas e acessíveis (mobile-first)
 - Engenharia de front-end com React, JavaScript moderno, HTML5 e CSS3
-- Design grÃ¡fico, identidade visual e peÃ§as de comunicaÃ§Ã£o
+- Design gráfico, identidade visual e peças de comunicação
 
 ## Tecnologias utilizadas
-- HTML5 semÃ¢ntico, CSS3 avanÃ§ado e JavaScript nativo.
+- HTML5 semântico, CSS3 avançado e JavaScript nativo.
 - React e ecossistema front-end.
 - Firebase (Authentication, Firestore e Hosting).
-- Canva e Affinity para criaÃ§Ã£o visual e design grÃ¡fico.
+- Canva e Affinity para criação visual e design gráfico.
 
-## Contato e orÃ§amento
+## Contato e orçamento
 - Email: pmadsonm@gmail.com
 - Instagram: https://www.instagram.com/mad.exe/
 - GitHub: https://github.com/Mad-xyz
 - LinkedIn: https://www.linkedin.com/in/dark-mad-203661368/
 
-## PrincÃ­pios e limites de precisÃ£o
-- Manter fidelidade estrita Ã s funcionalidades e escopos tÃ©cnicos comprovados no cÃ³digo e na documentaÃ§Ã£o.
-- NÃ£o inventar mÃ©tricas financeiras, depoimentos ou clientes corporativos nÃ£o documentados.
-- R.S. Top Team, Atlas GestÃ£o, MHouse Fit e Instagram DM Downloader servem como evidÃªncias verificÃ¡veis de capacidade tÃ©cnica e de entrega de software.
+## Princípios e limites de precisão
+- Manter fidelidade estrita às funcionalidades e escopos técnicos comprovados no código e na documentação.
+- Não inventar métricas financeiras, depoimentos ou clientes corporativos não documentados.
+- R.S. Top Team, Atlas Gestão, MHouse Fit e Instagram DM Downloader servem como evidências verificáveis de capacidade técnica e de entrega de software.
