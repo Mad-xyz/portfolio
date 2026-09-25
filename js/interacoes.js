@@ -14,23 +14,23 @@
 
     const paginas = {
       '/': {
-        title: 'Atlas Cretive | Atlas Cretive — Desenvolvimento Web, Interfaces e Design',
+        title: 'AVRYUM Digital Studio — Desenvolvimento Web, Interfaces e Design',
         description: 'Desenvolvimento de sites, interfaces e soluções web pensadas para apresentar negócios, organizar processos e transformar necessidades em produtos digitais funcionais.',
         canonical: `${ORIGEM}/`,
         image: `${ORIGEM}/imagens/hero-art.webp`,
-        imageAlt: 'Identidade visual Atlas Cretive de Atlas Cretive',
+        imageAlt: 'Identidade visual da AVRYUM Digital Studio',
         type: 'website'
       },
       '/index.html': {
-        title: 'Atlas Cretive | Atlas Cretive — Desenvolvimento Web, Interfaces e Design',
+        title: 'AVRYUM Digital Studio — Desenvolvimento Web, Interfaces e Design',
         description: 'Desenvolvimento de sites, interfaces e soluções web pensadas para apresentar negócios, organizar processos e transformar necessidades em produtos digitais funcionais.',
         canonical: `${ORIGEM}/`,
         image: `${ORIGEM}/imagens/hero-art.webp`,
-        imageAlt: 'Identidade visual Atlas Cretive de Atlas Cretive',
+        imageAlt: 'Identidade visual da AVRYUM Digital Studio',
         type: 'website'
       },
       '/projetos/rs-top-team': {
-        title: 'R.S. Top Team | Sistema para Academias — Mads Develop',
+        title: 'R.S. Top Team | Sistema para Academias — AVRYUM Digital Studio',
         description: 'Estudo de caso do R.S. Top Team: sistema de gestão para academias com alunos, equipe, modalidades, presença, eventos, finanças e permissões.',
         canonical: `${ORIGEM}/projetos/rs-top-team/index.html`,
         image: `${ORIGEM}/projetos/rs-top-team/img/1%20Dashboras.webp`,
@@ -41,7 +41,7 @@
         sameAs: ['https://rstopteam.web.app/', 'https://github.com/Mad-xyz/R.S-Top-Team']
       },
       '/projetos/rs-top-team/index.html': {
-        title: 'R.S. Top Team | Sistema para Academias — Mads Develop',
+        title: 'R.S. Top Team | Sistema para Academias — AVRYUM Digital Studio',
         description: 'Estudo de caso do R.S. Top Team: sistema de gestão para academias com alunos, equipe, modalidades, presença, eventos, finanças e permissões.',
         canonical: `${ORIGEM}/projetos/rs-top-team/index.html`,
         image: `${ORIGEM}/projetos/rs-top-team/img/1%20Dashboras.webp`,
@@ -52,7 +52,7 @@
         sameAs: ['https://rstopteam.web.app/', 'https://github.com/Mad-xyz/R.S-Top-Team']
       },
       '/projetos/mhouse-fit': {
-        title: 'MHouse Fit | Site Institucional — Mads Develop',
+        title: 'MHouse Fit | Site Institucional — AVRYUM Digital Studio',
         description: 'Estudo de caso do MHouse Fit, site institucional desenvolvido para apresentar a academia, seus serviços e diferenciais com foco em presença digital e interface responsiva.',
         canonical: `${ORIGEM}/projetos/mhouse-fit/index.html`,
         image: `${ORIGEM}/projetos/mhouse-fit/img/Mhouse.webp`,
@@ -63,7 +63,7 @@
         sameAs: ['https://mhousefit.vercel.app/', 'https://github.com/Mad-xyz/MHouse-web-site']
       },
       '/projetos/mhouse-fit/index.html': {
-        title: 'MHouse Fit | Site Institucional — Mads Develop',
+        title: 'MHouse Fit | Site Institucional — AVRYUM Digital Studio',
         description: 'Estudo de caso do MHouse Fit, site institucional desenvolvido para apresentar a academia, seus serviços e diferenciais com foco em presença digital e interface responsiva.',
         canonical: `${ORIGEM}/projetos/mhouse-fit/index.html`,
         image: `${ORIGEM}/projetos/mhouse-fit/img/Mhouse.webp`,
@@ -74,7 +74,7 @@
         sameAs: ['https://mhousefit.vercel.app/', 'https://github.com/Mad-xyz/MHouse-web-site']
       },
       '/projetos/instagram-dm-downloader': {
-        title: 'Instagram DM Downloader | Extensão Web — Mads Develop',
+        title: 'Instagram DM Downloader | Extensão Web — AVRYUM Digital Studio',
         description: 'Extensão para Instagram Web desenvolvida em JavaScript para facilitar e automatizar o download de mídias recebidas no Direct.',
         canonical: `${ORIGEM}/projetos/instagram-dm-downloader/index.html`,
         image: `${ORIGEM}/projetos/instagram-dm-downloader/img/DM%20downloader.webp`,
@@ -85,7 +85,7 @@
         sameAs: ['https://github.com/Mad-xyz/-Instagram-DM-Image-Video-Downloader']
       },
       '/projetos/instagram-dm-downloader/index.html': {
-        title: 'Instagram DM Downloader | Extensão Web — Mads Develop',
+        title: 'Instagram DM Downloader | Extensão Web — AVRYUM Digital Studio',
         description: 'Extensão para Instagram Web desenvolvida em JavaScript para facilitar e automatizar o download de mídias recebidas no Direct.',
         canonical: `${ORIGEM}/projetos/instagram-dm-downloader/index.html`,
         image: `${ORIGEM}/projetos/instagram-dm-downloader/img/DM%20downloader.webp`,
@@ -96,7 +96,7 @@
         sameAs: ['https://github.com/Mad-xyz/-Instagram-DM-Image-Video-Downloader']
       },
       '/projetos/atlas-gestao': {
-        title: 'Atlas Gestão | SaaS Multi-tenant — Mads Develop',
+        title: 'Atlas Gestão | SaaS Multi-tenant — AVRYUM Digital Studio',
         description: 'Atlas Gestão é uma plataforma SaaS multi-tenant desenvolvida para centralizar alunos, equipe, modalidades, presenças, finanças e rotinas de academias com isolamento de dados.',
         canonical: `${ORIGEM}/projetos/atlas-gestao/index.html`,
         image: `${ORIGEM}/projetos/atlas-gestao/img/index-atlas.webp`,
@@ -107,7 +107,7 @@
         sameAs: ['https://github.com/Mad-xyz/atlas-gestao']
       },
       '/projetos/atlas-gestao/index.html': {
-        title: 'Atlas Gestão | SaaS Multi-tenant — Mads Develop',
+        title: 'Atlas Gestão | SaaS Multi-tenant — AVRYUM Digital Studio',
         description: 'Atlas Gestão é uma plataforma SaaS multi-tenant desenvolvida para centralizar alunos, equipe, modalidades, presenças, finanças e rotinas de academias com isolamento de dados.',
         canonical: `${ORIGEM}/projetos/atlas-gestao/index.html`,
         image: `${ORIGEM}/projetos/atlas-gestao/img/index-atlas.webp`,
@@ -187,8 +187,8 @@
       '@type': 'WebSite',
       '@id': `${ORIGEM}/#website`,
       url: `${ORIGEM}/`,
-      name: 'Mads Develop — Madson Vander',
-      alternateName: 'Mads Develop',
+      name: 'AVRYUM Digital Studio — Madson Vander',
+      alternateName: 'AVRYUM Digital Studio',
       inLanguage: 'pt-BR',
       creator: { '@id': pessoa['@id'] }
     };

@@ -1,6 +1,6 @@
-# Mads Develop — Madson Vander | Desenvolvimento Web e Design
+# AVRYUM Digital Studio — Madson Vander | Desenvolvimento Web e Design
 
-Página profissional e portfólio de serviços digitais de **Madson Vander (Mads Develop)**. O site apresenta serviços de desenvolvimento web, sistemas, interfaces responsivas e design gráfico, acompanhado de estudos de caso técnicos de sistemas de gestão, sites institucionais e ferramentas web.
+Página profissional e portfólio de serviços digitais de **Madson Vander (AVRYUM Digital Studio)**. O site apresenta serviços de desenvolvimento web, sistemas, interfaces responsivas e design gráfico, acompanhado de estudos de caso técnicos de sistemas de gestão, sites institucionais e ferramentas web.
 
 **Site oficial:** https://madsdevelop.vercel.app/
 
