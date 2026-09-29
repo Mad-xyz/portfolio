@@ -1448,6 +1448,7 @@ h2 {
 
 /* ── AJUSTES DE MARCA, RODAPÉ E RESPONSIVIDADE ─────────────────────────── */
 .wordmark {
+  position:relative;
   display:inline-flex;
   align-items:center;
   width:clamp(188px,18vw,248px);
@@ -1455,26 +1456,27 @@ h2 {
   flex-shrink:0;
 }
 .wordmark-logo {
+  display:block;
   width:100%;
   height:auto;
-  overflow:visible;
+  transition:opacity .22s ease;
 }
-.wordmark-logo .logo-main,
-.wordmark-logo .logo-star,
-.wordmark-logo .logo-studio {
-  transition:fill .22s ease;
+.wordmark::after {
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  opacity:0;
+  background:var(--purple);
+  -webkit-mask:url("../imagens/assinatura-horizontal.svg") center/contain no-repeat;
+  mask:url("../imagens/assinatura-horizontal.svg") center/contain no-repeat;
+  transition:opacity .22s ease;
 }
-.wordmark-logo .logo-main,
-.wordmark-logo .logo-star {
-  fill:var(--foreground);
+.wordmark:hover .wordmark-logo {
+  opacity:0;
 }
-.wordmark-logo .logo-studio {
-  fill:var(--purple);
-}
-.wordmark:hover .logo-main,
-.wordmark:hover .logo-studio,
-.wordmark:hover .logo-star {
-  fill:var(--purple);
+.wordmark:hover::after {
+  opacity:1;
 }
 
 /* Ícones locais: sem dependência de CDN externa. */
