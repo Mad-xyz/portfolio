@@ -1444,3 +1444,114 @@ h2 {
 }
 
 }
+
+
+/* ── AJUSTES DE MARCA, RODAPÉ E RESPONSIVIDADE ─────────────────────────── */
+.wordmark {
+  display:inline-flex;
+  align-items:center;
+  width:clamp(188px,18vw,248px);
+  line-height:0;
+  flex-shrink:0;
+}
+.wordmark-logo {
+  width:100%;
+  height:auto;
+  overflow:visible;
+}
+.wordmark-logo .logo-main,
+.wordmark-logo .logo-star,
+.wordmark-logo .logo-studio {
+  transition:fill .22s ease;
+}
+.wordmark-logo .logo-main,
+.wordmark-logo .logo-star {
+  fill:var(--foreground);
+}
+.wordmark-logo .logo-studio {
+  fill:var(--purple);
+}
+.wordmark:hover .logo-main,
+.wordmark:hover .logo-studio,
+.wordmark:hover .logo-star {
+  fill:var(--purple);
+}
+
+/* Ícones locais: sem dependência de CDN externa. */
+.icon-github,.icon-instagram,.icon-linkedin {
+  display:inline-block;
+  width:18px;
+  height:18px;
+  flex:0 0 18px;
+  background:currentColor;
+  background-image:none;
+  filter:none;
+  -webkit-mask-repeat:no-repeat;
+  mask-repeat:no-repeat;
+  -webkit-mask-position:center;
+  mask-position:center;
+  -webkit-mask-size:contain;
+  mask-size:contain;
+}
+.icon-instagram {
+  -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='3' y='3' width='18' height='18' rx='5' fill='none' stroke='black' stroke-width='2.3'/%3E%3Ccircle cx='12' cy='12' r='4.2' fill='none' stroke='black' stroke-width='2.3'/%3E%3Ccircle cx='17.4' cy='6.6' r='1.35' fill='black'/%3E%3C/svg%3E");
+  mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='3' y='3' width='18' height='18' rx='5' fill='none' stroke='black' stroke-width='2.3'/%3E%3Ccircle cx='12' cy='12' r='4.2' fill='none' stroke='black' stroke-width='2.3'/%3E%3Ccircle cx='17.4' cy='6.6' r='1.35' fill='black'/%3E%3C/svg%3E");
+}
+.icon-linkedin {
+  -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='5' cy='5' r='2' fill='black'/%3E%3Crect x='3' y='9' width='4' height='12' rx='1' fill='black'/%3E%3Cpath d='M10 9h4v1.9c1-1.5 2.5-2.3 4.3-2.3 3.1 0 4.7 2 4.7 5.7V21h-4v-6c0-1.8-.7-2.9-2.3-2.9-1.8 0-2.7 1.2-2.7 3.5V21h-4V9z' fill='black'/%3E%3C/svg%3E");
+  mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='5' cy='5' r='2' fill='black'/%3E%3Crect x='3' y='9' width='4' height='12' rx='1' fill='black'/%3E%3Cpath d='M10 9h4v1.9c1-1.5 2.5-2.3 4.3-2.3 3.1 0 4.7 2 4.7 5.7V21h-4v-6c0-1.8-.7-2.9-2.3-2.9-1.8 0-2.7 1.2-2.7 3.5V21h-4V9z' fill='black'/%3E%3C/svg%3E");
+}
+.icon-github {
+  -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='9.5' fill='none' stroke='black' stroke-width='2'/%3E%3Cpath d='M8.5 9 5.5 12l3 3M15.5 9l3 3-3 3M13.7 7.8l-3.4 8.4' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='9.5' fill='none' stroke='black' stroke-width='2'/%3E%3Cpath d='M8.5 9 5.5 12l3 3M15.5 9l3 3-3 3M13.7 7.8l-3.4 8.4' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+.socials a {
+  color:#191024;
+}
+.socials a:hover {
+  opacity:.72;
+}
+
+/* A linha de especialidades agora quebra de forma previsível em telas menores. */
+.discipline-line {
+  flex-wrap:wrap;
+  justify-content:center;
+  column-gap:clamp(16px,2.2vw,34px);
+  row-gap:12px;
+}
+.discipline-line > span:not(.asterisk) {
+  white-space:nowrap;
+}
+
+@media(max-width:800px) {
+  .wordmark { width:205px; }
+  .discipline-line {
+    justify-content:center;
+    padding:20px 0;
+    column-gap:16px;
+    row-gap:10px;
+    text-align:center;
+  }
+}
+@media(max-width:560px) {
+  .wordmark { width:178px; }
+  .discipline-line {
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:10px 12px;
+    padding:17px 0;
+    font-size:11px;
+    line-height:1.35;
+  }
+  .discipline-line .asterisk {
+    display:none;
+  }
+  .discipline-line > span:not(.asterisk) {
+    white-space:normal;
+  }
+}
+@media(max-width:360px) {
+  .discipline-line {
+    grid-template-columns:1fr;
+  }
+}
