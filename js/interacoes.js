@@ -6,6 +6,106 @@
  */
 (function iniciarInteracoes() {
   // Metadados e JSON-LD ficam no HTML estático de cada página.
+
+  function configurarBotoesComOrigem() {
+    const botoes = document.querySelectorAll(
+      '.primary-link, .secondary-link, .footer-btn-primary, .footer-btn-secondary'
+    );
+
+    function definirOrigem(elemento, x, y) {
+      const largura = elemento.offsetWidth;
+      const altura = elemento.offsetHeight;
+
+      const diametro = Math.ceil(
+        2 * Math.max(
+          Math.hypot(x, y),
+          Math.hypot(largura - x, y),
+          Math.hypot(x, altura - y),
+          Math.hypot(largura - x, altura - y)
+        )
+      );
+
+      elemento.style.setProperty('--origin-x', `${x}px`);
+      elemento.style.setProperty('--origin-y', `${y}px`);
+      elemento.style.setProperty('--origin-size', `${diametro}px`);
+    }
+
+    function definirOrigemDoPonteiro(elemento, evento) {
+      const rect = elemento.getBoundingClientRect();
+      definirOrigem(
+        elemento,
+        evento.clientX - rect.left,
+        evento.clientY - rect.top
+      );
+    }
+
+    function definirOrigemCentral(elemento) {
+      definirOrigem(elemento, elemento.offsetWidth / 2, elemento.offsetHeight / 2);
+    }
+
+    botoes.forEach((botao) => {
+      botao.addEventListener('pointerenter', (evento) => {
+        definirOrigemDoPonteiro(botao, evento);
+      });
+
+      botao.addEventListener('pointerdown', (evento) => {
+        if (evento.button !== 0) return;
+        definirOrigemDoPonteiro(botao, evento);
+      });
+
+      botao.addEventListener('focus', () => {
+        if (botao.matches(':focus-visible')) definirOrigemCentral(botao);
+      });
+
+      botao.addEventListener('keydown', (evento) => {
+        if (evento.key === 'Enter' || evento.key === ' ') {
+          definirOrigemCentral(botao);
+        }
+      });
+    });
+  }
+
+  function configurarWordmarkComOrigem() {
+    const wordmark = document.querySelector('.wordmark');
+    if (!wordmark) return;
+
+    function definirOrigem(x, y) {
+      const largura = wordmark.offsetWidth;
+      const altura = wordmark.offsetHeight;
+      const raio = Math.ceil(
+        Math.max(
+          Math.hypot(x, y),
+          Math.hypot(largura - x, y),
+          Math.hypot(x, altura - y),
+          Math.hypot(largura - x, altura - y)
+        )
+      );
+
+      wordmark.style.setProperty('--wordmark-origin-x', `${x}px`);
+      wordmark.style.setProperty('--wordmark-origin-y', `${y}px`);
+      wordmark.style.setProperty('--wordmark-origin-radius', `${raio}px`);
+    }
+
+    wordmark.addEventListener('pointerenter', (evento) => {
+      const rect = wordmark.getBoundingClientRect();
+      definirOrigem(evento.clientX - rect.left, evento.clientY - rect.top);
+    });
+
+    wordmark.addEventListener('pointerdown', (evento) => {
+      if (evento.button !== 0) return;
+      const rect = wordmark.getBoundingClientRect();
+      definirOrigem(evento.clientX - rect.left, evento.clientY - rect.top);
+    });
+
+    wordmark.addEventListener('focus', () => {
+      if (wordmark.matches(':focus-visible')) {
+        definirOrigem(wordmark.offsetWidth / 2, wordmark.offsetHeight / 2);
+      }
+    });
+  }
+
+  configurarBotoesComOrigem();
+  configurarWordmarkComOrigem();
   const consultaMovimento = window.matchMedia(
     '(pointer: fine) and (prefers-reduced-motion: no-preference)'
   );

@@ -314,7 +314,62 @@ h1 em {
   gap:16px;
   flex-wrap:wrap
 }
+.primary-link,
+.secondary-link,
+.footer-btn-primary,
+.footer-btn-secondary {
+  --origin-x:50%;
+  --origin-y:50%;
+  --origin-size:0px;
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+  transform:translateY(0);
+  transition:
+    color .3s cubic-bezier(.16,1,.3,1),
+    border-color .3s cubic-bezier(.16,1,.3,1),
+    transform .2s ease
+}
+
+.primary-link::before,
+.secondary-link::before,
+.footer-btn-primary::before,
+.footer-btn-secondary::before {
+  content:"";
+  position:absolute;
+  left:var(--origin-x);
+  top:var(--origin-y);
+  width:var(--origin-size);
+  height:var(--origin-size);
+  border-radius:50%;
+  background:var(--origin-fill);
+  transform:translate(-50%,-50%) scale(0);
+  transform-origin:center;
+  transition:transform .5s cubic-bezier(.16,1,.3,1);
+  pointer-events:none;
+  z-index:-1
+}
+
+.primary-link:hover::before,
+.primary-link:focus-visible::before,
+.secondary-link:hover::before,
+.secondary-link:focus-visible::before,
+.footer-btn-primary:hover::before,
+.footer-btn-primary:focus-visible::before,
+.footer-btn-secondary:hover::before,
+.footer-btn-secondary:focus-visible::before {
+  transform:translate(-50%,-50%) scale(1)
+}
+
+.primary-link:active,
+.secondary-link:active,
+.footer-btn-primary:active,
+.footer-btn-secondary:active {
+  transform:scale(.985)
+}
+
 .primary-link {
+  --origin-fill:var(--foreground);
   display:inline-flex;
   align-items:center;
   gap:34px;
@@ -323,14 +378,15 @@ h1 em {
   padding:15px 23px;
   font-size:14px;
   font-weight:600;
-  border:1px solid var(--purple);
-  transition:background .2s,transform .2s
+  border:0
 }
-.primary-link:hover {
-  background:#c4acff;
+.primary-link:hover,
+.primary-link:focus-visible {
+  color:var(--background);
   transform:translateY(-2px)
 }
 .secondary-link {
+  --origin-fill:var(--purple);
   display:inline-flex;
   align-items:center;
   gap:10px;
@@ -339,13 +395,12 @@ h1 em {
   padding:14px 22px;
   font-size:14px;
   font-weight:600;
-  border:1px solid var(--border);
-  transition:border-color .2s,background .2s,color .2s,transform .2s
+  border:1px solid var(--border)
 }
-.secondary-link:hover {
+.secondary-link:hover,
+.secondary-link:focus-visible {
   border-color:var(--purple);
-  color:var(--purple);
-  background:rgba(163,125,247,.08);
+  color:var(--background);
   transform:translateY(-2px)
 }
 .hero-footnote {
@@ -847,36 +902,40 @@ footer .eyebrow {
   margin-bottom:45px
 }
 .footer-btn-primary {
+  --origin-fill:var(--foreground);
   display:inline-flex;
   align-items:center;
   gap:12px;
-  background:#191024;
-  color:#f4f3f6;
+  background:var(--background);
+  color:var(--foreground);
   padding:15px 26px;
   font-size:15px;
   font-weight:600;
-  border:1px solid #191024;
-  transition:background .2s,transform .2s
+  border:1px solid var(--background)
 }
-.footer-btn-primary:hover {
-  background:#2e1f40;
+.footer-btn-primary:hover,
+.footer-btn-primary:focus-visible {
+  color:var(--background);
+  border-color:var(--foreground);
   transform:translateY(-2px)
 }
 .footer-btn-secondary {
+  --origin-fill:var(--background);
   display:inline-flex;
   align-items:center;
   gap:10px;
   background:transparent;
-  color:#191024;
+  color:var(--background);
   padding:14px 22px;
   font-size:15px;
   font-weight:600;
-  border:1px solid #6b4d90;
-  transition:background .2s,border-color .2s
+  border:1px solid rgba(16,16,18,.55)
 }
-.footer-btn-secondary:hover {
-  background:rgba(25,16,36,.08);
-  border-color:#191024
+.footer-btn-secondary:hover,
+.footer-btn-secondary:focus-visible {
+  color:var(--foreground);
+  border-color:var(--background);
+  transform:translateY(-2px)
 }
 .footer-bottom {
   border-top:1px solid #876aae;
@@ -1448,6 +1507,9 @@ h2 {
 
 /* ── AJUSTES DE MARCA, RODAPÉ E RESPONSIVIDADE ─────────────────────────── */
 .wordmark {
+  --wordmark-origin-x:50%;
+  --wordmark-origin-y:50%;
+  --wordmark-origin-radius:0px;
   position:relative;
   display:inline-flex;
   align-items:center;
@@ -1459,24 +1521,19 @@ h2 {
   display:block;
   width:100%;
   height:auto;
-  transition:opacity .22s ease;
 }
-.wordmark::after {
-  content:"";
+
+.wordmark-logo--roxo {
   position:absolute;
   inset:0;
   pointer-events:none;
-  opacity:0;
-  background:var(--purple);
-  -webkit-mask:url("../imagens/assinatura-horizontal.svg") center/contain no-repeat;
-  mask:url("../imagens/assinatura-horizontal.svg") center/contain no-repeat;
-  transition:opacity .22s ease;
+  clip-path:circle(0 at var(--wordmark-origin-x) var(--wordmark-origin-y));
+  transition:clip-path .5s cubic-bezier(.16,1,.3,1);
 }
-.wordmark:hover .wordmark-logo {
-  opacity:0;
-}
-.wordmark:hover::after {
-  opacity:1;
+
+.wordmark:hover .wordmark-logo--roxo,
+.wordmark:focus-visible .wordmark-logo--roxo {
+  clip-path:circle(var(--wordmark-origin-radius) at var(--wordmark-origin-x) var(--wordmark-origin-y));
 }
 
 /* Ícones locais: sem dependência de CDN externa. */
