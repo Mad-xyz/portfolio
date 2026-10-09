@@ -47,7 +47,7 @@ Confirmar depois do deploy:
 
 Depois que o deploy estiver estável:
 1. verificar a propriedade do domínio/site;
-2. enviar `https://avryum.vercel.app/sitemap.xml`;
+2. enviar `https://www.avryum.com.br/sitemap.xml`;
 3. inspecionar a home e os quatro estudos de caso;
 4. acompanhar cobertura, impressões, cliques e consultas sem inferir resultados antes dos dados.
 
@@ -119,3 +119,5 @@ A próxima rodada pode ser considerada completa quando:
 - [ ] Validar Schema.org usando Schema Markup Validator e, quando aplicável, Rich Results Test.
 - [ ] Enviar sitemap pelo Google Search Console e acompanhar cobertura de indexação.
 - [ ] Medir LCP, INP e CLS antes de declarar ganhos de desempenho.
+
+- [x] Uniformizar o domínio principal `https://www.avryum.com.br` nas páginas, sitemap, robots.txt e llms.txt, conforme redirecionamento 308 configurado na Vercel.

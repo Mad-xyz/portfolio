@@ -32,7 +32,7 @@ Data da revisão: 2026-09-16
 
 | Área | Severidade | Confiança | Finding | Evidência | Impacto | Fix / estado |
 |---|---|---|---|---|---|---|
-| Crawl / descoberta | Pass | Confirmed | Sitemap e robots agora existem | `robots.txt` aponta para `https://avryum.vercel.app/sitemap.xml`; sitemap lista as 5 páginas públicas | Facilita descoberta e rastreamento das páginas | Implementado |
+| Crawl / descoberta | Pass | Confirmed | Sitemap e robots agora existem | `robots.txt` aponta para `https://www.avryum.com.br/sitemap.xml`; sitemap lista as 5 páginas públicas | Facilita descoberta e rastreamento das páginas | Implementado |
 | Canonical | Pass | Confirmed | Cada página principal possui URL canônica | Home usa `/`; projetos usam seus `index.html` públicos | Reduz ambiguidade entre variações de URL | Implementado |
 | Titles e descriptions | Pass | Confirmed | Metadados agora descrevem intenção e projeto de cada página | Titles específicos para home, R.S., MHouse, Instagram DM e Atlas | Melhora entendimento do documento e potencial CTR | Implementado |
 | Social previews | Pass | Confirmed | Open Graph e Twitter Cards foram adicionados | `og:title`, `og:description`, `og:url`, `og:image` e equivalentes Twitter | Melhora compartilhamento e representação da página | Implementado |
@@ -132,3 +132,5 @@ A rotina de SEO em `js/interacoes.js` substituía no navegador os metadados orig
 **Limites:** respostas HTTP, redirects, indexação, dados de Google Search Console e métricas reais de Core Web Vitals ainda não foram confirmados no domínio publicado. Alterações no código não comprovam aumento de tráfego ou posições.
 
 **Sobre llms.txt:** conforme orientação de 2026 do Google Search Central, esse arquivo não é necessário nem utilizado como sinal de ranqueamento pelo Google Search, embora possa ser útil em outras ferramentas compatíveis.
+
+**Domínio canônico confirmado:** a configuração da Vercel identifica `www.avryum.com.br` como domínio personalizado verificado, com redirecionamento permanente 308 de `avryum.com.br` para `www.avryum.com.br`. Em 2026-10-09, URLs canônicas, URLs de imagens sociais, sitemaps, robots e llms.txt foram alinhados com o endereço de destino. Acesso público HTTP ainda exige verificação externa.
