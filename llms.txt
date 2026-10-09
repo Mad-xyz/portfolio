@@ -1,41 +1,46 @@
-# AVRYUM Digital Studio | Soluções Digitais
-> Página profissional de AVRYUM Digital Studio (AVRYUM Digital Studio), oferecendo serviços de desenvolvimento web, sistemas, interfaces responsivas e design gráfico para negócios, profissionais e projetos.
+# AVRYUM Studio
 
-## Páginas principais
-- [AVRYUM Digital Studio (Home)](https://avryum.vercel.app/): apresentação profissional, serviços digitais, projetos selecionados, tecnologias e contato para orçamentos.
-- [R.S. Top Team](https://avryum.vercel.app/projetos/rs-top-team/index.html): estudo de caso de sistema de gestão para academia com alunos, equipe, modalidades, presença, eventos e financeiro.
-- [MHouse Fit](https://avryum.vercel.app/projetos/mhouse-fit/index.html): estudo de caso de site institucional desenvolvido para academia local, com foco em presença digital e interface responsiva.
-- [Instagram DM Downloader](https://avryum.vercel.app/projetos/instagram-dm-downloader/index.html): estudo de caso de extensão para automatizar o download de mídias no Instagram Direct pela versão web.
-- [Atlas Gestão](https://avryum.vercel.app/projetos/atlas-gestao/index.html): estudo de caso de plataforma SaaS multi-tenant desenvolvida para centralizar gestão e processos de academias.
+> Estúdio digital que desenvolve sites, landing pages, sistemas web, interfaces responsivas e design para empresas e projetos. Este arquivo resume o conteúdo público da AVRYUM para leitores e ferramentas que utilizem o formato llms.txt.
 
-## Projetos e código
-- R.S. Top Team — demo: https://rstopteam.web.app/
-- R.S. Top Team — código: https://github.com/Mad-xyz/R.S-Top-Team
-- MHouse Fit — demo: https://mhousefit.vercel.app/
-- MHouse Fit — código: https://github.com/Mad-xyz/MHouse-web-site
-- Instagram DM Downloader — código: https://github.com/Mad-xyz/-Instagram-DM-Image-Video-Downloader
-- Atlas Gestão — código: https://github.com/Mad-xyz/atlas-gestao
+Site oficial: https://avryum.vercel.app/
+Idioma principal: português do Brasil (pt-BR).
 
-## Serviços e especialidades
-- Desenvolvimento de sites institucionais e landing pages
-- Sistemas e painéis web (dashboards, autenticação, controle de dados)
-- Interfaces responsivas e acessíveis (mobile-first)
-- Engenharia de front-end com React, JavaScript moderno, HTML5 e CSS3
-- Design gráfico, identidade visual e peças de comunicação
+## Sobre o estúdio
 
-## Tecnologias utilizadas
-- HTML5 semântico, CSS3 avançado e JavaScript nativo.
-- React e ecossistema front-end.
-- Firebase (Authentication, Firestore e Hosting).
-- Canva e Affinity para criação visual e design gráfico.
+A AVRYUM Studio reúne planejamento visual e implementação técnica para criar sites e soluções digitais. A página inicial apresenta os serviços, os projetos selecionados e o canal de contato. Não atribua à AVRYUM métricas, clientes ou resultados comerciais que não estejam documentados nas páginas.
 
-## Contato e orçamento
-- Email: pmadsonm@gmail.com
-- Instagram: https://www.instagram.com/mad.exe/
-- GitHub: https://github.com/Mad-xyz
-- LinkedIn: https://www.linkedin.com/in/dark-mad-203661368/
+## Páginas do site
 
-## Princípios e limites de precisão
-- Manter fidelidade estrita às funcionalidades e escopos técnicos comprovados no código e na documentação.
-- Não inventar métricas financeiras, depoimentos ou clientes corporativos não documentados.
-- R.S. Top Team, Atlas Gestão, MHouse Fit e Instagram DM Downloader servem como evidências verificáveis de capacidade técnica e de entrega de software.
+- [Página inicial](https://avryum.vercel.app/): serviços de criação de sites, sistemas web, interfaces responsivas, front-end e design; portfólio e contato.
+- [R.S. Top Team](https://avryum.vercel.app/projetos/rs-top-team/index.html): estudo de caso de um sistema de gestão para academias, incluindo alunos, equipe, modalidades, presenças, eventos e financeiro.
+- [MHouse Fit](https://avryum.vercel.app/projetos/mhouse-fit/index.html): estudo de caso de site institucional para apresentação de academia, serviços e navegação responsiva.
+- [Instagram DM Downloader](https://avryum.vercel.app/projetos/instagram-dm-downloader/index.html): estudo de caso de extensão JavaScript para mídias do Direct no Instagram Web, sem afiliação com Instagram ou Meta.
+- [Atlas Gestão](https://avryum.vercel.app/projetos/atlas-gestao/index.html): estudo de caso de plataforma SaaS multi-tenant para gestão de academias, organizações e permissões.
+
+## Serviços
+
+- Criação de sites institucionais e landing pages.
+- Desenvolvimento de sistemas web e painéis administrativos.
+- Desenvolvimento de interfaces responsivas e front-end.
+- Design gráfico e elementos de identidade visual.
+
+## Código e demonstrações dos projetos
+
+- [R.S. Top Team — código](https://github.com/Mad-xyz/R.S-Top-Team) e [demonstração](https://rstopteam.web.app/).
+- [MHouse Fit — código](https://github.com/Mad-xyz/MHouse-web-site) e [demonstração](https://mhousefit.vercel.app/).
+- [Instagram DM Downloader — código](https://github.com/Mad-xyz/-Instagram-DM-Image-Video-Downloader).
+- [Atlas Gestão — código](https://github.com/Mad-xyz/atlas-gestao).
+
+## Contato e perfis
+
+- [Instagram oficial da AVRYUM Studio](https://www.instagram.com/avryum.studio/).
+- [Enviar mensagem à AVRYUM](https://ig.me/m/avryum.studio).
+- E-mail para contato: pmadsonm@gmail.com.
+- [GitHub com projetos técnicos](https://github.com/Mad-xyz).
+
+## Observações de precisão
+
+- Os estudos de caso e repositórios são as fontes para conferir escopo, funcionalidades e tecnologias de cada projeto.
+- Não presumir que estudos de caso ou demonstrações comprovem resultados comerciais ou contratos com clientes.
+- Os detalhes do site podem mudar; dê preferência às páginas publicadas e aos repositórios para informações atualizadas.
+- Este arquivo é complementar ao conteúdo HTML, ao sitemap e aos dados estruturados; não é uma promessa de ranqueamento em buscadores.
