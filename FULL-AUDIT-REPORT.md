@@ -120,3 +120,15 @@ Data da revisão: 2026-09-16
 - Qualidade final das imagens depois de uma futura recompressão.
 
 Esses itens devem permanecer como **Unknown** até existir evidência mensurável.
+
+---
+
+## Revisão técnica de 2026-10-09
+
+A rotina de SEO em `js/interacoes.js` substituía no navegador os metadados originais da AVRYUM por dados inconsistentes, inclusive `og:site_name`. Ela também criava um segundo bloco JSON-LD nas páginas de projetos.
+
+**Correções:** a rotina dinâmica foi removida. O HTML estático de cada uma das cinco páginas agora mantém os metadados e o bloco JSON-LD principal. Os estudos de caso identificam `WebSite`, `WebPage`, `Organization`, o projeto e o breadcrumb em um único grafo relacionado. A home recebeu título e descrição mais específicos para o serviço, e `llms.txt` foi reescrito com dados da marca, estudos de caso e fontes. O sitemap mantém somente as cinco URLs canônicas, com datas de modificação correspondentes a esta revisão.
+
+**Limites:** respostas HTTP, redirects, indexação, dados de Google Search Console e métricas reais de Core Web Vitals ainda não foram confirmados no domínio publicado. Alterações no código não comprovam aumento de tráfego ou posições.
+
+**Sobre llms.txt:** conforme orientação de 2026 do Google Search Central, esse arquivo não é necessário nem utilizado como sinal de ranqueamento pelo Google Search, embora possa ser útil em outras ferramentas compatíveis.

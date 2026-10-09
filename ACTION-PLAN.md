@@ -108,3 +108,14 @@ A próxima rodada pode ser considerada completa quando:
 - imagens grandes estiverem revisadas;
 - não houver links quebrados nas páginas públicas;
 - os dados estruturados estiverem válidos e coerentes com o conteúdo visível.
+
+## Revisão de 2026-10-09
+
+- [x] Remover a sobrescrita de metadados e o segundo JSON-LD criado pelo JavaScript.
+- [x] Unificar metadados e entidades estruturadas nas cinco páginas estáticas.
+- [x] Atualizar conteúdo, identidade e links de `llms.txt`.
+- [x] Atualizar o sitemap para representar as mudanças nas páginas.
+- [ ] Confirmar deploy e status HTTP das cinco páginas, `/sitemap.xml`, `/robots.txt` e `/llms.txt`.
+- [ ] Validar Schema.org usando Schema Markup Validator e, quando aplicável, Rich Results Test.
+- [ ] Enviar sitemap pelo Google Search Console e acompanhar cobertura de indexação.
+- [ ] Medir LCP, INP e CLS antes de declarar ganhos de desempenho.

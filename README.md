@@ -44,3 +44,11 @@ python -m http.server 5500
 ```
 
 Acesse: `http://localhost:5500`
+
+## SEO e descoberta (revisão de 2026-10-09)
+
+- Título, descrição, Open Graph, Twitter Cards e JSON-LD são servidos no HTML de cada página, sem depender de JavaScript.
+- `sitemap.xml` lista as cinco páginas públicas canônicas; atualizar `lastmod` somente quando a página sofrer mudanças significativas.
+- `robots.txt` permite rastreamento e informa a localização do sitemap.
+- `llms.txt` descreve a AVRYUM e os estudos de caso para ferramentas compatíveis; ele não é um fator de ranqueamento do Google Search.
+- Após o deploy: validar os status HTTP e a marcação estruturada, enviar o sitemap ao Search Console e medir Core Web Vitals em dados reais.
