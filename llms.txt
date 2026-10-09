@@ -2,7 +2,7 @@
 
 > Estúdio digital que desenvolve sites, landing pages, sistemas web, interfaces responsivas e design para empresas e projetos. Este arquivo resume o conteúdo público da AVRYUM para leitores e ferramentas que utilizem o formato llms.txt.
 
-Site oficial: https://avryum.vercel.app/
+Site oficial: https://www.avryum.com.br/
 Idioma principal: português do Brasil (pt-BR).
 
 ## Sobre o estúdio
@@ -11,11 +11,11 @@ A AVRYUM Studio reúne planejamento visual e implementação técnica para criar
 
 ## Páginas do site
 
-- [Página inicial](https://avryum.vercel.app/): serviços de criação de sites, sistemas web, interfaces responsivas, front-end e design; portfólio e contato.
-- [R.S. Top Team](https://avryum.vercel.app/projetos/rs-top-team/index.html): estudo de caso de um sistema de gestão para academias, incluindo alunos, equipe, modalidades, presenças, eventos e financeiro.
-- [MHouse Fit](https://avryum.vercel.app/projetos/mhouse-fit/index.html): estudo de caso de site institucional para apresentação de academia, serviços e navegação responsiva.
-- [Instagram DM Downloader](https://avryum.vercel.app/projetos/instagram-dm-downloader/index.html): estudo de caso de extensão JavaScript para mídias do Direct no Instagram Web, sem afiliação com Instagram ou Meta.
-- [Atlas Gestão](https://avryum.vercel.app/projetos/atlas-gestao/index.html): estudo de caso de plataforma SaaS multi-tenant para gestão de academias, organizações e permissões.
+- [Página inicial](https://www.avryum.com.br/): serviços de criação de sites, sistemas web, interfaces responsivas, front-end e design; portfólio e contato.
+- [R.S. Top Team](https://www.avryum.com.br/projetos/rs-top-team/index.html): estudo de caso de um sistema de gestão para academias, incluindo alunos, equipe, modalidades, presenças, eventos e financeiro.
+- [MHouse Fit](https://www.avryum.com.br/projetos/mhouse-fit/index.html): estudo de caso de site institucional para apresentação de academia, serviços e navegação responsiva.
+- [Instagram DM Downloader](https://www.avryum.com.br/projetos/instagram-dm-downloader/index.html): estudo de caso de extensão JavaScript para mídias do Direct no Instagram Web, sem afiliação com Instagram ou Meta.
+- [Atlas Gestão](https://www.avryum.com.br/projetos/atlas-gestao/index.html): estudo de caso de plataforma SaaS multi-tenant para gestão de academias, organizações e permissões.
 
 ## Serviços
 
