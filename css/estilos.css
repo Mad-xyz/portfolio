@@ -911,12 +911,11 @@ footer .eyebrow {
   padding:15px 26px;
   font-size:15px;
   font-weight:600;
-  border:1px solid var(--background)
+  border:0
 }
 .footer-btn-primary:hover,
 .footer-btn-primary:focus-visible {
   color:var(--background);
-  border-color:var(--foreground);
   transform:translateY(-2px)
 }
 .footer-btn-secondary {
@@ -1613,4 +1612,43 @@ h2 {
   .discipline-line {
     grid-template-columns:1fr;
   }
+}
+
+/* Botões sem contornos: mantém hover e foco de teclado. */
+button,
+a.primary-link,
+a.secondary-link,
+a.footer-btn-primary,
+a.footer-btn-secondary,
+a.contact-link,
+.round-arrow {
+  border:0 !important;
+}
+.secondary-link {
+  background:rgba(244,243,246,.09);
+}
+.secondary-link:hover,
+.secondary-link:focus-visible {
+  background:rgba(244,243,246,.13);
+}
+.footer-btn-secondary {
+  background:rgba(16,16,18,.10);
+}
+.footer-btn-secondary:hover,
+.footer-btn-secondary:focus-visible {
+  background:rgba(16,16,18,.15);
+}
+.contact-link {
+  padding:8px 0;
+}
+
+/* Exceção: "Iniciar um projeto" conserva a borda original. */
+.hero-actions .secondary-link {
+  border:1px solid var(--border) !important;
+  background:transparent;
+}
+.hero-actions .secondary-link:hover,
+.hero-actions .secondary-link:focus-visible {
+  border-color:var(--purple) !important;
+  background:transparent;
 }
