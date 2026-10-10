@@ -1,0 +1,310 @@
+/*
+ * AVRYUM — Especialidades & Serviços
+ * Bento responsivo inspirado no exemplo fornecido.
+ * Componente adaptado para HTML/CSS nativo: o portfólio não usa React.
+ */
+.services-section {
+  background-color: #101012;
+  border-bottom: 0;
+}
+
+.services-section .section-heading {
+  margin-bottom: 42px;
+}
+
+.services-section .section-heading h2 {
+  max-width: 770px;
+  text-wrap: balance;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(16px, 2.15vw, 30px);
+  margin-top: 0;
+  align-items: stretch;
+}
+
+.services-grid > .service-card {
+  grid-column: span 1;
+  box-sizing: border-box;
+  min-width: 0;
+  min-height: 320px;
+  padding: clamp(25px, 2.75vw, 39px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: 12px;
+  background: #201d26;
+  box-shadow: none;
+  color: #f4f3f6;
+  transition: background-color .25s ease, transform .35s cubic-bezier(.2,.8,.2,1);
+}
+
+.services-grid > .service-card:nth-child(1),
+.services-grid > .service-card:nth-child(4),
+.services-grid > .service-card:nth-child(5) {
+  grid-column: span 2;
+}
+
+.services-grid > .service-card:nth-child(1) {
+  background: linear-gradient(135deg, #272134 0%, #201c28 85%);
+}
+.services-grid > .service-card:nth-child(4) {
+  background: linear-gradient(120deg, #1e1d29 0%, #282137 100%);
+}
+.services-grid > .service-card:nth-child(5) {
+  background: linear-gradient(125deg, #282131 0%, #211d28 100%);
+}
+
+.services-grid > .service-card:hover {
+  transform: translateY(-4px);
+  border: 0;
+  background-color: #2c2634;
+}
+
+.services-grid > .service-card .service-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 0;
+}
+
+.services-grid > .service-card .service-icon {
+  order: -1;
+  color: #c6a5ff;
+  flex-shrink: 0;
+}
+
+.services-grid > .service-card .service-icon svg {
+  width: 32px;
+  height: 32px;
+  stroke-width: 1.5;
+}
+
+.services-grid > .service-card > div:nth-child(2) {
+  margin-top: auto;
+  padding-top: 42px;
+}
+
+.services-grid > .service-card h3 {
+  color: #f4f3f6;
+  font-size: clamp(23px, 2.1vw, 30px);
+  font-weight: 600;
+  line-height: 1.18;
+  letter-spacing: -1px;
+  margin: 0 0 12px;
+}
+
+.services-grid > .service-card p {
+  color: #bcb4c6;
+  font-size: 15px;
+  line-height: 1.65;
+  max-width: 490px;
+}
+
+.services-grid > .service-card .service-card-footer {
+  display: none;
+}
+
+/* O último card é o convite para iniciar um projeto. */
+.services-grid > .service-card--contact,
+.services-grid > .service-card--contact:hover {
+  background: #a37df7;
+}
+
+.services-grid > .service-card--contact .service-icon,
+.services-grid > .service-card--contact h3,
+.services-grid > .service-card--contact p {
+  color: #191224;
+}
+
+.services-grid > .service-card--contact > div:nth-child(2) {
+  padding-top: 30px;
+}
+
+.services-grid > .service-card--contact .service-card-footer {
+  display: block;
+  margin: 19px 0 0;
+  padding: 0;
+  border: 0;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.services-grid > .service-card--contact .service-card-footer a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 10px 17px;
+  background: #101012;
+  color: #f4f3f6;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color .2s ease, transform .2s ease;
+}
+
+.services-grid > .service-card--contact .service-card-footer a:hover {
+  transform: translateY(-2px);
+  background: #292132;
+}
+
+.services-grid > .service-card--contact .service-card-footer a:focus-visible {
+  outline: 2px solid #101012;
+  outline-offset: 3px;
+}
+
+/* Em tablets, cards com 2 colunas equilibradas. */
+@media (max-width: 950px) {
+  .services-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+  .services-grid > .service-card:nth-child(n) {
+    grid-column: span 1;
+    min-height: 290px;
+  }
+  .services-grid > .service-card {
+    padding: 28px;
+  }
+  .services-grid > .service-card h3 {
+    font-size: clamp(22px, 3vw, 28px);
+  }
+}
+
+/* Mobile: cards empilhados, sem corte de textos. */
+@media (max-width: 620px) {
+  .services-section .section-heading {
+    margin-bottom: 28px;
+  }
+  .services-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+  }
+  .services-grid > .service-card:nth-child(n) {
+    min-height: 230px;
+    grid-column: span 1;
+    padding: 25px;
+  }
+  .services-grid > .service-card > div:nth-child(2) {
+    padding-top: 29px;
+  }
+  .services-grid > .service-card h3 {
+    font-size: 24px;
+  }
+  .services-grid > .service-card p {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .services-grid > .service-card--contact {
+    min-height: 280px;
+  }
+  .services-grid > .service-card--contact .service-card-footer {
+    margin-top: 13px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .services-grid > .service-card,
+  .services-grid > .service-card--contact .service-card-footer a {
+    transition: none;
+  }
+}
+
+/* Artes decorativas fora do fluxo: preservam dimensões e posição dos textos. */
+.services-grid > .service-card {
+  position: relative;
+  isolation: isolate;
+}
+.services-grid > .service-card .servico-arte {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 62%;
+  object-fit: contain;
+  object-position: center top;
+  z-index: -1;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 62%, rgba(0,0,0,.45) 84%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 62%, rgba(0,0,0,.45) 84%, transparent 100%);
+}
+.services-grid > .service-card--contact .servico-arte {
+  height: 62%;
+  opacity: .88;
+}
+
+/* Preenche todo o card e mantém a composição completa visível. */
+.services-grid > .service-card .servico-arte {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  opacity: .96;
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+.services-grid > .service-card--contact .servico-arte {
+  height: 100%;
+  opacity: .76;
+}
+.services-grid > .service-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -3;
+  background: var(--arte-servico) center / cover no-repeat;
+  filter: blur(12px);
+  transform: scale(1.08);
+  opacity: .72;
+  pointer-events: none;
+}
+.services-grid > .service-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(180deg,
+    rgba(16,16,18,.04) 0%,
+    rgba(16,16,18,.09) 38%,
+    rgba(16,16,18,.48) 68%,
+    rgba(16,16,18,.68) 100%);
+}
+.services-grid > .service-card:nth-child(1) { --arte-servico: url("../imagens/servicos/servico-1.webp"); }
+.services-grid > .service-card:nth-child(2) { --arte-servico: url("../imagens/servicos/servico-2.webp"); }
+.services-grid > .service-card:nth-child(3) { --arte-servico: url("../imagens/servicos/servico-3.webp"); }
+.services-grid > .service-card:nth-child(4) { --arte-servico: url("../imagens/servicos/servico-4.webp"); }
+.services-grid > .service-card:nth-child(5) { --arte-servico: url("../imagens/servicos/servico-5.webp"); }
+.services-grid > .service-card:nth-child(6) { --arte-servico: url("../imagens/servicos/servico-6.webp"); }
+
+/* Imagem única preenchendo toda a área do card. */
+.services-grid > .service-card .servico-arte {
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+}
+.services-grid > .service-card::before { content: none; }
+
+/* Degradê mais intenso para destacar os textos sobre a arte. */
+.services-grid > .service-card::after {
+  background: linear-gradient(180deg,
+    rgba(16,16,18,.08) 0%,
+    rgba(16,16,18,.22) 30%,
+    rgba(16,16,18,.72) 60%,
+    rgba(16,16,18,.94) 100%);
+}
+.services-grid > .service-card--contact h3,
+.services-grid > .service-card--contact p,
+.services-grid > .service-card--contact .service-icon { color: #f4f3f6; }

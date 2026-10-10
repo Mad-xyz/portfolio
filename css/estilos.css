@@ -1652,3 +1652,11 @@ a.contact-link,
   border-color:var(--purple) !important;
   background:transparent;
 }
+
+/* Mantém a expressão do título unida. */
+.hero h1 em { display: inline-block; white-space: nowrap; }
+
+/* Ajusta a linha completa à largura disponível, inclusive em tela cheia. */
+.hero-copy { min-width: 0; container-type: inline-size; }
+.hero h1 .hero-linha-digital { display: block; white-space: nowrap; font-size: min(1em, 15.5cqi); }
+.hero h1 .hero-linha-digital em { display: inline; white-space: nowrap; }
