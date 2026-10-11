@@ -1,0 +1,42 @@
+/* Layout do rodapé do index, aplicado a todas as páginas. */
+footer {
+  padding: clamp(77px, 8vw, 125px) max(clamp(22px, 6vw, 90px), calc((100vw - 1270px) / 2)) 32px;
+}
+.footer-title { max-width: 940px; }
+.footer-lead { max-width: 540px; }
+@media (max-width: 560px) {
+  footer { padding: 82px 6% 28px; }
+}
+
+/* Única extensão do footer original: espaço vertical e SVG inferior centralizado. */
+footer { padding-bottom: 0; }
+.footer-lead { margin-bottom: 32px; }
+.av-footer-bottom-word {
+  display: block;
+  width: 100vw;
+  max-width: none;
+  height: 14.6vw;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+.av-footer-bottom-word img {
+  position: absolute;
+  display: block;
+  left: 50%;
+  top: -11.2vw;
+  transform: translateX(-50%);
+  width: 125vw;
+  max-width: none;
+  height: auto;
+  margin: 0;
+  padding: 0;
+}
+@media (max-width: 560px) {
+  footer { padding-bottom: 0; }
+  .footer-lead { margin-bottom: 32px; }
+  .av-footer-bottom-word { margin: 0; }
+}

@@ -24,23 +24,22 @@ A AVRYUM Studio reúne planejamento visual e implementação técnica para criar
 - Desenvolvimento de interfaces responsivas e front-end.
 - Design gráfico e elementos de identidade visual.
 
-## Código e demonstrações dos projetos
+## Projetos e demonstrações
 
-- [R.S. Top Team — código](https://github.com/Mad-xyz/R.S-Top-Team) e [demonstração](https://rstopteam.web.app/).
-- [MHouse Fit — código](https://github.com/Mad-xyz/MHouse-web-site) e [demonstração](https://mhousefit.vercel.app/).
-- [Instagram DM Downloader — código](https://github.com/Mad-xyz/-Instagram-DM-Image-Video-Downloader).
-- [Atlas Gestão — código](https://github.com/Mad-xyz/atlas-gestao).
+- [R.S. Top Team — demonstração](https://rstopteam.web.app/).
+- [MHouse Fit — demonstração](https://mhousefit.vercel.app/).
+- [Instagram DM Downloader — estudo de caso](https://www.avryum.com.br/projetos/instagram-dm-downloader/index.html).
+- [Atlas Gestão — estudo de caso](https://www.avryum.com.br/projetos/atlas-gestao/index.html).
 
 ## Contato e perfis
 
 - [Instagram oficial da AVRYUM Studio](https://www.instagram.com/avryum.studio/).
 - [Enviar mensagem à AVRYUM](https://ig.me/m/avryum.studio).
 - E-mail para contato: pmadsonm@gmail.com.
-- [GitHub com projetos técnicos](https://github.com/Mad-xyz).
 
 ## Observações de precisão
 
-- Os estudos de caso e repositórios são as fontes para conferir escopo, funcionalidades e tecnologias de cada projeto.
+- Os estudos de caso são as fontes para conferir escopo, funcionalidades e tecnologias de cada projeto.
 - Não presumir que estudos de caso ou demonstrações comprovem resultados comerciais ou contratos com clientes.
-- Os detalhes do site podem mudar; dê preferência às páginas publicadas e aos repositórios para informações atualizadas.
+- Os detalhes do site podem mudar; dê preferência às páginas publicadas para informações atualizadas.
 - Este arquivo é complementar ao conteúdo HTML, ao sitemap e aos dados estruturados; não é uma promessa de ranqueamento em buscadores.

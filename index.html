@@ -28,6 +28,8 @@
   <link rel="icon" type="image/x-icon" href="imagens/favicon.ico" />
   <link rel="stylesheet" href="css/estilos.css?v=20261010-titulo2" />
   <link rel="stylesheet" href="css/bento-servicos.css" />
+  <link rel="stylesheet" href="css/avryum-reference-layout.css" />
+<link rel="stylesheet" href="css/footer-compartilhado.css" />
 
   <script id="seo-structured-data" type="application/ld+json">
 {
@@ -80,6 +82,7 @@
   <script defer src="js/interacoes.js"></script>
   <script defer src="js/bibliotecas/liquid-react.js"></script>
   <script defer src="js/card-media.js"></script>
+  <script defer src="js/avryum-navigation.js"></script>
 </head>
 <body class="antialiased">
   <a class="skip-link" href="#main">Pular para o conteúdo</a>
@@ -88,11 +91,13 @@
   <header class="site-header">
     <a class="wordmark" href="index.html" aria-label="AVRYUM Studio, início"><img class="wordmark-logo" src="imagens/assinatura-horizontal.svg" alt="" aria-hidden="true" />
       <img class="wordmark-logo wordmark-logo--roxo" src="imagens/assinatura-horizontal-roxo.svg" alt="" aria-hidden="true" /></a>
-    <nav aria-label="Principal">
+    <button class="av-menu-button" type="button" aria-expanded="false" aria-label="Abrir menu" aria-controls="av-primary-nav"><span></span><span></span><span></span></button>
+    <nav id="av-primary-nav" aria-label="Principal">
       <a href="#servicos">Serviços</a>
       <a href="#projetos">Projetos</a>
-      <a href="#sobre">Sobre</a>
+      <a href="#processo">Processo</a>
       <a href="#design">Design</a>
+      <a href="#sobre">Sobre</a>
     </nav>
     <a class="contact-link" href="#contato">Falar sobre um projeto
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right" aria-hidden="true"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>
@@ -207,6 +212,17 @@
         <p>Uma seleção de sites, sistemas e ferramentas desenvolvidos para necessidades e contextos diferentes.</p>
       </div>
 
+      <a class="av-featured-project" href="projetos/rs-top-team/index.html" aria-label="Conhecer o projeto R.S. Top Team">
+        <div class="av-featured-copy">
+          <span class="eyebrow">PROJETO EM DESTAQUE / 01</span>
+          <h3>R.S. <em>Top Team.</em></h3>
+          <p>Um sistema para conectar alunos, equipe e a operação de uma academia em um só lugar.</p>
+          <span class="av-featured-link">Conhecer o projeto <span aria-hidden="true">↗</span></span>
+        </div>
+        <div class="av-featured-image">
+          <img src="projetos/rs-top-team/img/card-1.webp" alt="Prévia do sistema de gestão R.S. Top Team" loading="lazy" decoding="async">
+        </div>
+      </a>
       <div class="project-grid">
         <a class="project-card" href="projetos/rs-top-team/index.html" aria-label="Ver estudo de caso do projeto R.S. Top Team">
           <div class="project-cover rs" data-media-type="slideshow" data-project="rs-top-team">
@@ -254,22 +270,22 @@
       </div>
     </section>
 
-    <section class="about section" id="sobre" aria-labelledby="titulo-sobre">
-      <div class="about-heading">
-        <span class="eyebrow">03 / SOBRE A AVRYUM</span>
-        <h2 id="titulo-sobre">Design e desenvolvimento<br />no mesmo <em>processo.</em></h2>
-        <p class="about-lead">AVRYUM Studio,<br />um estúdio digital focado<br />em web e design.</p>
-        <span class="signature">AVRYUM</span>
-      </div>
-      <div class="about-story">
-        <p>A AVRYUM desenvolve sites, interfaces e sistemas web. Design e implementação são tratados juntos para evitar que a ideia visual se perca quando o projeto vai para o código.</p>
-        <p>Cada trabalho parte do contexto da empresa ou do projeto e do que precisa ser apresentado, organizado ou automatizado. A partir daí, definimos o escopo e as decisões de interface e tecnologia.</p>
+
+
+    <section class="solution-mindset" id="processo" aria-labelledby="titulo-mindset">
+      <div class="mindset-container">
+        <div class="av-process-intro">
+          <span class="eyebrow">03 / NOSSO PROCESSO</span>
+          <h2 id="titulo-mindset">Do escopo<br />à <em>implementação.</em></h2>
+          <p>Design e desenvolvimento avançam juntos, do primeiro planejamento ao produto final.</p>
+        </div>
+        <div class="av-process-steps">
         <div class="timeline">
           <div><span>FOCO</span><div><h3>Entender o contexto.</h3><p>O projeto começa pelo que a empresa precisa comunicar, organizar ou tornar mais simples para quem usa.</p></div></div>
           <div><span>MÉTODO</span><div><h3>Projetar antes de implementar.</h3><p>A estrutura de navegação e a hierarquia da interface são definidas antes da implementação.</p></div></div>
           <div><span>ENTREGA</span><div><h3>Construir com continuidade.</h3><p>O código é organizado para facilitar ajustes, manutenção e novas etapas do projeto.</p></div></div>
         </div>
-        <p class="honest-note">Escopo, decisões técnicas e andamento do projeto são tratados de forma direta durante o desenvolvimento.</p>
+        </div>
       </div>
     </section>
 
@@ -297,37 +313,22 @@
       </div>
     </section>
 
-    <section class="solution-mindset" aria-labelledby="titulo-mindset">
-      <div class="mindset-container">
-        <div>
-          <span class="eyebrow">COMO TRABALHAMOS</span>
-          <h2 id="titulo-mindset">Do escopo<br />à <em>implementação.</em></h2>
-        </div>
-        <div class="mindset-copy">
-          <p>Antes de começar a interface, organizamos o que o projeto precisa comunicar ou resolver. Isso orienta o conteúdo, a navegação e as prioridades.</p>
-          <p>Depois, design e desenvolvimento avançam juntos para que o que foi projetado funcione da mesma forma quando chega ao navegador.</p>
-        </div>
+
+    <section class="about section" id="sobre" aria-labelledby="titulo-sobre">
+      <div class="about-heading">
+        <span class="eyebrow">05 / SOBRE A AVRYUM</span>
+        <h2 id="titulo-sobre">Design e desenvolvimento<br />no mesmo <em>processo.</em></h2>
+        <p class="about-lead">AVRYUM Studio,<br />um estúdio digital focado<br />em web e design.</p>
+        <span class="signature">AVRYUM</span>
+      </div>
+      <div class="about-story">
+        <p>A AVRYUM desenvolve sites, interfaces e sistemas web. Design e implementação são tratados juntos para evitar que a ideia visual se perca quando o projeto vai para o código.</p>
+        <p>Cada trabalho parte do contexto da empresa ou do projeto e do que precisa ser apresentado, organizado ou automatizado. A partir daí, definimos o escopo e as decisões de interface e tecnologia.</p>
+        <p class="honest-note">Escopo, decisões técnicas e andamento do projeto são tratados de forma direta durante o desenvolvimento.</p>
       </div>
     </section>
   </main>
 
-  <footer id="contato">
-    <div class="eyebrow">NOVO PROJETO / ORÇAMENTO</div>
-    <div class="footer-title">Vamos conversar?</div>
-    <p class="footer-lead">Conte o que sua empresa precisa, o que já existe e em que etapa o projeto está. A partir dessas informações, alinhamos o escopo e os próximos passos.</p>
-    <div class="footer-actions">
-      <a class="footer-btn-primary" href="https://ig.me/m/avryum.studio" target="_blank" rel="noreferrer">
-        Falar com a AVRYUM
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>
-      </a>
-    </div>
-    <div class="footer-bottom">
-      <div class="socials">
-      
-        <a href="https://ig.me/m/avryum.studio" target="_blank" rel="noreferrer"><span class="icon-instagram" aria-hidden="true"></span>Instagram</a>
-      </div>
-      <span>AVRYUM Studio · 2026</span>
-    </div>
-  </footer>
+  <script src="js/footer-compartilhado.js"></script>
 </body>
 </html>
