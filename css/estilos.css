@@ -954,6 +954,11 @@ footer .eyebrow {
   align-items:center;
   gap:7px
 }
+.socials a img {
+  display:block;
+  flex-shrink:0;
+  filter:brightness(0)
+}
 .icon-instagram,.icon-linkedin {
   background-size: contain;
   background-repeat: no-repeat;

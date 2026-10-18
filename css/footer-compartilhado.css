@@ -35,8 +35,25 @@ footer { padding-bottom: 0; }
   margin: 0;
   padding: 0;
 }
+
+/* Links sociais no rodapé inferior:
+   - Desktop: ícone + texto lado a lado
+   - Mobile (≤560px): apenas ícone, texto oculto */
 @media (max-width: 560px) {
   footer { padding-bottom: 0; }
   .footer-lead { margin-bottom: 32px; }
   .av-footer-bottom-word { margin: 0; }
+
+  /* Esconde os nomes no mobile, mantém só os ícones centralizados */
+  .social-label { display: none; }
+  .socials { justify-content: center; }
+
+  /* Empilha rodapé inferior em coluna centralizada */
+  .footer-bottom {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 16px;
+  }
+  .footer-bottom > span { text-align: center; }
 }

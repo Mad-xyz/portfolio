@@ -1,0 +1,21 @@
+# ─── Imagens ────────────────────────────────────────────────────────────────
+# Pasta de imagens ignorada do controle de versão
+imagens/
+
+# ─── Documentação / arquivos de referência ──────────────────────────────────
+documentacao/
+
+# ─── Sistema operacional ────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ─── Editor / IDE ───────────────────────────────────────────────────────────
+.vscode/
+*.code-workspace
+
+# ─── Node (caso seja usado no futuro) ───────────────────────────────────────
+node_modules/
+dist/
+.env
+.env.local

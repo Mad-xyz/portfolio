@@ -1,54 +1,51 @@
-# AVRYUM Digital Studio — Madson Vander | Desenvolvimento Web e Design
+# Madson Vander | Portfólio de Desenvolvimento Web Front-end
 
-Página profissional e portfólio de serviços digitais de **Madson Vander (AVRYUM Digital Studio)**. O site apresenta serviços de desenvolvimento web, sistemas, interfaces responsivas e design gráfico, acompanhado de estudos de caso técnicos de sistemas de gestão, sites institucionais e ferramentas web.
+Portfólio pessoal de **Madson Vander**, desenvolvedor web em formação com foco em front-end e design gráfico, residente em Marituba, PA.
 
-**Site oficial:** https://www.avryum.com.br/
+**Site:** https://www.avryum.com.br/
 
-## Serviços e Soluções
+## Sobre
 
-- **Sites Institucionais & Landing Pages:** Apresentação profissional para empresas, profissionais e marcas com alta legibilidade e semântica.
-- **Sistemas Web & Painéis:** Aplicações para centralização de dados, controle de permissões, presenças e finanças.
-- **Interfaces Responsivas:** Experiências otimizadas para desktop, tablets e smartphones.
-- **Front-end Moderno:** Implementação modular com HTML5, CSS3, JavaScript, React e Firebase.
-- **Design Gráfico:** Identidade visual, banners de divulgação e composições visuais.
+- Foco em front-end: HTML, CSS e JavaScript (básico).
+- Em aprendizado contínuo em React e Firebase.
+- Uso de Inteligência Artificial como suporte na implementação dos projetos.
+- Design gráfico: peças digitais, identidade visual e materiais visuais (Canva e Affinity).
 
-## Projetos em Destaque (Estudos de Caso)
+## Projetos em destaque
 
-- **[R.S. Top Team](projetos/rs-top-team/index.html)** — Sistema de gestão para academias com alunos, equipe, modalidades, presença, eventos e financeiro.
-- **[MHouse Fit](projetos/mhouse-fit/index.html)** — Site institucional criado com foco em presença digital e interface para academia local.
+- **[R.S. Top Team](projetos/rs-top-team/index.html)** — Sistema de gestão para academias com alunos, equipe, modalidades, presença, eventos e financeiro (React, Firebase e apoio de IA).
+- **[MHouse Fit](projetos/mhouse-fit/index.html)** — Site institucional criado com foco em presença digital e interface responsiva (HTML, CSS e JavaScript).
 - **[Instagram DM Downloader](projetos/instagram-dm-downloader/index.html)** — Extensão em JavaScript para download de mídias no Instagram Direct pela versão web.
-- **[Atlas Gestão](projetos/atlas-gestao/index.html)** — Plataforma SaaS multi-tenant para gestão centralizada de academias com isolamento de dados.
+- **[Atlas Gestão](projetos/atlas-gestao/index.html)** — Plataforma SaaS multi-tenant para gestão centralizada de academias com isolamento de dados (React, Firebase e apoio de IA).
+
+## Contatos
+
+- **E-mail:** pmadsonm@gmail.com
+- **LinkedIn:** [linkedin.com/in/madsonvander](https://www.linkedin.com/in/madsonvander/)
+- **GitHub:** [github.com/Mad-xyz](https://github.com/Mad-xyz)
+- **Instagram:** [instagram.com/mad.exe](https://www.instagram.com/mad.exe)
 
 ## Estrutura do Repositório
 
 ```text
-index.html                       Página principal (Serviços, Projetos, Sobre, Design e Contato)
-projetos/                        Estudos de caso detalhados de cada solução
+index.html                       Página principal (Projetos, Sobre mim e Contato)
+projetos/                        Estudos de caso detalhados de cada projeto
 css/estilos.css                  Design system, variáveis de cor, tipografia e responsividade
-js/interacoes.js                 Lógica de interface, navegação e metadados SEO
+js/interacoes.js                 Lógica de interface e interações
 js/card-media.js                 Carregamento dinâmico e mídia interativa dos cards
-js/bibliotecas/liquid-react.js   Renderização visual da imagem principal
-imagens/                         Assets visuais, hero art e favicons
+imagens/                         Assets visuais e favicons
 robots.txt                       Diretrizes para mecanismos de busca
 sitemap.xml                      Mapeamento das páginas públicas
-llms.txt                         Resumo contextual factual para agentes e LLMs
-vercel.json                      Configuração de deploy com cabeçalhos de segurança (CSP, HSTS)
+llms.txt                         Resumo contextual para ferramentas de IA
+vercel.json                      Configuração de deploy com cabeçalhos de segurança
 ```
 
 ## Como Abrir Localmente
 
-Abra `index.html` em qualquer navegador moderno ou inicie um servidor HTTP local:
+Abra `index.html` em qualquer navegador ou inicie um servidor HTTP local:
 
 ```bash
 python -m http.server 5500
 ```
 
 Acesse: `http://localhost:5500`
-
-## SEO e descoberta (revisão de 2026-10-09)
-
-- Título, descrição, Open Graph, Twitter Cards e JSON-LD são servidos no HTML de cada página, sem depender de JavaScript.
-- `sitemap.xml` lista as cinco páginas públicas canônicas; atualizar `lastmod` somente quando a página sofrer mudanças significativas.
-- `robots.txt` permite rastreamento e informa a localização do sitemap.
-- `llms.txt` descreve a AVRYUM e os estudos de caso para ferramentas compatíveis; ele não é um fator de ranqueamento do Google Search.
-- Após o deploy: validar os status HTTP e a marcação estruturada, enviar o sitemap ao Search Console e medir Core Web Vitals em dados reais.

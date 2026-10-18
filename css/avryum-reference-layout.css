@@ -162,14 +162,16 @@ body { overflow-x: clip; }
 .av-featured-link span {
   display: grid;
   place-items: center;
-  width: 33px;
-  height: 33px;
-  background: var(--purple);
-  color: var(--background);
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
-  transition: transform .25s ease;
+  flex-shrink: 0;
+  transition: background .2s, color .2s;
 }
-.av-featured-project:hover .av-featured-link span { transform: translate(3px,-3px); }
+.av-featured-project:hover .av-featured-link span {
+  background: var(--purple);
+  color: #17121d;
+}
 .av-featured-image {
   position: relative;
   overflow: hidden;

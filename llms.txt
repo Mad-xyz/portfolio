@@ -1,28 +1,21 @@
-# AVRYUM Studio
+# Madson Vander
 
-> Estúdio digital que desenvolve sites, landing pages, sistemas web, interfaces responsivas e design para empresas e projetos. Este arquivo resume o conteúdo público da AVRYUM para leitores e ferramentas que utilizem o formato llms.txt.
+> Portfólio de desenvolvimento web front-end e design de Madson Vander. Este arquivo resume o conteúdo público para ferramentas e leitores que utilizem o formato llms.txt.
 
-Site oficial: https://www.avryum.com.br/
+Site: https://www.avryum.com.br/
 Idioma principal: português do Brasil (pt-BR).
 
-## Sobre o estúdio
+## Sobre Madson Vander
 
-A AVRYUM Studio reúne planejamento visual e implementação técnica para criar sites e soluções digitais. A página inicial apresenta os serviços, os projetos selecionados e o canal de contato. Não atribua à AVRYUM métricas, clientes ou resultados comerciais que não estejam documentados nas páginas.
+Desenvolvedor web em formação com foco em front-end e design gráfico, residente em Marituba, PA. Constrói páginas e interfaces utilizando HTML, CSS e JavaScript básico, além de utilizar inteligência artificial como apoio na implementação de projetos com React e Firebase.
 
 ## Páginas do site
 
-- [Página inicial](https://www.avryum.com.br/): serviços de criação de sites, sistemas web, interfaces responsivas, front-end e design; portfólio e contato.
-- [R.S. Top Team](https://www.avryum.com.br/projetos/rs-top-team/index.html): estudo de caso de um sistema de gestão para academias, incluindo alunos, equipe, modalidades, presenças, eventos e financeiro.
-- [MHouse Fit](https://www.avryum.com.br/projetos/mhouse-fit/index.html): estudo de caso de site institucional para apresentação de academia, serviços e navegação responsiva.
-- [Instagram DM Downloader](https://www.avryum.com.br/projetos/instagram-dm-downloader/index.html): estudo de caso de extensão JavaScript para mídias do Direct no Instagram Web, sem afiliação com Instagram ou Meta.
-- [Atlas Gestão](https://www.avryum.com.br/projetos/atlas-gestao/index.html): estudo de caso de plataforma SaaS multi-tenant para gestão de academias, organizações e permissões.
-
-## Serviços
-
-- Criação de sites institucionais e landing pages.
-- Desenvolvimento de sistemas web e painéis administrativos.
-- Desenvolvimento de interfaces responsivas e front-end.
-- Design gráfico e elementos de identidade visual.
+- [Página inicial](https://www.avryum.com.br/): portfólio de projetos, sobre mim e canais de contato.
+- [R.S. Top Team](https://www.avryum.com.br/projetos/rs-top-team/index.html): estudo de caso de sistema de gestão para academias desenvolvido em React e Firebase com apoio de IA.
+- [MHouse Fit](https://www.avryum.com.br/projetos/mhouse-fit/index.html): estudo de caso de site institucional desenvolvido com HTML, CSS e JavaScript puro.
+- [Instagram DM Downloader](https://www.avryum.com.br/projetos/instagram-dm-downloader/index.html): estudo de caso de extensão em JavaScript para download de mídias no Instagram Web (sem afiliação com Instagram ou Meta).
+- [Atlas Gestão](https://www.avryum.com.br/projetos/atlas-gestao/index.html): estudo de caso de plataforma SaaS multi-tenant estruturada em React e Firebase com auxílio de IA.
 
 ## Projetos e demonstrações
 
@@ -31,15 +24,9 @@ A AVRYUM Studio reúne planejamento visual e implementação técnica para criar
 - [Instagram DM Downloader — estudo de caso](https://www.avryum.com.br/projetos/instagram-dm-downloader/index.html).
 - [Atlas Gestão — estudo de caso](https://www.avryum.com.br/projetos/atlas-gestao/index.html).
 
-## Contato e perfis
+## Contatos
 
-- [Instagram oficial da AVRYUM Studio](https://www.instagram.com/avryum.studio/).
-- [Enviar mensagem à AVRYUM](https://ig.me/m/avryum.studio).
-- E-mail para contato: pmadsonm@gmail.com.
-
-## Observações de precisão
-
-- Os estudos de caso são as fontes para conferir escopo, funcionalidades e tecnologias de cada projeto.
-- Não presumir que estudos de caso ou demonstrações comprovem resultados comerciais ou contratos com clientes.
-- Os detalhes do site podem mudar; dê preferência às páginas publicadas para informações atualizadas.
-- Este arquivo é complementar ao conteúdo HTML, ao sitemap e aos dados estruturados; não é uma promessa de ranqueamento em buscadores.
+- E-mail: pmadsonm@gmail.com
+- LinkedIn: https://www.linkedin.com/in/madsonvander/
+- GitHub: https://github.com/Mad-xyz
+- Instagram: https://www.instagram.com/mad.exe
