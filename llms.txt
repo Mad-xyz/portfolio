@@ -1,8 +1,8 @@
-# Madson Vander
+﻿# Madson Vander
 
 > Portfólio de desenvolvimento web front-end e design de Madson Vander. Este arquivo resume o conteúdo público para ferramentas e leitores que utilizem o formato llms.txt.
 
-Site: https://www.avryum.com.br/
+Site: https://maddev.pages.dev/
 Idioma principal: português do Brasil (pt-BR).
 
 ## Sobre Madson Vander
@@ -11,18 +11,18 @@ Desenvolvedor web em formação com foco em front-end e design gráfico, residen
 
 ## Páginas do site
 
-- [Página inicial](https://www.avryum.com.br/): portfólio de projetos, sobre mim e canais de contato.
-- [R.S. Top Team](https://www.avryum.com.br/projetos/rs-top-team/index.html): estudo de caso de sistema de gestão para academias desenvolvido em React e Firebase com apoio de IA.
-- [MHouse Fit](https://www.avryum.com.br/projetos/mhouse-fit/index.html): estudo de caso de site institucional desenvolvido com HTML, CSS e JavaScript puro.
-- [Instagram DM Downloader](https://www.avryum.com.br/projetos/instagram-dm-downloader/index.html): estudo de caso de extensão em JavaScript para download de mídias no Instagram Web (sem afiliação com Instagram ou Meta).
-- [Atlas Gestão](https://www.avryum.com.br/projetos/atlas-gestao/index.html): estudo de caso de plataforma SaaS multi-tenant estruturada em React e Firebase com auxílio de IA.
+- [Página inicial](https://maddev.pages.dev/): portfólio de projetos, sobre mim e canais de contato.
+- [R.S. Top Team](https://maddev.pages.dev/projetos/rs-top-team/index.html): estudo de caso de sistema de gestão para academias desenvolvido em React e Firebase com apoio de IA.
+- [MHouse Fit](https://maddev.pages.dev/projetos/mhouse-fit/index.html): estudo de caso de site institucional desenvolvido com HTML, CSS e JavaScript puro.
+- [Instagram DM Downloader](https://maddev.pages.dev/projetos/instagram-dm-downloader/index.html): estudo de caso de extensão em JavaScript para download de mídias no Instagram Web (sem afiliação com Instagram ou Meta).
+- [Atlas Gestão](https://maddev.pages.dev/projetos/atlas-gestao/index.html): estudo de caso de plataforma SaaS multi-tenant estruturada em React e Firebase com auxílio de IA.
 
 ## Projetos e demonstrações
 
 - [R.S. Top Team — demonstração](https://rstopteam.web.app/).
 - [MHouse Fit — demonstração](https://mhousefit.vercel.app/).
-- [Instagram DM Downloader — estudo de caso](https://www.avryum.com.br/projetos/instagram-dm-downloader/index.html).
-- [Atlas Gestão — estudo de caso](https://www.avryum.com.br/projetos/atlas-gestao/index.html).
+- [Instagram DM Downloader — estudo de caso](https://maddev.pages.dev/projetos/instagram-dm-downloader/index.html).
+- [Atlas Gestão — estudo de caso](https://maddev.pages.dev/projetos/atlas-gestao/index.html).
 
 ## Contatos
 

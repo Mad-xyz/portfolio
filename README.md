@@ -1,8 +1,8 @@
-# Madson Vander | Portfólio de Desenvolvimento Web Front-end
+﻿# Madson Vander | Portfólio de Desenvolvimento Web Front-end
 
 Portfólio pessoal de **Madson Vander**, desenvolvedor web em formação com foco em front-end e design gráfico, residente em Marituba, PA.
 
-**Site:** https://www.avryum.com.br/
+**Site:** https://maddev.pages.dev/
 
 ## Sobre
 

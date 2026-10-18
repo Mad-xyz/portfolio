@@ -1,4 +1,4 @@
-User-agent: *
+﻿User-agent: *
 Allow: /
 
-Sitemap: https://www.avryum.com.br/sitemap.xml
+Sitemap: https://maddev.pages.dev/sitemap.xml
